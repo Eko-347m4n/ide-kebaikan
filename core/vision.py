@@ -6,7 +6,6 @@ import face_recognition # Tetap butuh ini utk encoding login awal
 
 class VisionSystem:
     def __init__(self):
-        print("👁️ Vision System: HYBRID (Pro Dlib + Smart Ratio)")
         
         # --- 1. SETUP MODEL DLIB ---
         base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -15,10 +14,8 @@ class VisionSystem:
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"❌ ERROR: File '{model_path}' hilang!")
         
-        print("⏳ Memuat Model...")
         self.detector = dlib.get_frontal_face_detector()
         self.predictor = dlib.shape_predictor(model_path)
-        print("✅ Model Siap!")
 
         # --- 2. DATABASE & CONFIG ---
         self.memory_users = []
@@ -28,7 +25,6 @@ class VisionSystem:
         self.ZONE_YELLOW = 0.65
         
         # --- 3. KONFIGURASI SENYUM (DARI KODE BARUMU) ---
-        # Rasio Bibir dibagi Lebar Rahang
         self.LIP_JAW_THRESHOLD = 0.50 # Sedikit disesuaikan biar responsif
         
         # Rasio Bukaan Mulut dibagi Jarak Hidung-Mulut
@@ -57,7 +53,6 @@ class VisionSystem:
                     self.memory_encodings.append(np.array(user["encoding"]))
                     self.memory_users.append(user)
                 except: pass
-        print(f"👁️ Memori Siap: {len(self.memory_users)} wajah.")
 
     def calculate_smile_hybrid(self, shape):
         """
