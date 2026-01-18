@@ -287,7 +287,7 @@ Nganterin anak nyasar nemuin guru piket,Stranger,Exceptional
 Bantuin ibu kantin ngitung uang kembalian pas rame,Stranger,Exceptional
 Ngasih minum ke peserta lomba dari sekolah lain yang kehausan,Stranger,Exceptional
 Bantuin anak kelas sebelah nyari kontak lensanya yang jatuh,Stranger,Exceptional
-Nolongin kucing sekolah yang kejebak di selokan,Stranger,Exceptional
+Nolongin kucing sekolah yang kejebak di selokan,Junk,Exceptional
 Bersihin tumpahan minuman orang lain biar gak ada yang kepeleset,Stranger,Exceptional
 Bantuin tukang kebun nyabutin rumput liar pas jam kosong,Stranger,Exceptional
 Minjemin kalkulator ke kakak kelas yang lagi ujian fisika,Stranger,Exceptional
@@ -892,7 +892,7 @@ Bantu report akun penipuan online biar gak ada korban lain,Stranger,Exceptional
 Kasih tutorial/tips bermanfaat di forum komunitas (brainly/reddit) buat orang lain,Stranger,Exceptional
 Donasi baju layak pakai ke posko bencana buat pengungsi,Stranger,Exceptional
 Bantu share link donasi (kitabisa) buat orang yang butuh biaya berobat,Stranger,Exceptional
-Ngasih makan kucing jalanan (stray cat) yang kelaperan,Stranger,Exceptional
+Ngasih makan kucing jalanan (stray cat) yang kelaperan,Junk,Standard
 Bantu bersihin sisa makanan orang lain yang tumpah di lantai foodcourt,Stranger,Exceptional
 Tegur sopan orang yang buang sampah sembarangan di depan mata,Stranger,Exceptional
 Bantu adik kelas (gak kenal) yang bingung cari ruang ujian,Stranger,Exceptional
@@ -1128,7 +1128,6 @@ jual follower aktif murah meriah,Junk,Standard
 jual akun ml murah spek dewa,Junk,Standard
 open joki tugas murah amanah,Junk,Standard
 info slot gacor hari ini,Junk,Standard
-text,target_level,quality
 ngasih contekan ke temen sebangku pas ujian,Junk,Standard
 nyontek jawaban punya temen diem-diem,Junk,Standard
 kerjasama sama temen buat nyontek pas ulangan,Junk,Standard
@@ -1297,3 +1296,84 @@ coret-coret dinding kelas (vandalism),Junk,Standard
 gambar-gambar gak jelas di tembok sekolah,Junk,Standard
 kotori tembok sekolah dengan tulisan,Junk,Standard
 tulis nama di meja atau tembok sekolah,Junk,Standard
+dasar anjing lu,Junk,Standard
+babi banget kelakuannya,Junk,Standard
+monyet lo,Junk,Standard
+dasar kunyuk tidak berguna,Junk,Standard
+bangsat kau,Junk,Standard
+sialan lo bikin emosi,Junk,Standard
+bodoh banget sih jadi orang,Junk,Standard
+dasar tolol gak punya otak,Junk,Standard
+goblok dipelihara,Junk,Standard
+bego jangan natural napa,Junk,Standard
+idiot lu,Junk,Standard
+otak udang,Junk,Standard
+gak ada otak,Junk,Standard
+matimu aja sana,Junk,Standard
+sini gue tonjok muka lo,Junk,Standard
+hajar aja dia sampe babak belur,Junk,Standard
+pukul dia kalo berani,Junk,Standard
+tendang kepalanya,Junk,Standard
+bunuh aja orang kayak gitu,Junk,Standard
+bacot lu bau sampah,Junk,Standard
+brisik woy anjing,Junk,Standard
+tawuran yuk di belakang sekolah,Junk,Standard
+bawa gir buat tawuran,Junk,Standard
+nyuri motor orang,Junk,Standard
+maling helm di parkiran,Junk,Standard
+rampok uang jajan adek kelas,Junk,Standard
+mampus lu rasain,Junk,Standard
+bantu ibu masak di dapur rumah,Junk,Standard
+masakin air panas buat ayah di rumah,Junk,Standard
+cuci piring bekas makan sekeluarga di rumah,Junk,Standard
+nyuci baju sendiri di rumah,Junk,Standard
+setrika baju seragam di rumah,Junk,Standard
+jagain adik bayi di rumah,Junk,Standard
+ngasuh adik pas ibu pergi ke pasar,Junk,Standard
+bantu ayah cuci mobil di garasi rumah,Junk,Standard
+bersihin kamar tidur sendiri di rumah,Junk,Standard
+nyapu halaman rumah yang kotor,Junk,Standard
+siram tanaman hias punya ibu di rumah,Junk,Standard
+kasih makan kucing peliharaan di rumah,Junk,Standard
+mandiin anjing di rumah,Junk,Standard
+benerin genteng rumah yang bocor,Junk,Standard
+ganti lampu teras rumah yang mati,Junk,Standard
+belanja sayur ke pasar nemenin ibu,Junk,Standard
+tidur siang di kamar rumah,Junk,Standard
+nonton tv bareng keluarga di ruang tamu,Junk,Standard
+main game di kamar sampe pagi,Junk,Standard
+rebahan di kasur rumah seharian,Junk,Standard
+bantu tetangga angkat jemuran di rumah,Junk,Standard
+ikut kerja bakti di kampung halaman,Junk,Standard
+bersihin selokan depan rumah,Junk,Standard
+jagain rumah kosong punya tetangga,Junk,Standard
+bantu nenek nyebrang jalan raya,Stranger,Standard
+bantu ibu guru bawa buku ke kantor,Stranger,Standard
+siram tanaman di depan kelas,Stranger,Standard
+sapu ruang kelas piket kebersihan,Friend,Standard
+bersihin papan tulis kelas yang kotor,Stranger,Standard
+pungut sampah di lapangan sekolah,Stranger,Standard
+jagain barang temen pas dia ke toilet,Friend,Standard
+ngasih makan kucing liar di jalan,Junk,Standard
+beri makan kucing depan rumah,Junk,Standard
+kasih makan ayam tetangga,Junk,Standard
+main sama kucing di sekolah,Junk,Standard
+bawa kucing peliharaan ke kelas,Junk,Standard
+ngasih makan anjing jalanan,Junk,Standard
+kasih makan kelinci di rumah,Junk,Standard
+siram tanaman di kebun rumah,Junk,Standard
+nyiram bunga punya ibu di rumah,Junk,Standard
+ngasih makan ikan di akuarium rumah,Junk,Standard
+belajar coding python sendiri biar pinter,Self,Featured
+belajar bahasa inggris otodidak,Self,Featured
+baca buku sejarah sendirian di perpus,Self,Standard
+latihan soal matematika sendiri di kamar,Self,Standard
+belajar edit video buat skill baru,Self,Featured
+fokus belajar buat ujian besok,Self,Standard
+menghafal rumus fisika sendiri,Self,Standard
+ngerjain latihan soal di buku paket,Self,Standard
+makan siang di kantin sekolah,Self,Standard
+jajan di kantin pas jam istirahat,Self,Standard
+beli makanan di kantin buat diri sendiri,Self,Standard
+minum es teh di kantin sendirian,Self,Standard
+makan bakso di kantin pas istirahat,Self,Standard

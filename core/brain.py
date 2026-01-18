@@ -8,6 +8,7 @@ import sys
 import difflib 
 import sqlite3
 import json 
+import csv
 
 # Import Rules
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -25,9 +26,34 @@ from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFacto
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(BASE_DIR, '../data/training_data.csv') 
+LEARNED_PATH = os.path.join(BASE_DIR, '../data/learned_data.csv')
 MODEL_PATH = os.path.join(BASE_DIR, 'trained_brain.pkl')
 
 class BrainLogic:
+    def __init__(self):
+        print("🧠 Initializing Brain (Human-Centric + Plagiarism Guard)...")
+        self.stemmer = StemmerFactory().create_stemmer()
+        self.stopword_remover = StopWordRemoverFactory().create_stop_word_remover()
+        
+        self.vectorizer = None
+        self.knn_level = None
+        self.knn_quality = None
+        self.is_trained = False
+        self.init_learned_data()
+        self.load_model()
+        self.init_db() 
+
+    def init_learned_data(self):
+        """Membuat file learned_data.csv jika belum ada"""
+        if not os.path.exists(LEARNED_PATH):
+            try:
+                os.makedirs(os.path.dirname(LEARNED_PATH), exist_ok=True)
+                with open(LEARNED_PATH, 'w', newline='', encoding='utf-8') as f:
+                    writer = csv.writer(f)
+                    writer.writerow(['text', 'target_level', 'quality']) # Header Standar
+                print("📂 File 'learned_data.csv' baru berhasil dibuat.")
+            except Exception as e:
+                print(f"⚠️ Gagal membuat file learned data: {e}")
 
     def init_db(self):
         """Membuat tabel database jika belum ada"""
@@ -63,7 +89,6 @@ class BrainLogic:
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
         
-        # Cek apakah sudah ada (berdasarkan Nama & Kelas)
         c.execute("SELECT id FROM siswa WHERE nama=? AND kelas=?", (nama, kelas))
         if c.fetchone():
             conn.close()
@@ -82,17 +107,14 @@ class BrainLogic:
         db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
-        
         c.execute("SELECT id, total_poin FROM siswa WHERE nama=? AND kelas=?", (nama, kelas))
-        data = c.fetchone()
-        
+        data = c.fetchone()        
         if data:
             new_poin = data[1] + poin
             c.execute("UPDATE siswa SET total_poin=? WHERE id=?", (new_poin, data[0]))
         else:
             c.execute("INSERT INTO siswa (nama, kelas, total_poin) VALUES (?, ?, ?)", (nama, kelas, poin))
             
-        # 2. Catat Log Aktivitas
         c.execute("INSERT INTO log_aktivitas (nama_siswa, kelas, ide_kebaikan, skor_ai, kategori_ide) VALUES (?, ?, ?, ?, ?)", 
                   (nama, kelas, ide, poin, kategori_ide))
                   
@@ -102,24 +124,20 @@ class BrainLogic:
     def get_leaderboard(self, limit=15):
         db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
         conn = sqlite3.connect(db_path)
-        c = conn.cursor()
-        
+        c = conn.cursor()        
         c.execute("SELECT nama, kelas, total_poin FROM siswa ORDER BY total_poin DESC LIMIT ?", (limit,))
-        data = c.fetchall() 
-        
+        data = c.fetchall()         
         conn.close()
         return data
     
     def get_all_users(self):
-        import json # Pastikan import json
         db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
-        
         c.execute("SELECT id, nama, kelas, encoding, total_poin FROM siswa")
         users = []
         for row in c.fetchall():
-            if row[3]: # Jika ada encoding
+            if row[3]:
                 try:
                     encoding_list = json.loads(row[3])
                     users.append({
@@ -133,23 +151,10 @@ class BrainLogic:
                     pass
         conn.close()
         return users
-    
-    def __init__(self):
-        print("🧠 Initializing Brain (Human-Centric + Plagiarism Guard)...")
-        self.stemmer = StemmerFactory().create_stemmer()
-        self.stopword_remover = StopWordRemoverFactory().create_stop_word_remover()
-        
-        self.vectorizer = None
-        self.knn_level = None
-        self.knn_quality = None
-        self.is_trained = False
-        self.load_model()
-        self.init_db()
 
     def preprocess_text(self, text):
         if not isinstance(text, str): 
-            return 
-        
+            return         
         text = text.lower()        
         text = re.sub(r'[^a-z\s]', ' ', text)      
         words = text.split()
@@ -158,38 +163,47 @@ class BrainLogic:
             correct_word = rules.SLANG_DICTIONARY.get(word, word)
             normalized_words.append(correct_word)
         text = " ".join(normalized_words)
-
         text = self.stopword_remover.remove(text)        
         text = self.stemmer.stem(text)
-        
         return text
     
-    def train(self, data_path=DATA_PATH):
-        print(f"📂 Loading dataset from {data_path}...")
+    def train(self):
+        print("📂 Loading datasets (Main + Learned)...")
         try:
-            df = pd.read_csv(data_path)
-            df.dropna(subset=['text', 'target_level', 'quality'], inplace=True)
-        except:
-            print("❌ Dataset tidak ditemukan!")
-            return
+            df_main = pd.read_csv(DATA_PATH)
+            df_final = df_main
+            if os.path.exists(LEARNED_PATH) and os.path.getsize(LEARNED_PATH) > 10:
+                try:
+                    df_learned = pd.read_csv(LEARNED_PATH)
+                    print(f"📈 Menambahkan {len(df_learned)} data baru dari pengalaman lapangan.")
+                    df_final = pd.concat([df_main, df_learned], ignore_index=True)
+                except Exception as e:
+                    print(f"⚠️ Warning: Gagal load learned_data, pakai data utama saja. Error: {e}")
+            df_final.dropna(subset=['text', 'target_level', 'quality'], inplace=True)
+            df_final['clean_text'] = df_final['text'].apply(self.preprocess_text)
+            df_final = df_final[df_final['clean_text'].str.strip() != ""]
+            self.vectorizer = TfidfVectorizer(ngram_range=(1, 2), min_df=1)
+            X = self.vectorizer.fit_transform(df_final['clean_text'])
+            self.knn_level = KNeighborsClassifier(n_neighbors=5, metric='cosine', weights='distance')
+            self.knn_level.fit(X, df_final['target_level'])
+            self.knn_quality = KNeighborsClassifier(n_neighbors=5, metric='cosine', weights='distance')
+            self.knn_quality.fit(X, df_final['quality'])
+            
+            self.is_trained = True
+            self.save_model()
+            print(f"✅ Training Selesai! Total Data: {len(df_final)} baris.")
+            
+        except Exception as e:
+            print(f"❌ Error Train: {e}")
 
-        print("🧹 Preprocessing data...")
-        df['clean_text'] = df['text'].apply(self.preprocess_text)
-        df = df[df['clean_text'].str.strip() != ""]
-
-        print("🤖 Training KNN Models...")
-        self.vectorizer = TfidfVectorizer(ngram_range=(1, 2), min_df=1)
-        X = self.vectorizer.fit_transform(df['clean_text'])
-
-        self.knn_level = KNeighborsClassifier(n_neighbors=5, metric='cosine', weights='distance')
-        self.knn_level.fit(X, df['target_level'])
-        
-        self.knn_quality = KNeighborsClassifier(n_neighbors=5, metric='cosine', weights='distance')
-        self.knn_quality.fit(X, df['quality'])
-
-        self.is_trained = True
-        print("✅ Training Selesai!")
-        self.save_model()
+    def auto_learn(self, text, level, quality):
+        try:
+            with open(LEARNED_PATH, 'a', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                writer.writerow([text, level, quality])
+            # print(f"📝 AI Belajar hal baru: '{text}' -> {level}") 
+        except Exception as e:
+            print(f"⚠️ Gagal menyimpan learned data: {e}")
 
     def calculate_score_saw(self, pred_level, pred_quality, text_len):
         W = [0.5, 0.3, 0.2]
@@ -236,83 +250,57 @@ class BrainLogic:
     
     def check_plagiarism(self, new_text, history_list):
         if not history_list: return False, None
-        
         clean_new = new_text.lower().strip()
-        
         for old_text in history_list:
             clean_old = old_text.lower().strip()
-            
             if clean_new == clean_old:
                 return True, old_text
-            
             ratio = difflib.SequenceMatcher(None, clean_new, clean_old).ratio()
             if ratio > 0.85:
                 return True, old_text
-                
         return False, None
 
     def predict_and_score(self, text_input, class_history=[]):
         fail_response = {"success": False, "original_text": text_input, "msg": "Error", "debug": "Unknown"}
-
         if not self.is_trained:
-            fail_response["msg"] = "Model belum siap. Train dulu."
+            fail_response["msg"] = "Model belum siap."
             return fail_response
 
         text_lower = text_input.lower()
         clean_input = self.preprocess_text(text_input)
         
         if self.vectorizer.transform([clean_input]).sum() == 0:
-            fail_response["msg"] = "AI tidak mengerti kalimat ini."
-            fail_response["debug"] = "Zero Vector"
+            fail_response["msg"] = "Kalimat tidak dimengerti."
             return fail_response
-
         if len(text_input) < 10: 
             fail_response["msg"] = "Terlalu pendek."
             return fail_response
         
-        bad_hit = [w for w in rules.BAD_KEYWORDS if w in text_lower]
-        if bad_hit:
-            if not any(w in text_lower for w in rules.GOOD_CONTEXT_FOR_BAD_WORDS):
-                fail_response["msg"] = f"⚠️ Terdeteksi kata: '{bad_hit[0]}'."
-                fail_response["debug"] = "Bad Word"
-                return fail_response
-
         if class_history:
             is_plagiat, _ = self.check_plagiarism(text_input, class_history)
             if is_plagiat: 
-                fail_response["msg"] = "Ide ini mirip temanmu!"
-                fail_response["debug"] = "Plagiarism"
+                fail_response["msg"] = "Ide mirip temanmu!"
                 return fail_response
-
-        forced_level = None
-        debug_reason = "Pure AI"
-        
-        if any(w in text_lower for w in rules.BLOCK_KEYWORDS):
-             if not any(w in text_lower for w in rules.HUMAN_KEYWORDS):
-                 fail_response["msg"] = "Fokus ke teman sekelas ya!"
-                 fail_response["debug"] = "Env Rejected"
-                 return fail_response
-
-        if any(w in text_lower for w in rules.SELF_KEYWORDS):
-            forced_level = "Self"
-            debug_reason = "Rule: Self"
-        elif any(w in text_lower for w in rules.SOCIAL_VIP_KEYWORDS):
-            forced_level = "Friend"
-            debug_reason = "Rule: VIP"
 
         vec_input = self.vectorizer.transform([clean_input])
         pred_level = self.knn_level.predict(vec_input)[0]
         pred_quality = self.knn_quality.predict(vec_input)[0]
         confidence = np.max(self.knn_level.predict_proba(vec_input)) * 100
         
-        if forced_level: pred_level = forced_level
-        elif pred_level == "Junk": 
-            fail_response["msg"] = "AI bingung (Kategori Junk)."
-            fail_response["debug"] = "Junk Predicted"
+        if pred_level == "Junk": 
+            fail_response["msg"] = "Kalimat kurang jelas/tidak nyambung."
+            return fail_response
+        
+        if pred_level == "Enemy":
+            fail_response["msg"] = "Kebaikan harus positif ya!"
             return fail_response
 
         final_score = self.calculate_score_saw(pred_level, pred_quality, len(text_input))
+        
         feedback_text = self.get_smart_feedback(text_input, pred_level)
+
+        if pred_level in ['Friend', 'Self', 'Social'] and confidence > 60 and len(text_input) > 15:
+            self.auto_learn(text_input, pred_level, pred_quality)
 
         return {
             "success": True,
@@ -321,7 +309,7 @@ class BrainLogic:
             "prediction_quality": pred_quality,
             "final_score": final_score,
             "feedback": feedback_text,
-            "debug": f"{debug_reason} ({confidence:.0f}%)"
+            "debug": f"Conf: {confidence:.0f}%"
         }
 
     def save_model(self):
@@ -335,3 +323,11 @@ class BrainLogic:
             self.is_trained = True
         else:
             print("⚠️ Model belum ada.")
+
+# ... (Ini adalah baris terakhir class BrainLogic kamu sebelumnya) ...
+# ... (Paste kode di bawah ini di paling bawah file) ...
+
+# --- DEBUGGER (JANGAN DIHAPUS UTK CEK) ---
+if __name__ == "__main__":
+    brain = BrainLogic()
+    # Test jika perlu...

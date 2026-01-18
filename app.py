@@ -34,7 +34,7 @@ class ConfettiManager:
 
     def start(self):
         self.canvas.place(relx=0, rely=0, relwidth=1, relheight=1)
-        self.particles = [ConfettiParticle(self.canvas, 1000, 600) for _ in range(50)] # 50 partikel
+        self.particles = [ConfettiParticle(self.canvas, 1000, 600) for _ in range(50)] 
         self.is_active = True
         self.animate()
 
@@ -90,7 +90,9 @@ class KebaikanApp(ctk.CTk):
         self.cap = None
         self.last_activity_time = time.time() # Pencatat waktu terakhir ada orang
         self.SLEEP_TIMEOUT = 300 # 300 Detik = 5 Menit (Ganti jadi 10 utk testing) 
-        self.toggle_camera()
+
+        # Matikan kamera di awal
+        self.go_to_sleep()
 
     def setup_sidebar(self):
         self.sidebar = ctk.CTkFrame(self, width=250, corner_radius=0)
@@ -100,13 +102,14 @@ class KebaikanApp(ctk.CTk):
         self.logo_label = ctk.CTkLabel(self.sidebar, text="✨ BERBURU IDE KEBAIKAN ✨", font=ctk.CTkFont(size=24, weight="bold"))
         self.logo_label.grid(row=0, column=0, padx=20, pady=(30, 10))
 
-        self.switch_cam = ctk.CTkSwitch(self.sidebar, text="Kamera Aktif", command=self.toggle_camera, 
-                                        onvalue=True, offvalue=False, font=ctk.CTkFont(size=14, weight="bold"))
-        self.switch_cam.grid(row=1, column=0, padx=20, pady=10)
-        self.switch_cam.deselect() # Default Mati
+        self.status_container = ctk.CTkFrame(self.sidebar, fg_color="transparent")
+        self.status_container.grid(row=1, column=0, padx=20, pady=10)
 
-        self.status_label = ctk.CTkLabel(self.sidebar, text="System: SLEEP 💤", text_color="gray", font=ctk.CTkFont(weight="bold"))
-        self.status_label.grid(row=2, column=0, padx=20, pady=0)
+        self.status_dot = ctk.CTkLabel(self.status_container, text="●", font=ctk.CTkFont(size=24), text_color="red")
+        self.status_dot.pack(side="left", padx=5)
+        
+        self.status_text = ctk.CTkLabel(self.status_container, text="OFFLINE", font=ctk.CTkFont(weight="bold"))
+        self.status_text.pack(side="left")
 
         ctk.CTkLabel(self.sidebar, text="_________________________").grid(row=2, column=0, pady=10)
 
@@ -117,7 +120,7 @@ class KebaikanApp(ctk.CTk):
         self.lb_frame.grid(row=4, column=0, padx=20, pady=10, sticky="nsew")
         self.refresh_leaderboard() 
 
-        self.btn_reset = ctk.CTkButton(self.sidebar, text="Reset System", command=self.reset_system, fg_color="transparent", border_width=1, text_color=("gray10", "gray90"))
+        self.btn_reset = ctk.CTkButton(self.sidebar, text="Reset System", command=self.start_reset_sequence, fg_color="transparent", border_width=1, text_color=("gray10", "gray90"))
         self.btn_reset.grid(row=5, column=0, padx=20, pady=20)
 
     def refresh_leaderboard(self):
@@ -143,11 +146,16 @@ class KebaikanApp(ctk.CTk):
         self.page_camera = ctk.CTkFrame(self.main_frame, fg_color="transparent")
         self.cam_container = ctk.CTkFrame(self.page_camera, corner_radius=15, fg_color="white")
         self.cam_container.pack(fill="both", expand=True)
-        self.cam_label = ctk.CTkLabel(self.cam_container, text="")
-        self.cam_label.pack(fill="both", expand=True, padx=0, pady=0)
-        self.info_label = ctk.CTkLabel(self.page_camera, text="Senyum untuk Login 😊", font=ctk.CTkFont(size=20, weight="bold"), text_color="blue")
+        
+        # Label Kamera dengan instruksi SPASI
+        self.cam_label = ctk.CTkLabel(self.cam_container, 
+                                      text="Klik Layar untuk Mulai 🚀", # <--- Ganti Ini
+                                      font=ctk.CTkFont(size=20, weight="bold"), text_color="gray")
+        self.cam_label.pack(fill="both", expand=True, padx=0, pady=0)        
+        self.cam_label.bind('<Button-1>', self.wake_up_system)
+        
+        self.info_label = ctk.CTkLabel(self.page_camera, text="Sistem Sedang Tidur 💤", font=ctk.CTkFont(size=20, weight="bold"), text_color="gray")
         self.info_label.pack(pady=15)
-
         # --- HALAMAN 2: REGISTER ---
         self.page_register = ctk.CTkFrame(self.main_frame, fg_color="white", corner_radius=15)
         ctk.CTkLabel(self.page_register, text="👋 Halo Teman Baru!", font=ctk.CTkFont(size=24, weight="bold")).pack(pady=(40, 10))
@@ -159,8 +167,7 @@ class KebaikanApp(ctk.CTk):
         self.entry_kelas.pack(pady=10)
         self.entry_kelas.set("Pilih Kelas") 
         ctk.CTkButton(self.page_register, text="Simpan & Lanjut", command=self.submit_register, width=200, height=40).pack(pady=20)
-        ctk.CTkButton(self.page_register, text="Batal", command=self.reset_system, fg_color="transparent", text_color="red").pack()
-
+        ctk.CTkButton(self.page_register, text="Batal", command=self.start_reset_sequence, fg_color="transparent", text_color="red").pack()
         # --- HALAMAN 3: INPUT ---
         self.page_input = ctk.CTkFrame(self.main_frame, fg_color="white", corner_radius=15)
         self.lbl_welcome = ctk.CTkLabel(self.page_input, text="Hai, Budi!", font=ctk.CTkFont(size=24, weight="bold"))
@@ -169,6 +176,8 @@ class KebaikanApp(ctk.CTk):
         self.txt_ide = ctk.CTkTextbox(self.page_input, width=400, height=150, font=ctk.CTkFont(size=14))
         self.txt_ide.pack(pady=10)
         ctk.CTkButton(self.page_input, text="Kirim Kebaikan 🚀", command=self.submit_kebaikan, width=200, height=50, fg_color="green").pack(pady=20)
+        self.btn_cancel_input = ctk.CTkButton(self.page_input, text="Batal / Kembali", command=self.start_reset_sequence, fg_color="transparent", text_color="red", hover_color="#ffebee")
+        self.btn_cancel_input.pack(pady=5)
         
         self.page_loading = ctk.CTkFrame(self.main_frame, fg_color="white", corner_radius=15)
         self.lbl_loading = ctk.CTkLabel(self.page_loading, text="Sedang menghubungi markas...", font=ctk.CTkFont(size=20))
@@ -179,29 +188,18 @@ class KebaikanApp(ctk.CTk):
         self.result_card = ctk.CTkFrame(self.page_result, fg_color="white", corner_radius=20, 
                                         border_width=2, border_color="#FFD700")
         self.result_card.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.6, relheight=0.7)
-
-        # Isi Kartu
         self.lbl_result_title = ctk.CTkLabel(self.result_card, text="✨ HASIL ANALISIS ✨", 
                                              font=ctk.CTkFont(size=14, weight="bold"), text_color="gray")
         self.lbl_result_title.pack(pady=(30, 10))
-
-        # Ikon Emoji Besar (Gimmick)
         self.lbl_icon = ctk.CTkLabel(self.result_card, text="🏆", font=ctk.CTkFont(size=80))
         self.lbl_icon.pack(pady=5)
-
-        # Skor dengan Font Raksasa
         self.lbl_score = ctk.CTkLabel(self.result_card, text="100", 
-                                      font=ctk.CTkFont(size=70, weight="bold"), text_color="#FFA500") # Warna Oranye
+                                      font=ctk.CTkFont(size=70, weight="bold"), text_color="#FFA500") 
         self.lbl_score.pack(pady=5)
-        
-        # Feedback
         self.lbl_feedback = ctk.CTkLabel(self.result_card, text="Feedback...", 
                                          font=ctk.CTkFont(size=18), wraplength=400)
         self.lbl_feedback.pack(pady=20)
-        
-        # Tombol Action
-        self.btn_result_action = ctk.CTkButton(self.result_card, text="Selesai", 
-                                               command=self.reset_system, width=200, height=40, corner_radius=20)
+        self.btn_result_action = ctk.CTkButton(self.result_card, text="Selesai", command=self.start_reset_sequence, width=200, height=40, corner_radius=20)
         self.btn_result_action.pack(side="bottom", pady=30)
         
         self.show_frame("CAMERA")
@@ -212,6 +210,21 @@ class KebaikanApp(ctk.CTk):
         self.page_input.pack_forget()
         self.page_loading.pack_forget()
         self.page_result.pack_forget()
+
+        # --- LOGIKA MATIKAN KAMERA (ANTI FREEZE) ---
+        if name != "CAMERA":
+            self.is_camera_on = False 
+            
+            try:
+                self.cam_label.configure(image=None)
+                self.cam_label.image = None
+                self.update_idletasks() 
+            except:
+                pass
+
+            if self.cap is not None:
+                self.cap.release()    
+                self.cap = None       
 
         if name == "CAMERA":
             self.page_camera.pack(fill="both", expand=True)
@@ -230,35 +243,80 @@ class KebaikanApp(ctk.CTk):
             self.page_result.pack(fill="both", expand=True, padx=50, pady=50)
             self.current_state = "RESULT"
     
-    def toggle_camera(self):
-        # Reset timer setiap kali dinyalakan manual
-        self.last_activity_time = time.time()
+    def wake_up_system(self, event=None):
+        """Menyalakan Sistem & Kamera (Hanya via Klik atau Restart Internal)"""
+        self.last_activity_time = time.time() 
         
-        if self.switch_cam.get() == 1:
-            if self.cap is None or not self.cap.isOpened():
-                self.cap = cv2.VideoCapture(0)
-            self.is_camera_on = True
-            self.cam_label.configure(text="")
-            self.update_camera() 
-        else:
-            self.is_camera_on = False
-            self.status_label.configure(text="System: SLEEP 💤", text_color="gray")
-            if self.cap: self.cap.release()
-            self.cam_label.configure(image=None, text="Kamera Mati 💤\nKlik 'Kamera Aktif' di kiri untuk mulai.", text_color="green")
+        # Cek kalau kamera sudah jalan & sehat, gak usah restart
+        if self.is_camera_on and self.cap is not None and self.cap.isOpened():
+            self.show_frame("CAMERA")
+            return
 
+        print("🚀 Waking Up / Restarting System...")
+        self.is_camera_on = True
+        
+        # Update UI Status
+        self.status_dot.configure(text_color="green")
+        self.status_text.configure(text="ONLINE", text_color="green")
+        self.info_label.configure(text="Senyum untuk Login 😊", text_color="blue")
+        
+        try: self.cam_label.configure(text="")
+        except: pass
+        
+        # Nyalakan Kamera
+        if self.cap is None or not self.cap.isOpened():
+            self.cap = cv2.VideoCapture(0)
+            
+        # Tampilkan Halaman Kamera
+        self.show_frame("CAMERA")
+            
+        self.update_camera()
+
+    def go_to_sleep(self):
+        print("💤 System Going to Sleep...")
+        self.is_camera_on = False
+        
+        if self.cap is not None:
+            self.cap.release()
+            self.cap = None 
+            
+        # UI RESET
+        self.status_dot.configure(text_color="red")
+        self.status_text.configure(text="OFFLINE", text_color="red")
+        self.info_label.configure(text="Sistem Sedang Tidur 💤", text_color="gray")
+        
+        # [UPDATE TEKS INSTRUKSI]
+        try:
+            self.cam_label.configure(image=None, text="Klik Layar untuk Mulai 🚀", text_color="gray")
+            self.cam_label.image = None
+        except:
+            try: self.cam_label.configure(text="Klik Layar untuk Mulai 🚀")
+            except: pass
+            
     def update_camera(self):
         if not self.is_camera_on: return
 
         elapsed_idle = time.time() - self.last_activity_time
         if elapsed_idle > self.SLEEP_TIMEOUT:
             print("💤 Auto Sleep Activated!")
-            self.switch_cam.deselect() 
-            self.toggle_camera() 
+            self.go_to_sleep()
             return
 
-        if self.current_state == "STANDBY" and self.cap.isOpened():
+        if self.current_state == "STANDBY":
+            if self.cap is None or not self.cap.isOpened():
+                try: 
+                    self.cam_label.configure(text="Menyalakan Kamera... 📷")
+                except: 
+                    pass
+                return
+
             ret, frame = self.cap.read()
             if ret:
+                try:
+                    if self.cam_label.cget("text") != "":
+                         self.cam_label.configure(text="") 
+                except: pass
+
                 frame = cv2.flip(frame, 1)
                 data = self.vision.process_frame(frame)
                 
@@ -292,15 +350,27 @@ class KebaikanApp(ctk.CTk):
                         if elapsed >= 3.0:
                             self.smile_start_time = None 
                             self.handle_login_trigger(data) 
+                            return 
                     else:
                         self.smile_start_time = None
 
+                if not self.is_camera_on: return
+
+                # Render
                 frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 img = Image.fromarray(frame_rgb)
                 img_tk = ctk.CTkImage(light_image=img, dark_image=img, size=(960, 720))
-                self.cam_label.configure(image=img_tk)
-                self.cam_label.image = img_tk 
+                
+                try:
+                    self.cam_label.configure(image=img_tk)
+                    self.cam_label.image = img_tk 
+                except: pass
 
+            else:
+                try: self.cam_label.configure(text="Kamera Error / Loading... ⏳")
+                except: pass
+
+            # Loop
             if self.is_camera_on:
                 self.after(10, self.update_camera)
 
@@ -308,11 +378,9 @@ class KebaikanApp(ctk.CTk):
         zone = data["zone"]
         
         if zone == "RED":
-            # Wajah Asing -> Masuk Pendaftaran
             self.pending_encoding = data["encoding"] 
             self.show_frame("REGISTER")
         else:
-            # Wajah Dikenal -> Masuk Input
             user = data["user_data"]
             self.active_user = user
             self.lbl_welcome.configure(text=f"Hai, {user['nama']}!")
@@ -389,32 +457,47 @@ class KebaikanApp(ctk.CTk):
         temp_score = random.randint(0, 100) if current_size < 60 else target_score
         self.lbl_score.configure(font=ctk.CTkFont(size=current_size, weight="bold"), text=f"{temp_score}")
         
-        # Loop lagi dengan ukuran lebih besar
         self.after(20, lambda: self.animate_score_pop(target_score, current_size + 5))
     
     def start_auto_close_timer(self):
-        # Batalkan timer lama kalau ada
         if self.auto_close_timer:
             self.after_cancel(self.auto_close_timer)
         
-        # Set timer baru 7 detik -> Panggil reset_system
-        self.auto_close_timer = self.after(7000, self.reset_system)
+        self.auto_close_timer = self.after(4000, self.reset_system)
 
     def cancel_auto_close(self):
-        # Dipanggil kalau user klik tombol "Selesai" manual
         if self.auto_close_timer:
             self.after_cancel(self.auto_close_timer)
             self.auto_close_timer = None
         
+    def start_reset_sequence(self):
+        self.lbl_loading.configure(text="Sabar ya, sedang mereset sistem... 🔄")
+        self.show_frame("LOADING")
+        self.after(3000, self.reset_system)
+
     def reset_system(self):
+        self.is_camera_on = False 
+        self.last_activity_time = time.time()
         self.cancel_auto_close()
         self.stop_confetti()
+        
         self.entry_nama.delete(0, "end")
         self.entry_kelas.set("Pilih Kelas")
         self.txt_ide.delete("1.0", "end")
         self.active_user = None
         self.pending_encoding = None
-        self.show_frame("CAMERA")
+        
+        try:
+            self.cam_label.configure(image=None, text="Merestart Kamera... 📷")
+            self.cam_label.image = None
+        except:
+            pass
+
+        
+        #self.show_frame("CAMERA")
+        #self.update_idletasks() 
+
+        self.after(300, self.wake_up_system)
 
     def on_closing(self):
         if self.cap is not None:
