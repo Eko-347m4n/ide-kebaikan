@@ -28,7 +28,7 @@ BLOCK_KEYWORDS = [
 ]
 
 HUMAN_KEYWORDS = ["teman", "guru", "orang", "adik", "kakak", "ibu", "ayah", "sahabat"]
-SELF_KEYWORDS  = ["tidur", "makan", "belajar", "sholat", "doa", "healing", "main game"]
+SELF_KEYWORDS  = ["tidur", "sholat", "doa", "healing", "main game"]
 SOCIAL_VIP_KEYWORDS     = ["jenguk", "donasi", "tolong", "traktir"]
 SLANG_DICTIONARY = {
     "yg": "yang", 

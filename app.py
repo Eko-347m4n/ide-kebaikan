@@ -60,7 +60,7 @@ class KebaikanApp(ctk.CTk):
         super().__init__()
 
         # --- SETUP WINDOW ---
-        self.title("AI Kebaikan - Smart Kindness Detector")
+        self.title("Berburu Kebaikan")
         self.geometry("1100x700")
         
         self.grid_columnconfigure(1, weight=1)
@@ -86,8 +86,11 @@ class KebaikanApp(ctk.CTk):
         self.confetti = ConfettiManager(self.page_result)
 
         # CAMERA
-        self.cap = cv2.VideoCapture(0)
-        self.update_camera() 
+        self.is_camera_on = False 
+        self.cap = None
+        self.last_activity_time = time.time() # Pencatat waktu terakhir ada orang
+        self.SLEEP_TIMEOUT = 300 # 300 Detik = 5 Menit (Ganti jadi 10 utk testing) 
+        self.toggle_camera()
 
     def setup_sidebar(self):
         self.sidebar = ctk.CTkFrame(self, width=250, corner_radius=0)
@@ -96,6 +99,14 @@ class KebaikanApp(ctk.CTk):
 
         self.logo_label = ctk.CTkLabel(self.sidebar, text="✨ BERBURU IDE KEBAIKAN ✨", font=ctk.CTkFont(size=24, weight="bold"))
         self.logo_label.grid(row=0, column=0, padx=20, pady=(30, 10))
+
+        self.switch_cam = ctk.CTkSwitch(self.sidebar, text="Kamera Aktif", command=self.toggle_camera, 
+                                        onvalue=True, offvalue=False, font=ctk.CTkFont(size=14, weight="bold"))
+        self.switch_cam.grid(row=1, column=0, padx=20, pady=10)
+        self.switch_cam.deselect() # Default Mati
+
+        self.status_label = ctk.CTkLabel(self.sidebar, text="System: SLEEP 💤", text_color="gray", font=ctk.CTkFont(weight="bold"))
+        self.status_label.grid(row=2, column=0, padx=20, pady=0)
 
         ctk.CTkLabel(self.sidebar, text="_________________________").grid(row=2, column=0, pady=10)
 
@@ -133,7 +144,7 @@ class KebaikanApp(ctk.CTk):
         self.cam_container = ctk.CTkFrame(self.page_camera, corner_radius=15, fg_color="white")
         self.cam_container.pack(fill="both", expand=True)
         self.cam_label = ctk.CTkLabel(self.cam_container, text="")
-        self.cam_label.pack(fill="both", expand=True, padx=10, pady=10)
+        self.cam_label.pack(fill="both", expand=True, padx=0, pady=0)
         self.info_label = ctk.CTkLabel(self.page_camera, text="Senyum untuk Login 😊", font=ctk.CTkFont(size=20, weight="bold"), text_color="blue")
         self.info_label.pack(pady=15)
 
@@ -218,14 +229,42 @@ class KebaikanApp(ctk.CTk):
         elif name == "RESULT":
             self.page_result.pack(fill="both", expand=True, padx=50, pady=50)
             self.current_state = "RESULT"
+    
+    def toggle_camera(self):
+        # Reset timer setiap kali dinyalakan manual
+        self.last_activity_time = time.time()
+        
+        if self.switch_cam.get() == 1:
+            if self.cap is None or not self.cap.isOpened():
+                self.cap = cv2.VideoCapture(0)
+            self.is_camera_on = True
+            self.cam_label.configure(text="")
+            self.update_camera() 
+        else:
+            self.is_camera_on = False
+            self.status_label.configure(text="System: SLEEP 💤", text_color="gray")
+            if self.cap: self.cap.release()
+            self.cam_label.configure(image=None, text="Kamera Mati 💤\nKlik 'Kamera Aktif' di kiri untuk mulai.", text_color="green")
 
     def update_camera(self):
-        if self.current_state == "STANDBY":
+        if not self.is_camera_on: return
+
+        elapsed_idle = time.time() - self.last_activity_time
+        if elapsed_idle > self.SLEEP_TIMEOUT:
+            print("💤 Auto Sleep Activated!")
+            self.switch_cam.deselect() 
+            self.toggle_camera() 
+            return
+
+        if self.current_state == "STANDBY" and self.cap.isOpened():
             ret, frame = self.cap.read()
             if ret:
                 frame = cv2.flip(frame, 1)
                 data = self.vision.process_frame(frame)
                 
+                if data["face_detected"]:
+                    self.last_activity_time = time.time()
+
                 if data["face_detected"] and data["location"]:
                     top, right, bottom, left = data["location"]
                     zone = data["zone"]
@@ -246,27 +285,24 @@ class KebaikanApp(ctk.CTk):
                         bar_w = 200
                         bx, by = left + (right-left)//2 - bar_w//2, top - 30
                         cv2.rectangle(frame, (bx, by), (bx + bar_w, by + 10), (200, 200, 200), -1)
-                        
-                        # Bar Hijau (Isi sesuai progress)
                         fill_w = int(bar_w * progress)
                         cv2.rectangle(frame, (bx, by), (bx + fill_w, by + 10), (0, 255, 0), -1)
-                        
-                        cv2.putText(frame, "TETAP TERSENYUM...", (bx, by-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
+                        cv2.putText(frame, "TAHAN...", (bx, by-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
 
                         if elapsed >= 3.0:
                             self.smile_start_time = None 
                             self.handle_login_trigger(data) 
-                    
                     else:
                         self.smile_start_time = None
 
                 frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 img = Image.fromarray(frame_rgb)
-                img_tk = ctk.CTkImage(light_image=img, dark_image=img, size=(640, 480))
+                img_tk = ctk.CTkImage(light_image=img, dark_image=img, size=(960, 720))
                 self.cam_label.configure(image=img_tk)
                 self.cam_label.image = img_tk 
 
-        self.after(10, self.update_camera)
+            if self.is_camera_on:
+                self.after(10, self.update_camera)
 
     def handle_login_trigger(self, data):
         zone = data["zone"]
@@ -381,7 +417,10 @@ class KebaikanApp(ctk.CTk):
         self.show_frame("CAMERA")
 
     def on_closing(self):
-        self.cap.release()
+        if self.cap is not None:
+            self.cap.release()
+            
+        self.cancel_auto_close()                      
         self.destroy()
     
     def start_confetti(self):
