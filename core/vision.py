@@ -4,12 +4,13 @@ import numpy as np
 import os
 import face_recognition # Tetap butuh ini utk encoding login awal
 
+from core.config import Config
+
 class VisionSystem:
     def __init__(self):
         
         # --- 1. SETUP MODEL DLIB ---
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        model_path = os.path.join(base_dir, "shape_predictor_68_face_landmarks.dat")
+        model_path = Config.DLIB_MODEL_PATH
         
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"❌ ERROR: File '{model_path}' hilang!")
@@ -21,19 +22,19 @@ class VisionSystem:
         self.memory_users = []
         self.memory_encodings = []
         
-        self.ZONE_GREEN = 0.45
-        self.ZONE_YELLOW = 0.65
+        self.ZONE_GREEN = Config.ZONE_GREEN
+        self.ZONE_YELLOW = Config.ZONE_YELLOW
         
         # --- 3. KONFIGURASI SENYUM (DARI KODE BARUMU) ---
-        self.LIP_JAW_THRESHOLD = 0.50 # Sedikit disesuaikan biar responsif
+        self.LIP_JAW_THRESHOLD = Config.LIP_JAW_THRESHOLD
         
         # Rasio Bukaan Mulut dibagi Jarak Hidung-Mulut
-        self.OPENING_THRESHOLD = 0.30 # Ambang batas minimal mulut terbuka sedikit
+        self.OPENING_THRESHOLD = Config.OPENING_THRESHOLD
 
         # --- 4. OPTIMASI ---
         self.frame_count = 0
-        self.SKIP_FRAMES = 3
-        self.RESIZE_FACTOR = 0.25
+        self.SKIP_FRAMES = Config.SKIP_FRAMES
+        self.RESIZE_FACTOR = Config.RESIZE_FACTOR
         
         # Stabilizer
         self.avg_ratio = 0.0

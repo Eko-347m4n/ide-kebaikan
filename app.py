@@ -7,6 +7,7 @@ import random
 
 from core.brain import BrainLogic
 from core.vision import VisionSystem
+from core.config import Config
 
 ctk.set_appearance_mode("Light")
 ctk.set_default_color_theme("blue")
@@ -60,8 +61,8 @@ class KebaikanApp(ctk.CTk):
         super().__init__()
 
         # --- SETUP WINDOW ---
-        self.title("Berburu Kebaikan")
-        self.geometry("1100x700")
+        self.title(Config.APP_TITLE)
+        self.geometry(Config.APP_GEOMETRY)
         
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
@@ -89,7 +90,7 @@ class KebaikanApp(ctk.CTk):
         self.is_camera_on = False 
         self.cap = None
         self.last_activity_time = time.time() # Pencatat waktu terakhir ada orang
-        self.SLEEP_TIMEOUT = 300 # 300 Detik = 5 Menit (Ganti jadi 10 utk testing) 
+        self.SLEEP_TIMEOUT = Config.SLEEP_TIMEOUT 
 
         # Matikan kamera di awal
         self.go_to_sleep()

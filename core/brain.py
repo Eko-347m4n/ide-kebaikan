@@ -23,11 +23,12 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import KNeighborsClassifier
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+from core.config import Config
+from core.database import DatabaseManager
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(BASE_DIR, '../data/training_data.csv') 
-LEARNED_PATH = os.path.join(BASE_DIR, '../data/learned_data.csv')
-MODEL_PATH = os.path.join(BASE_DIR, 'trained_brain.pkl')
+DATA_PATH = Config.TRAINING_DATA_PATH
+LEARNED_PATH = Config.LEARNED_DATA_PATH
+MODEL_PATH = Config.MODEL_PATH
 
 class BrainLogic:
     def __init__(self):
@@ -35,13 +36,14 @@ class BrainLogic:
         self.stemmer = StemmerFactory().create_stemmer()
         self.stopword_remover = StopWordRemoverFactory().create_stop_word_remover()
         
+        self.db = DatabaseManager() # Komposisi Database
+        
         self.vectorizer = None
         self.knn_level = None
         self.knn_quality = None
         self.is_trained = False
         self.init_learned_data()
         self.load_model()
-        self.init_db() 
 
     def init_learned_data(self):
         """Membuat file learned_data.csv jika belum ada"""
@@ -55,102 +57,17 @@ class BrainLogic:
             except Exception as e:
                 print(f"⚠️ Gagal membuat file learned data: {e}")
 
-    def init_db(self):
-        """Membuat tabel database jika belum ada"""
-        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
-        os.makedirs(os.path.dirname(db_path), exist_ok=True)
-        
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
-        
-        c.execute('''CREATE TABLE IF NOT EXISTS siswa
-                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                      nama TEXT, 
-                      kelas TEXT, 
-                      encoding TEXT, 
-                      total_poin INTEGER DEFAULT 0, 
-                      streak INTEGER DEFAULT 0, 
-                      last_active DATE)''')
-                      
-        c.execute('''CREATE TABLE IF NOT EXISTS log_aktivitas
-                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                      nama_siswa TEXT, 
-                      kelas TEXT, 
-                      ide_kebaikan TEXT, 
-                      skor_ai INTEGER, 
-                      kategori_ide TEXT,
-                      waktu TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
-        conn.commit()
-        conn.close()
-        print("🗄️ Database initialized.")
-
     def register_user(self, nama, kelas, encoding):
-        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
-        
-        c.execute("SELECT id FROM siswa WHERE nama=? AND kelas=?", (nama, kelas))
-        if c.fetchone():
-            conn.close()
-            return False, "Siswa sudah terdaftar!"
-            
-        encoding_list = encoding.tolist() 
-        encoding_json = json.dumps(encoding_list)
-        
-        c.execute("INSERT INTO siswa (nama, kelas, encoding, total_poin) VALUES (?, ?, ?, 0)", 
-                  (nama, kelas, encoding_json))
-        conn.commit()
-        conn.close()
-        return True, "Pendaftaran Berhasil!"
+        return self.db.register_user(nama, kelas, encoding)
 
     def add_points(self, nama, kelas, poin, ide, kategori_ide):
-        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
-        c.execute("SELECT id, total_poin FROM siswa WHERE nama=? AND kelas=?", (nama, kelas))
-        data = c.fetchone()        
-        if data:
-            new_poin = data[1] + poin
-            c.execute("UPDATE siswa SET total_poin=? WHERE id=?", (new_poin, data[0]))
-        else:
-            c.execute("INSERT INTO siswa (nama, kelas, total_poin) VALUES (?, ?, ?)", (nama, kelas, poin))
-            
-        c.execute("INSERT INTO log_aktivitas (nama_siswa, kelas, ide_kebaikan, skor_ai, kategori_ide) VALUES (?, ?, ?, ?, ?)", 
-                  (nama, kelas, ide, poin, kategori_ide))
-                  
-        conn.commit()
-        conn.close()
+        self.db.add_points(nama, kelas, poin, ide, kategori_ide)
 
     def get_leaderboard(self, limit=15):
-        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()        
-        c.execute("SELECT nama, kelas, total_poin FROM siswa ORDER BY total_poin DESC LIMIT ?", (limit,))
-        data = c.fetchall()         
-        conn.close()
-        return data
+        return self.db.get_leaderboard(limit)
     
     def get_all_users(self):
-        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
-        conn = sqlite3.connect(db_path)
-        c = conn.cursor()
-        c.execute("SELECT id, nama, kelas, encoding, total_poin FROM siswa")
-        users = []
-        for row in c.fetchall():
-            if row[3]:
-                try:
-                    encoding_list = json.loads(row[3])
-                    users.append({
-                        "id": row[0],
-                        "nama": row[1],
-                        "kelas": row[2],
-                        "encoding": encoding_list,
-                        "poin": row[4]
-                    })
-                except:
-                    pass
-        conn.close()
-        return users
+        return self.db.get_all_users()
 
     def preprocess_text(self, text):
         if not isinstance(text, str): 
