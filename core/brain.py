@@ -330,4 +330,4 @@ class BrainLogic:
 # --- DEBUGGER (JANGAN DIHAPUS UTK CEK) ---
 if __name__ == "__main__":
     brain = BrainLogic()
-    # Test jika perlu...
+    brain.train()

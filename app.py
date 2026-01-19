@@ -259,7 +259,8 @@ class KebaikanApp(ctk.CTk):
         self.status_dot.configure(text_color="green")
         self.status_text.configure(text="ONLINE", text_color="green")
         self.info_label.configure(text="Senyum untuk Login 😊", text_color="blue")
-        
+        self.info_label.pack(pady=15)
+
         try: self.cam_label.configure(text="")
         except: pass
         
@@ -345,7 +346,7 @@ class KebaikanApp(ctk.CTk):
                         cv2.rectangle(frame, (bx, by), (bx + bar_w, by + 10), (200, 200, 200), -1)
                         fill_w = int(bar_w * progress)
                         cv2.rectangle(frame, (bx, by), (bx + fill_w, by + 10), (0, 255, 0), -1)
-                        cv2.putText(frame, "TAHAN...", (bx, by-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
+                        cv2.putText(frame, "TAHAN SENYUMNYAA...", (bx, by-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
 
                         if elapsed >= 3.0:
                             self.smile_start_time = None 
@@ -438,7 +439,7 @@ class KebaikanApp(ctk.CTk):
                 self.brain.add_points(self.active_user["nama"], self.active_user["kelas"], score, text_input, result["prediction_level"])
                 self.refresh_leaderboard() 
             
-            self.btn_result_action.configure(text="Selesai (Reset)", fg_color="blue", hover_color="darkblue", command=self.reset_system)
+            self.btn_result_action.configure(text="Selesai (Reset)", fg_color="blue", hover_color="darkblue", command=self.start_reset_sequence)
             self.start_auto_close_timer()
             
         else:
@@ -448,10 +449,11 @@ class KebaikanApp(ctk.CTk):
             self.lbl_score.configure(text="0", text_color="red")
             self.lbl_feedback.configure(text=f"{msg}\n\nYuk perbaiki kalimatmu!", text_color="red")            
             self.btn_result_action.configure(text="Perbaiki Kata-kata ✏️", fg_color="green", hover_color="darkgreen", command=lambda: self.show_frame("INPUT"))
+            self.btn_result_action.pack(side="bottom", pady=30)
 
     def animate_score_pop(self, target_score, current_size):
         if current_size >= 70: 
-            self.lbl_score.configure(text=f"{target_score}") # Pastikan angka final benar
+            self.lbl_score.configure(text=f"{target_score}") 
             return
         
         temp_score = random.randint(0, 100) if current_size < 60 else target_score
@@ -471,9 +473,9 @@ class KebaikanApp(ctk.CTk):
             self.auto_close_timer = None
         
     def start_reset_sequence(self):
-        self.lbl_loading.configure(text="Sabar ya, sedang mereset sistem... 🔄")
+        self.lbl_loading.configure(text="Sabar ya, sedang proses menuju ke halaman awal... 🔄")
         self.show_frame("LOADING")
-        self.after(3000, self.reset_system)
+        self.after(2000, self.reset_system)
 
     def reset_system(self):
         self.is_camera_on = False 
