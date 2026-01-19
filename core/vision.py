@@ -7,7 +7,6 @@ import face_recognition # Tetap butuh ini utk encoding login awal
 class VisionSystem:
     def __init__(self):
         
-        # --- 1. SETUP MODEL DLIB ---
         base_dir = os.path.dirname(os.path.abspath(__file__))
         model_path = os.path.join(base_dir, "shape_predictor_68_face_landmarks.dat")
         
@@ -17,25 +16,20 @@ class VisionSystem:
         self.detector = dlib.get_frontal_face_detector()
         self.predictor = dlib.shape_predictor(model_path)
 
-        # --- 2. DATABASE & CONFIG ---
         self.memory_users = []
         self.memory_encodings = []
         
-        self.ZONE_GREEN = 0.45
-        self.ZONE_YELLOW = 0.65
+        self.ZONE_GREEN = 0.40  
+        self.ZONE_YELLOW = 0.50 
         
-        # --- 3. KONFIGURASI SENYUM (DARI KODE BARUMU) ---
-        self.LIP_JAW_THRESHOLD = 0.50 # Sedikit disesuaikan biar responsif
-        
-        # Rasio Bukaan Mulut dibagi Jarak Hidung-Mulut
-        self.OPENING_THRESHOLD = 0.30 # Ambang batas minimal mulut terbuka sedikit
+        self.LIP_JAW_THRESHOLD = 0.40 
+        self.OPENING_THRESHOLD = 0.25 
 
-        # --- 4. OPTIMASI ---
         self.frame_count = 0
-        self.SKIP_FRAMES = 3
-        self.RESIZE_FACTOR = 0.25
+        self.SKIP_FRAMES = 2 
         
-        # Stabilizer
+        self.RESIZE_FACTOR = 0.50 
+        
         self.avg_ratio = 0.0
         self.alpha = 0.3
 
@@ -67,26 +61,19 @@ class VisionSystem:
         lips_width = dist(pt(48), pt(54))
 
         # 2. Hitung Lebar Rahang (Titik 2 ke 14 - Pipi ke Pipi)
-        # Note: Di model 68 titik, rahang itu 0-16. 
-        # Titik 2 dan 14 adalah sudut rahang yang pas untuk referensi.
         jaw_width = dist(pt(2), pt(14))
 
         if jaw_width == 0: return 0, False
 
-        # Rasio Utama: Seberapa lebar senyum dibanding muka?
         lip_jaw_ratio = lips_width / jaw_width
 
-        # 3. Hitung Bukaan Mulut (Bibir Atas Bawah: 51 ke 57)
         mouth_opening = dist(pt(51), pt(57))
         
-        # 4. Jarak Hidung ke Mulut (Hidung 33 ke Bibir Atas 51)
         nose_to_mouth = dist(pt(33), pt(51))
         
         if nose_to_mouth == 0: opening_ratio = 0
         else: opening_ratio = mouth_opening / nose_to_mouth
 
-        # --- LOGIKA PENENTUAN SENYUM ---
-        # Syarat 1: Bibir harus cukup lebar dibanding rahang
         is_wide_enough = lip_jaw_ratio > self.LIP_JAW_THRESHOLD
         
         # Syarat 2: (Opsional) Cek bukaan mulut agar tidak mendeteksi wajah datar yang lebar
@@ -174,20 +161,16 @@ class VisionSystem:
             result["smile_score"] = self.avg_ratio
             result["is_smiling"] = is_smiling
 
-            # 2. ENCODING & IDENTIFIKASI (Wajib utk Pendaftaran)
-            # Konversi koordinat Dlib ke CSS (top, right, bottom, left)
             css_rect = (int(rect.top()), int(rect.right()), int(rect.bottom()), int(rect.left()))
             
-            # Kita butuh RGB frame kecil untuk encoding (biar cepat)
             rgb_small = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
             
             try:
-                # [FIX 3] Generate Encoding secara eksplisit
                 encodings = face_recognition.face_encodings(rgb_small, [css_rect])
                 
                 if encodings:
                     unknown_encoding = encodings[0]
-                    result["encoding"] = unknown_encoding # <--- INI YG KEMARIN HILANG!
+                    result["encoding"] = unknown_encoding 
                     
                     # Cek Database
                     zone, user, dist = self.identify_face_zones(unknown_encoding)

@@ -7,6 +7,7 @@ import random
 
 from core.brain import BrainLogic
 from core.vision import VisionSystem
+from core.logger import log
 
 ctk.set_appearance_mode("Light")
 ctk.set_default_color_theme("blue")
@@ -156,6 +157,20 @@ class KebaikanApp(ctk.CTk):
         
         self.info_label = ctk.CTkLabel(self.page_camera, text="Sistem Sedang Tidur 💤", font=ctk.CTkFont(size=20, weight="bold"), text_color="gray")
         self.info_label.pack(pady=15)
+        # --- [BARU] HALAMAN KONFIRMASI (RAGU) ---
+        self.page_confirm = ctk.CTkFrame(self.main_frame, fg_color="white", corner_radius=15)
+        ctk.CTkLabel(self.page_confirm, text="🤔", font=ctk.CTkFont(size=80)).pack(pady=(50, 10))
+        ctk.CTkLabel(self.page_confirm, text="Sebentar, sistem agak ragu...", font=ctk.CTkFont(size=16)).pack(pady=5)
+        
+        self.lbl_confirm_name = ctk.CTkLabel(self.page_confirm, text="Apakah kamu BUDI?", font=ctk.CTkFont(size=24, weight="bold"))
+        self.lbl_confirm_name.pack(pady=20)
+        
+        # Tombol Pilihan
+        btn_row = ctk.CTkFrame(self.page_confirm, fg_color="transparent")
+        btn_row.pack(pady=20)
+        
+        ctk.CTkButton(btn_row, text="Bukan, Daftar Baru", command=self.confirm_no, fg_color="red", width=150).pack(side="left", padx=10)
+        ctk.CTkButton(btn_row, text="Ya, Itu Aku!", command=self.confirm_yes, fg_color="green", width=150).pack(side="left", padx=10)
         # --- HALAMAN 2: REGISTER ---
         self.page_register = ctk.CTkFrame(self.main_frame, fg_color="white", corner_radius=15)
         ctk.CTkLabel(self.page_register, text="👋 Halo Teman Baru!", font=ctk.CTkFont(size=24, weight="bold")).pack(pady=(40, 10))
@@ -229,6 +244,9 @@ class KebaikanApp(ctk.CTk):
         if name == "CAMERA":
             self.page_camera.pack(fill="both", expand=True)
             self.current_state = "STANDBY"
+        elif name == "CONFIRM": # <--- Tambah Blok ini
+            self.page_confirm.pack(fill="both", expand=True, padx=50, pady=50)
+            self.current_state = "CONFIRM"
         elif name == "REGISTER":
             self.page_register.pack(fill="both", expand=True, padx=50, pady=50)
             self.current_state = "REGISTER"
@@ -252,7 +270,7 @@ class KebaikanApp(ctk.CTk):
             self.show_frame("CAMERA")
             return
 
-        print("🚀 Waking Up / Restarting System...")
+        log.info("🚀 Waking Up / Restarting System...")
         self.is_camera_on = True
         
         # Update UI Status
@@ -274,7 +292,7 @@ class KebaikanApp(ctk.CTk):
         self.update_camera()
 
     def go_to_sleep(self):
-        print("💤 System Going to Sleep...")
+        log.info("💤 System Going to Sleep...")
         self.is_camera_on = False
         
         if self.cap is not None:
@@ -295,97 +313,125 @@ class KebaikanApp(ctk.CTk):
             except: pass
             
     def update_camera(self):
-        if not self.is_camera_on: return
+        try: 
+            if not self.is_camera_on: return
 
-        elapsed_idle = time.time() - self.last_activity_time
-        if elapsed_idle > self.SLEEP_TIMEOUT:
-            print("💤 Auto Sleep Activated!")
-            self.go_to_sleep()
-            return
-
-        if self.current_state == "STANDBY":
-            if self.cap is None or not self.cap.isOpened():
-                try: 
-                    self.cam_label.configure(text="Menyalakan Kamera... 📷")
-                except: 
-                    pass
+            elapsed_idle = time.time() - self.last_activity_time
+            if elapsed_idle > self.SLEEP_TIMEOUT:
+                log.info("💤 Auto Sleep Activated!")
+                self.go_to_sleep()
                 return
 
-            ret, frame = self.cap.read()
-            if ret:
-                try:
-                    if self.cam_label.cget("text") != "":
-                         self.cam_label.configure(text="") 
-                except: pass
+            if self.current_state == "STANDBY":
+                if self.cap is None or not self.cap.isOpened():
+                    try: 
+                        self.cam_label.configure(text="Menyalakan Kamera... 📷")
+                    except: 
+                        pass
+                    return
 
-                frame = cv2.flip(frame, 1)
-                data = self.vision.process_frame(frame)
-                
-                if data["face_detected"]:
-                    self.last_activity_time = time.time()
+                ret, frame = self.cap.read()
+                if ret:
+                    try:
+                        if self.cam_label.cget("text") != "":
+                            self.cam_label.configure(text="") 
+                    except: pass
 
-                if data["face_detected"] and data["location"]:
-                    top, right, bottom, left = data["location"]
-                    zone = data["zone"]
+                    frame = cv2.flip(frame, 1)
+                    data = self.vision.process_frame(frame)
                     
-                    color = (0, 0, 255) 
-                    if zone == "GREEN": color = (0, 255, 0)
-                    elif zone == "YELLOW": color = (0, 255, 255)
-                    
-                    cv2.rectangle(frame, (left, top), (right, bottom), color, 3)
+                    if data["face_detected"]:
+                        self.last_activity_time = time.time()
 
-                    if data["is_smiling"]:
-                        if self.smile_start_time is None:
-                            self.smile_start_time = time.time() 
+                    if data["face_detected"] and data["location"]:
+                        top, right, bottom, left = data["location"]
+                        zone = data["zone"]
                         
-                        elapsed = time.time() - self.smile_start_time
-                        progress = min(elapsed / 3.0, 1.0)
+                        color = (0, 0, 255) 
+                        if zone == "GREEN": color = (0, 255, 0)
+                        elif zone == "YELLOW": color = (0, 255, 255)
+                        
+                        cv2.rectangle(frame, (left, top), (right, bottom), color, 3)
 
-                        bar_w = 200
-                        bx, by = left + (right-left)//2 - bar_w//2, top - 30
-                        cv2.rectangle(frame, (bx, by), (bx + bar_w, by + 10), (200, 200, 200), -1)
-                        fill_w = int(bar_w * progress)
-                        cv2.rectangle(frame, (bx, by), (bx + fill_w, by + 10), (0, 255, 0), -1)
-                        cv2.putText(frame, "TAHAN SENYUMNYAA...", (bx, by-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
+                        if data["is_smiling"]:
+                            if self.smile_start_time is None:
+                                self.smile_start_time = time.time() 
+                            
+                            elapsed = time.time() - self.smile_start_time
+                            progress = min(elapsed / 3.0, 1.0)
 
-                        if elapsed >= 3.0:
-                            self.smile_start_time = None 
-                            self.handle_login_trigger(data) 
-                            return 
-                    else:
-                        self.smile_start_time = None
+                            bar_w = 200
+                            bx, by = left + (right-left)//2 - bar_w//2, top - 30
+                            cv2.rectangle(frame, (bx, by), (bx + bar_w, by + 10), (200, 200, 200), -1)
+                            fill_w = int(bar_w * progress)
+                            cv2.rectangle(frame, (bx, by), (bx + fill_w, by + 10), (0, 255, 0), -1)
+                            cv2.putText(frame, "TAHAN SENYUMNYAA...", (bx, by-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
 
-                if not self.is_camera_on: return
+                            if elapsed >= 3.0:
+                                self.smile_start_time = None 
+                                self.handle_login_trigger(data) 
+                                return 
+                        else:
+                            self.smile_start_time = None
 
-                # Render
-                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                img = Image.fromarray(frame_rgb)
-                img_tk = ctk.CTkImage(light_image=img, dark_image=img, size=(960, 720))
-                
-                try:
-                    self.cam_label.configure(image=img_tk)
-                    self.cam_label.image = img_tk 
-                except: pass
+                    if not self.is_camera_on: return
 
-            else:
-                try: self.cam_label.configure(text="Kamera Error / Loading... ⏳")
-                except: pass
+                    # Render
+                    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                    img = Image.fromarray(frame_rgb)
+                    img_tk = ctk.CTkImage(light_image=img, dark_image=img, size=(640, 480))
+                    
+                    try:
+                        self.cam_label.configure(image=img_tk)
+                        self.cam_label.image = img_tk 
+                    except: pass
 
-            # Loop
-            if self.is_camera_on:
-                self.after(10, self.update_camera)
+                else:
+                    try: self.cam_label.configure(text="Kamera Error / Loading... ⏳")
+                    except: pass
+
+                # Loop
+                if self.is_camera_on:
+                    self.after(10, self.update_camera)
+
+        except Exception as e: 
+            log.error(f"CRASH DI KAMERA: {e}", exc_info=True) 
+            self.reset_system() 
 
     def handle_login_trigger(self, data):
         zone = data["zone"]
+        user = data["user_data"]
         
-        if zone == "RED":
-            self.pending_encoding = data["encoding"] 
-            self.show_frame("REGISTER")
-        else:
-            user = data["user_data"]
+        # Simpan data sementara (Siapa tau nanti butuh buat register/login)
+        self.pending_encoding = data["encoding"]
+        self.temp_potential_user = user 
+        
+        if zone == "GREEN":
+            # 1. Mirip Banget -> Langsung Masuk
             self.active_user = user
             self.lbl_welcome.configure(text=f"Hai, {user['nama']}!")
             self.show_frame("INPUT")
+            
+        elif zone == "YELLOW":
+            # 2. Ragu-ragu -> Tanya Dulu
+            nama_calon = user['nama']
+            self.lbl_confirm_name.configure(text=f"Apakah kamu {nama_calon}?")
+            self.show_frame("CONFIRM")
+            
+        else: # RED
+            # 3. Asing -> Register
+            self.show_frame("REGISTER")
+            
+    def confirm_yes(self):
+        """User mengonfirmasi dia benar orang yang ditebak"""
+        if self.temp_potential_user:
+            self.active_user = self.temp_potential_user
+            self.lbl_welcome.configure(text=f"Hai, {self.active_user['nama']}!")
+            self.show_frame("INPUT")
+
+    def confirm_no(self):
+        """User menyangkal -> Lempar ke Register"""
+        self.show_frame("REGISTER")
 
     def submit_register(self):
         nama = self.entry_nama.get()
@@ -401,7 +447,7 @@ class KebaikanApp(ctk.CTk):
                 self.lbl_welcome.configure(text=f"Hai, {nama}!")
                 self.show_frame("INPUT")
             else:
-                print(f"Error Register: {msg}")
+                log.info(f"Error Register: {msg}")
 
     def submit_kebaikan(self):
         text = self.txt_ide.get("1.0", "end-1c")
@@ -494,10 +540,6 @@ class KebaikanApp(ctk.CTk):
             self.cam_label.image = None
         except:
             pass
-
-        
-        #self.show_frame("CAMERA")
-        #self.update_idletasks() 
 
         self.after(300, self.wake_up_system)
 

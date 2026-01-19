@@ -66,7 +66,13 @@ SLANG_DICTIONARY = {
     "satpam": "orang",
     "ob": "orang",
     "cleaning": "orang",
-    "bekal": "makanan"
+    "membagikan": "bagi", 
+    "bagi": "bagi",
+    "berbagi": "bagi",
+    "temanku": "teman", 
+    "kawanku": "teman",
+    "sahabatku": "teman",
+    "makanan": "makan"
 }
 
 # --- C. FEEDBACK BANK ---

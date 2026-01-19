@@ -9,6 +9,7 @@ import difflib
 import sqlite3
 import json 
 import csv
+from datetime import datetime
 
 # Import Rules
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -27,6 +28,7 @@ from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFacto
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(BASE_DIR, '../data/training_data.csv') 
 LEARNED_PATH = os.path.join(BASE_DIR, '../data/learned_data.csv')
+REJECTED_PATH = os.path.join(BASE_DIR, '../data/rejected_data.csv')
 MODEL_PATH = os.path.join(BASE_DIR, 'trained_brain.pkl')
 
 class BrainLogic:
@@ -40,6 +42,7 @@ class BrainLogic:
         self.knn_quality = None
         self.is_trained = False
         self.init_learned_data()
+        self.init_rejected_data()
         self.load_model()
         self.init_db() 
 
@@ -54,6 +57,18 @@ class BrainLogic:
                 print("📂 File 'learned_data.csv' baru berhasil dibuat.")
             except Exception as e:
                 print(f"⚠️ Gagal membuat file learned data: {e}")
+    
+    def init_rejected_data(self):
+        """[BARU] Membuat file rejected_data.csv jika belum ada"""
+        if not os.path.exists(REJECTED_PATH):
+            try:
+                os.makedirs(os.path.dirname(REJECTED_PATH), exist_ok=True)
+                with open(REJECTED_PATH, 'w', newline='', encoding='utf-8') as f:
+                    writer = csv.writer(f)
+                    writer.writerow(['timestamp', 'text', 'reason']) # Header: Kapan, Apa, Kenapa
+                print("📂 File 'rejected_data.csv' siap menampung sampah.")
+            except Exception as e:
+                print(f"⚠️ Gagal membuat file rejected data: {e}")
 
     def init_db(self):
         """Membuat tabel database jika belum ada"""
@@ -151,6 +166,16 @@ class BrainLogic:
                     pass
         conn.close()
         return users
+    
+    def log_rejected_input(self, text, reason):
+        """[BARU] Catat input yang ditolak ke CSV"""
+        try:
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            with open(REJECTED_PATH, 'a', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                writer.writerow([timestamp, text, reason])
+        except Exception as e:
+            print(f"⚠️ Gagal mencatat rejection: {e}")
 
     def preprocess_text(self, text):
         if not isinstance(text, str): 
@@ -271,15 +296,19 @@ class BrainLogic:
         
         if self.vectorizer.transform([clean_input]).sum() == 0:
             fail_response["msg"] = "Kalimat tidak dimengerti."
+            self.log_rejected_input(text_input, "Unknown Words")
             return fail_response
+        
         if len(text_input) < 10: 
             fail_response["msg"] = "Terlalu pendek."
+            self.log_rejected_input(text_input, "Terlalu pendek")
             return fail_response
         
         if class_history:
             is_plagiat, _ = self.check_plagiarism(text_input, class_history)
             if is_plagiat: 
                 fail_response["msg"] = "Ide mirip temanmu!"
+                self.log_rejected_input(text_input, f"Plagiarism detected (Similiar to: {_})")
                 return fail_response
 
         vec_input = self.vectorizer.transform([clean_input])
@@ -289,10 +318,12 @@ class BrainLogic:
         
         if pred_level == "Junk": 
             fail_response["msg"] = "Kalimat kurang jelas/tidak nyambung."
+            self.log_rejected_input(text_input, "Junk")
             return fail_response
         
         if pred_level == "Enemy":
             fail_response["msg"] = "Kebaikan harus positif ya!"
+            self.log_rejected_input(text_input, "Enemy")
             return fail_response
 
         final_score = self.calculate_score_saw(pred_level, pred_quality, len(text_input))
@@ -324,10 +355,7 @@ class BrainLogic:
         else:
             print("⚠️ Model belum ada.")
 
-# ... (Ini adalah baris terakhir class BrainLogic kamu sebelumnya) ...
-# ... (Paste kode di bawah ini di paling bawah file) ...
-
-# --- DEBUGGER (JANGAN DIHAPUS UTK CEK) ---
+# --- DEBUGGER S---
 if __name__ == "__main__":
     brain = BrainLogic()
     brain.train()
