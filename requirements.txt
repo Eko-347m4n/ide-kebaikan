@@ -1,0 +1,7 @@
+customtkinter
+opencv-python
+face_recognition
+numpy
+pandas
+scikit-learn
+pillow

@@ -1,562 +1,345 @@
 import customtkinter as ctk
-from PIL import Image, ImageTk
-import cv2
-import threading
 import time
-import random
-
+import threading
 from core.brain import BrainLogic
 from core.vision import VisionSystem
 from core.logger import log
+from core.constants import (
+    AppState, AUTO_RESET_AFTER_SUCCESS, APP_TITLE, SIDEBAR_TITLE,
+    CAM_INFO_SLEEP, CAM_INFO_WAKE_UP, CAM_CLICK_TO_START, CAM_STARTING,
+    LEADERBOARD_LIMIT, ZONE_GREEN, ZONE_YELLOW
+)
+from ui.camera_page import CameraPage
+from ui.confirm_page import ConfirmPage
+from ui.input_page import InputPage
+from ui.loading_page import LoadingPage
+from ui.register_page import RegisterPage
+from ui.result_page import ResultPage
+from core.camera_manager import CameraManager
 
-ctk.set_appearance_mode("Light")
-ctk.set_default_color_theme("blue")
-
-class ConfettiParticle:
-    def __init__(self, canvas, width, height):
-        self.canvas = canvas
-        self.x = random.randint(0, width)
-        self.y = random.randint(-height, 0) 
-        self.speed = random.randint(2, 7)
-        self.color = random.choice(["red", "green", "blue", "yellow", "orange", "purple", "cyan"])
-        self.size = random.randint(5, 10)
-        self.id = canvas.create_oval(self.x, self.y, self.x+self.size, self.y+self.size, fill=self.color, outline="")
-
-    def move(self):
-        self.y += self.speed
-        self.x += random.randint(-1, 1) 
-        self.canvas.move(self.id, 0, self.speed)
-
-class ConfettiManager:
-    def __init__(self, master_frame):
-        self.canvas = ctk.CTkCanvas(master_frame, width=800, height=600, highlightthickness=0, bg="#F0F0F0")
-        self.particles = []
-        self.is_active = False
-
-    def start(self):
-        self.canvas.place(relx=0, rely=0, relwidth=1, relheight=1)
-        self.particles = [ConfettiParticle(self.canvas, 1000, 600) for _ in range(50)] 
-        self.is_active = True
-        self.animate()
-
-    def animate(self):
-        if not self.is_active: return
-        for p in self.particles:
-            p.move()
-            if p.y > 700:
-                p.y = random.randint(-100, 0)
-                self.canvas.move(p.id, 0, -700 - random.randint(0, 100))
-        
-        self.canvas.after(20, self.animate)
-
-    def stop(self):
-        self.is_active = False
-        self.canvas.place_forget() 
-        for p in self.particles:
-            self.canvas.delete(p.id)
-        self.particles = []
-
-class KebaikanApp(ctk.CTk):
+class GoodDeedApp(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        # --- SETUP WINDOW ---
-        self.title("Berburu Kebaikan")
+        # --- Window and Grid Setup ---
+        self.title(APP_TITLE)
         self.geometry("1100x700")
-        
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        # --- SYSTEM ---
+        # --- System Components ---
         self.brain = BrainLogic()
         self.vision = VisionSystem()
         
-        users = self.brain.get_all_users()
-        self.vision.load_memory(users)
-
-        # STATE
-        self.current_state = "STANDBY" 
-        self.smile_start_time = None
-        self.active_user = None         
+        # --- State Management ---
+        self.current_state = AppState.STANDBY
+        self.active_user = None
         self.pending_encoding = None
-        self.auto_close_timer = None    
+        self.auto_reset_timer = None
+        self.temp_potential_user = None
 
-        # UI
-        self.setup_sidebar()
-        self.setup_main_area()
-        self.confetti = ConfettiManager(self.page_result)
+        # --- UI and Services ---
+        self._setup_sidebar()
+        self._setup_main_area()
+        
+        self.camera_manager = CameraManager(
+            master_app=self,
+            vision_system=self.vision,
+            display_frame_callback=self._display_camera_frame,
+            login_trigger_callback=self._handle_login_trigger
+        )
+        
+        # --- Initial State ---
+        self.vision.load_memory(self.brain.get_all_users())
+        
+        if not self.brain.is_trained:
+            self._train_model_flow()
+        else:
+            self._go_to_sleep()
 
-        # CAMERA
-        self.is_camera_on = False 
-        self.cap = None
-        self.last_activity_time = time.time() # Pencatat waktu terakhir ada orang
-        self.SLEEP_TIMEOUT = 300 # 300 Detik = 5 Menit (Ganti jadi 10 utk testing) 
+    def _train_model_flow(self):
+        """Shows a training screen and runs the model training in a thread."""
+        self._show_frame(AppState.LOADING)
+        self.loading_page.set_text("Model AI sedang disiapkan... (± 15 detik)")
+        
+        def run_training():
+            self.brain.train()
+            # Once training is done, schedule the next step in the main thread
+            self.after(100, self._on_training_complete)
+            
+        # Run training in a separate thread to not freeze the GUI
+        training_thread = threading.Thread(target=run_training)
+        training_thread = threading.Thread(target=self._run_training_in_thread)
+        training_thread.daemon = True
+        training_thread.start()
+    
+    def _run_training_in_thread(self):                                                                              
+     """The actual training process, run in a background thread."""                                              
+     self.brain.train()                                                                                          
+     # Once training is done, schedule the next step in the main thread                                          
+     self.after(100, self._on_training_complete)
 
-        # Matikan kamera di awal
-        self.go_to_sleep()
+    def _on_training_complete(self):
+        """Callback executed in the main thread after the model is trained."""
+        log.info("Model training complete.")
+        self._go_to_sleep()
+        self._show_frame(AppState.CAMERA)
 
-    def setup_sidebar(self):
+    def _setup_sidebar(self):
         self.sidebar = ctk.CTkFrame(self, width=250, corner_radius=0)
         self.sidebar.grid(row=0, column=0, sticky="nsew")
         self.sidebar.grid_rowconfigure(4, weight=1)
 
-        self.logo_label = ctk.CTkLabel(self.sidebar, text="✨ BERBURU IDE KEBAIKAN ✨", font=ctk.CTkFont(size=24, weight="bold"))
-        self.logo_label.grid(row=0, column=0, padx=20, pady=(30, 10))
+        logo_label = ctk.CTkLabel(self.sidebar, text=SIDEBAR_TITLE, font=ctk.CTkFont(size=24, weight="bold"))
+        logo_label.grid(row=0, column=0, padx=20, pady=(30, 10))
 
-        self.status_container = ctk.CTkFrame(self.sidebar, fg_color="transparent")
-        self.status_container.grid(row=1, column=0, padx=20, pady=10)
+        status_container = ctk.CTkFrame(self.sidebar, fg_color="transparent")
+        status_container.grid(row=1, column=0, padx=20, pady=10)
 
-        self.status_dot = ctk.CTkLabel(self.status_container, text="●", font=ctk.CTkFont(size=24), text_color="red")
+        self.status_dot = ctk.CTkLabel(status_container, text="●", font=ctk.CTkFont(size=24), text_color="red")
         self.status_dot.pack(side="left", padx=5)
         
-        self.status_text = ctk.CTkLabel(self.status_container, text="OFFLINE", font=ctk.CTkFont(weight="bold"))
+        self.status_text = ctk.CTkLabel(status_container, text="OFFLINE", font=ctk.CTkFont(weight="bold"))
         self.status_text.pack(side="left")
 
         ctk.CTkLabel(self.sidebar, text="_________________________").grid(row=2, column=0, pady=10)
 
-        self.lb_title = ctk.CTkLabel(self.sidebar, text="🏆 Top Siswa", font=ctk.CTkFont(size=18, weight="bold"))
-        self.lb_title.grid(row=3, column=0, padx=20, pady=(10, 10))
+        lb_title = ctk.CTkLabel(self.sidebar, text="🏆 Top Siswa", font=ctk.CTkFont(size=18, weight="bold"))
+        lb_title.grid(row=3, column=0, padx=20, pady=(10, 10))
 
-        self.lb_frame = ctk.CTkScrollableFrame(self.sidebar, label_text="Minggu Ini", fg_color="white")
-        self.lb_frame.grid(row=4, column=0, padx=20, pady=10, sticky="nsew")
-        self.refresh_leaderboard() 
+        self.leaderboard_frame = ctk.CTkScrollableFrame(self.sidebar, label_text="Minggu Ini", fg_color="white")
+        self.leaderboard_frame.grid(row=4, column=0, padx=20, pady=10, sticky="nsew")
+        self.update_leaderboard()
 
-        self.btn_reset = ctk.CTkButton(self.sidebar, text="Reset System", command=self.start_reset_sequence, fg_color="transparent", border_width=1, text_color=("gray10", "gray90"))
-        self.btn_reset.grid(row=5, column=0, padx=20, pady=20)
+    def _setup_main_area(self):
+        main_frame = ctk.CTkFrame(self, fg_color="transparent")
+        main_frame.grid(row=0, column=1, sticky="nsew", padx=20, pady=20)
 
-    def refresh_leaderboard(self):
-        for widget in self.lb_frame.winfo_children():
+        # Instantiate all pages
+        self.camera_page = CameraPage(main_frame, wake_up_callback=self._wake_up_system)
+        self.confirm_page = ConfirmPage(main_frame, yes_callback=self._on_confirm_yes, no_callback=self._on_confirm_no)
+        self.register_page = RegisterPage(main_frame, submit_callback=self._submit_registration, cancel_callback=self.start_reset)
+        self.input_page = InputPage(main_frame, submit_callback=self._submit_idea, cancel_callback=self.start_reset)
+        self.loading_page = LoadingPage(main_frame)
+        self.result_page = ResultPage(main_frame, reset_callback=self.start_reset)
+        
+        self._show_frame(AppState.CAMERA)
+    
+    
+    def update_leaderboard(self):
+        for widget in self.leaderboard_frame.winfo_children():
             widget.destroy()
             
-        data = self.brain.get_leaderboard(10)
+        data = self.brain.get_leaderboard(LEADERBOARD_LIMIT)
         if not data:
-            ctk.CTkLabel(self.lb_frame, text="Belum ada data.").pack()
+            ctk.CTkLabel(self.leaderboard_frame, text="Belum ada data.").pack()
             return
             
-        for idx, (nama, kelas, poin) in enumerate(data):
-            row = ctk.CTkFrame(self.lb_frame, fg_color="transparent")
+        for idx, (name, class_name, score) in enumerate(data):
+            row = ctk.CTkFrame(self.leaderboard_frame, fg_color="transparent")
             row.pack(fill="x", pady=2)
-            ctk.CTkLabel(row, text=f"{idx+1}. {nama} ({kelas})", anchor="w").pack(side="left", padx=5)
-            ctk.CTkLabel(row, text=f"{poin} Pts", font=ctk.CTkFont(weight="bold")).pack(side="right", padx=5)
+            ctk.CTkLabel(row, text=f"{idx+1}. {name} ({class_name})", anchor="w").pack(side="left", padx=5)
+            ctk.CTkLabel(row, text=f"{score} Pts", font=ctk.CTkFont(weight="bold")).pack(side="right", padx=5)
 
-    def setup_main_area(self):
-        self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
-        self.main_frame.grid(row=0, column=1, sticky="nsew", padx=20, pady=20)
+    def start_reset(self):
+        self.loading_page.set_text("Sabar ya, sedang proses menuju ke halaman awal... 🔄")
+        self._show_frame(AppState.LOADING)
+        self.after(2000, self._reset_app)
+
+    def _reset_app(self):
+        self._go_to_sleep()
+        self._cancel_auto_reset_timer()
         
-        # --- HALAMAN 1: KAMERA ---
-        self.page_camera = ctk.CTkFrame(self.main_frame, fg_color="transparent")
-        self.cam_container = ctk.CTkFrame(self.page_camera, corner_radius=15, fg_color="white")
-        self.cam_container.pack(fill="both", expand=True)
-        
-        # Label Kamera dengan instruksi SPASI
-        self.cam_label = ctk.CTkLabel(self.cam_container, 
-                                      text="Klik Layar untuk Mulai 🚀", # <--- Ganti Ini
-                                      font=ctk.CTkFont(size=20, weight="bold"), text_color="gray")
-        self.cam_label.pack(fill="both", expand=True, padx=0, pady=0)        
-        self.cam_label.bind('<Button-1>', self.wake_up_system)
-        
-        self.info_label = ctk.CTkLabel(self.page_camera, text="Sistem Sedang Tidur 💤", font=ctk.CTkFont(size=20, weight="bold"), text_color="gray")
-        self.info_label.pack(pady=15)
-        # --- [BARU] HALAMAN KONFIRMASI (RAGU) ---
-        self.page_confirm = ctk.CTkFrame(self.main_frame, fg_color="white", corner_radius=15)
-        ctk.CTkLabel(self.page_confirm, text="🤔", font=ctk.CTkFont(size=80)).pack(pady=(50, 10))
-        ctk.CTkLabel(self.page_confirm, text="Sebentar, sistem agak ragu...", font=ctk.CTkFont(size=16)).pack(pady=5)
-        
-        self.lbl_confirm_name = ctk.CTkLabel(self.page_confirm, text="Apakah kamu BUDI?", font=ctk.CTkFont(size=24, weight="bold"))
-        self.lbl_confirm_name.pack(pady=20)
-        
-        # Tombol Pilihan
-        btn_row = ctk.CTkFrame(self.page_confirm, fg_color="transparent")
-        btn_row.pack(pady=20)
-        
-        ctk.CTkButton(btn_row, text="Bukan, Daftar Baru", command=self.confirm_no, fg_color="red", width=150).pack(side="left", padx=10)
-        ctk.CTkButton(btn_row, text="Ya, Itu Aku!", command=self.confirm_yes, fg_color="green", width=150).pack(side="left", padx=10)
-        # --- HALAMAN 2: REGISTER ---
-        self.page_register = ctk.CTkFrame(self.main_frame, fg_color="white", corner_radius=15)
-        ctk.CTkLabel(self.page_register, text="👋 Halo Teman Baru!", font=ctk.CTkFont(size=24, weight="bold")).pack(pady=(40, 10))
-        ctk.CTkLabel(self.page_register, text="Wajahmu belum terdaftar. Kenalan dulu yuk!", font=ctk.CTkFont(size=14)).pack(pady=5)
-        self.entry_nama = ctk.CTkEntry(self.page_register, placeholder_text="Nama Panggilanmu?", width=300, height=40)
-        self.entry_nama.pack(pady=10)
-        self.daftar_kelas = ["7-A"]
-        self.entry_kelas = ctk.CTkOptionMenu(self.page_register, values=self.daftar_kelas, width=300, height=40)
-        self.entry_kelas.pack(pady=10)
-        self.entry_kelas.set("Pilih Kelas") 
-        ctk.CTkButton(self.page_register, text="Simpan & Lanjut", command=self.submit_register, width=200, height=40).pack(pady=20)
-        ctk.CTkButton(self.page_register, text="Batal", command=self.start_reset_sequence, fg_color="transparent", text_color="red").pack()
-        # --- HALAMAN 3: INPUT ---
-        self.page_input = ctk.CTkFrame(self.main_frame, fg_color="white", corner_radius=15)
-        self.lbl_welcome = ctk.CTkLabel(self.page_input, text="Hai, Budi!", font=ctk.CTkFont(size=24, weight="bold"))
-        self.lbl_welcome.pack(pady=(40, 10))
-        ctk.CTkLabel(self.page_input, text="Ide kebaikan apa yang ingin kamu bagikan?", font=ctk.CTkFont(size=16)).pack(pady=10)
-        self.txt_ide = ctk.CTkTextbox(self.page_input, width=400, height=150, font=ctk.CTkFont(size=14))
-        self.txt_ide.pack(pady=10)
-        ctk.CTkButton(self.page_input, text="Kirim Kebaikan 🚀", command=self.submit_kebaikan, width=200, height=50, fg_color="green").pack(pady=20)
-        self.btn_cancel_input = ctk.CTkButton(self.page_input, text="Batal / Kembali", command=self.start_reset_sequence, fg_color="transparent", text_color="red", hover_color="#ffebee")
-        self.btn_cancel_input.pack(pady=5)
-        
-        self.page_loading = ctk.CTkFrame(self.main_frame, fg_color="white", corner_radius=15)
-        self.lbl_loading = ctk.CTkLabel(self.page_loading, text="Sedang menghubungi markas...", font=ctk.CTkFont(size=20))
-        self.lbl_loading.pack(expand=True)
-
-        # --- HALAMAN 4: RESULT ---
-        self.page_result = ctk.CTkFrame(self.main_frame, fg_color="#F0F0F0", corner_radius=15)
-        self.result_card = ctk.CTkFrame(self.page_result, fg_color="white", corner_radius=20, 
-                                        border_width=2, border_color="#FFD700")
-        self.result_card.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.6, relheight=0.7)
-        self.lbl_result_title = ctk.CTkLabel(self.result_card, text="✨ HASIL ANALISIS ✨", 
-                                             font=ctk.CTkFont(size=14, weight="bold"), text_color="gray")
-        self.lbl_result_title.pack(pady=(30, 10))
-        self.lbl_icon = ctk.CTkLabel(self.result_card, text="🏆", font=ctk.CTkFont(size=80))
-        self.lbl_icon.pack(pady=5)
-        self.lbl_score = ctk.CTkLabel(self.result_card, text="100", 
-                                      font=ctk.CTkFont(size=70, weight="bold"), text_color="#FFA500") 
-        self.lbl_score.pack(pady=5)
-        self.lbl_feedback = ctk.CTkLabel(self.result_card, text="Feedback...", 
-                                         font=ctk.CTkFont(size=18), wraplength=400)
-        self.lbl_feedback.pack(pady=20)
-        self.btn_result_action = ctk.CTkButton(self.result_card, text="Selesai", command=self.start_reset_sequence, width=200, height=40, corner_radius=20)
-        self.btn_result_action.pack(side="bottom", pady=30)
-        
-        self.show_frame("CAMERA")
-
-    def show_frame(self, name):
-        self.page_camera.pack_forget()
-        self.page_register.pack_forget()
-        self.page_input.pack_forget()
-        self.page_loading.pack_forget()
-        self.page_result.pack_forget()
-
-        # --- LOGIKA MATIKAN KAMERA (ANTI FREEZE) ---
-        if name != "CAMERA":
-            self.is_camera_on = False 
-            
-            try:
-                self.cam_label.configure(image=None)
-                self.cam_label.image = None
-                self.update_idletasks() 
-            except:
-                pass
-
-            if self.cap is not None:
-                self.cap.release()    
-                self.cap = None       
-
-        if name == "CAMERA":
-            self.page_camera.pack(fill="both", expand=True)
-            self.current_state = "STANDBY"
-        elif name == "CONFIRM": # <--- Tambah Blok ini
-            self.page_confirm.pack(fill="both", expand=True, padx=50, pady=50)
-            self.current_state = "CONFIRM"
-        elif name == "REGISTER":
-            self.page_register.pack(fill="both", expand=True, padx=50, pady=50)
-            self.current_state = "REGISTER"
-        elif name == "INPUT":
-            self.page_input.pack(fill="both", expand=True, padx=50, pady=50)
-            self.current_state = "INPUT"
-            self.txt_ide.delete("1.0", "end")
-            self.txt_ide.focus_set()
-        elif name == "LOADING":
-            self.page_loading.pack(fill="both", expand=True, padx=50, pady=50)
-        elif name == "RESULT":
-            self.page_result.pack(fill="both", expand=True, padx=50, pady=50)
-            self.current_state = "RESULT"
-    
-    def wake_up_system(self, event=None):
-        """Menyalakan Sistem & Kamera (Hanya via Klik atau Restart Internal)"""
-        self.last_activity_time = time.time() 
-        
-        # Cek kalau kamera sudah jalan & sehat, gak usah restart
-        if self.is_camera_on and self.cap is not None and self.cap.isOpened():
-            self.show_frame("CAMERA")
-            return
-
-        log.info("🚀 Waking Up / Restarting System...")
-        self.is_camera_on = True
-        
-        # Update UI Status
-        self.status_dot.configure(text_color="green")
-        self.status_text.configure(text="ONLINE", text_color="green")
-        self.info_label.configure(text="Senyum untuk Login 😊", text_color="blue")
-        self.info_label.pack(pady=15)
-
-        try: self.cam_label.configure(text="")
-        except: pass
-        
-        # Nyalakan Kamera
-        if self.cap is None or not self.cap.isOpened():
-            self.cap = cv2.VideoCapture(0)
-            
-        # Tampilkan Halaman Kamera
-        self.show_frame("CAMERA")
-            
-        self.update_camera()
-
-    def go_to_sleep(self):
-        log.info("💤 System Going to Sleep...")
-        self.is_camera_on = False
-        
-        if self.cap is not None:
-            self.cap.release()
-            self.cap = None 
-            
-        # UI RESET
-        self.status_dot.configure(text_color="red")
-        self.status_text.configure(text="OFFLINE", text_color="red")
-        self.info_label.configure(text="Sistem Sedang Tidur 💤", text_color="gray")
-        
-        # [UPDATE TEKS INSTRUKSI]
-        try:
-            self.cam_label.configure(image=None, text="Klik Layar untuk Mulai 🚀", text_color="gray")
-            self.cam_label.image = None
-        except:
-            try: self.cam_label.configure(text="Klik Layar untuk Mulai 🚀")
-            except: pass
-            
-    def update_camera(self):
-        try: 
-            if not self.is_camera_on: return
-
-            elapsed_idle = time.time() - self.last_activity_time
-            if elapsed_idle > self.SLEEP_TIMEOUT:
-                log.info("💤 Auto Sleep Activated!")
-                self.go_to_sleep()
-                return
-
-            if self.current_state == "STANDBY":
-                if self.cap is None or not self.cap.isOpened():
-                    try: 
-                        self.cam_label.configure(text="Menyalakan Kamera... 📷")
-                    except: 
-                        pass
-                    return
-
-                ret, frame = self.cap.read()
-                if ret:
-                    try:
-                        if self.cam_label.cget("text") != "":
-                            self.cam_label.configure(text="") 
-                    except: pass
-
-                    frame = cv2.flip(frame, 1)
-                    data = self.vision.process_frame(frame)
-                    
-                    if data["face_detected"]:
-                        self.last_activity_time = time.time()
-
-                    if data["face_detected"] and data["location"]:
-                        top, right, bottom, left = data["location"]
-                        zone = data["zone"]
-                        
-                        color = (0, 0, 255) 
-                        if zone == "GREEN": color = (0, 255, 0)
-                        elif zone == "YELLOW": color = (0, 255, 255)
-                        
-                        cv2.rectangle(frame, (left, top), (right, bottom), color, 3)
-
-                        if data["is_smiling"]:
-                            if self.smile_start_time is None:
-                                self.smile_start_time = time.time() 
-                            
-                            elapsed = time.time() - self.smile_start_time
-                            progress = min(elapsed / 3.0, 1.0)
-
-                            bar_w = 200
-                            bx, by = left + (right-left)//2 - bar_w//2, top - 30
-                            cv2.rectangle(frame, (bx, by), (bx + bar_w, by + 10), (200, 200, 200), -1)
-                            fill_w = int(bar_w * progress)
-                            cv2.rectangle(frame, (bx, by), (bx + fill_w, by + 10), (0, 255, 0), -1)
-                            cv2.putText(frame, "TAHAN SENYUMNYAA...", (bx, by-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
-
-                            if elapsed >= 3.0:
-                                self.smile_start_time = None 
-                                self.handle_login_trigger(data) 
-                                return 
-                        else:
-                            self.smile_start_time = None
-
-                    if not self.is_camera_on: return
-
-                    # Render
-                    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                    img = Image.fromarray(frame_rgb)
-                    img_tk = ctk.CTkImage(light_image=img, dark_image=img, size=(640, 480))
-                    
-                    try:
-                        self.cam_label.configure(image=img_tk)
-                        self.cam_label.image = img_tk 
-                    except: pass
-
-                else:
-                    try: self.cam_label.configure(text="Kamera Error / Loading... ⏳")
-                    except: pass
-
-                # Loop
-                if self.is_camera_on:
-                    self.after(10, self.update_camera)
-
-        except Exception as e: 
-            log.error(f"CRASH DI KAMERA: {e}", exc_info=True) 
-            self.reset_system() 
-
-    def handle_login_trigger(self, data):
-        zone = data["zone"]
-        user = data["user_data"]
-        
-        # Simpan data sementara (Siapa tau nanti butuh buat register/login)
-        self.pending_encoding = data["encoding"]
-        self.temp_potential_user = user 
-        
-        if zone == "GREEN":
-            # 1. Mirip Banget -> Langsung Masuk
-            self.active_user = user
-            self.lbl_welcome.configure(text=f"Hai, {user['nama']}!")
-            self.show_frame("INPUT")
-            
-        elif zone == "YELLOW":
-            # 2. Ragu-ragu -> Tanya Dulu
-            nama_calon = user['nama']
-            self.lbl_confirm_name.configure(text=f"Apakah kamu {nama_calon}?")
-            self.show_frame("CONFIRM")
-            
-        else: # RED
-            # 3. Asing -> Register
-            self.show_frame("REGISTER")
-            
-    def confirm_yes(self):
-        """User mengonfirmasi dia benar orang yang ditebak"""
-        if self.temp_potential_user:
-            self.active_user = self.temp_potential_user
-            self.lbl_welcome.configure(text=f"Hai, {self.active_user['nama']}!")
-            self.show_frame("INPUT")
-
-    def confirm_no(self):
-        """User menyangkal -> Lempar ke Register"""
-        self.show_frame("REGISTER")
-
-    def submit_register(self):
-        nama = self.entry_nama.get()
-        kelas = self.entry_kelas.get()
-        if not nama or kelas == "Pilih Kelas": return 
-            
-        if self.pending_encoding is not None:
-            success, msg = self.brain.register_user(nama, kelas, self.pending_encoding)
-            if success:
-                users = self.brain.get_all_users()
-                self.vision.load_memory(users)
-                self.active_user = {"nama": nama, "kelas": kelas}
-                self.lbl_welcome.configure(text=f"Hai, {nama}!")
-                self.show_frame("INPUT")
-            else:
-                log.info(f"Error Register: {msg}")
-
-    def submit_kebaikan(self):
-        text = self.txt_ide.get("1.0", "end-1c")
-        if len(text) < 5: return 
-
-        self.show_frame("LOADING")
-        self.after(100, lambda: self._process_ai_delayed(text))
-
-    def _process_ai_delayed(self, text):
-        result = self.brain.predict_and_score(text)
-
-        self.lbl_loading.configure(text="Menganalisis kadar kebaikanmu nih 🧐")
-        self.after(1000, lambda: self.lbl_loading.configure(text="Menghitung poin..."))
-        self.after(2000, lambda:self._show_final_result(result, text))
-
-    def _show_final_result(self, result, text_input):
-        score = result.get("final_score", 0)
-        feedback = result.get("feedback", "No Feedback")
-        msg = result.get("msg", "")
-
-        self.show_frame("RESULT")
-
-        if result["success"]:
-            self.start_confetti()
-        self.result_card.lift()
-
-        if result["success"]:
-            self.result_card.configure(border_color="#FFD700") # Emas
-            self.lbl_icon.configure(text="🏆" if score >= 80 else "⭐") # Ikon beda sesuai skor
-            self.lbl_score.configure(text_color="#FFA500") # Oranye
-            self.lbl_feedback.configure(text=feedback, text_color="black")         
-            self.animate_score_pop(target_score=score, current_size=10)
-            
-            if self.active_user:
-                self.brain.add_points(self.active_user["nama"], self.active_user["kelas"], score, text_input, result["prediction_level"])
-                self.refresh_leaderboard() 
-            
-            self.btn_result_action.configure(text="Selesai (Reset)", fg_color="blue", hover_color="darkblue", command=self.start_reset_sequence)
-            self.start_auto_close_timer()
-            
-        else:
-            self.stop_confetti() 
-            self.result_card.configure(border_color="red") 
-            self.lbl_icon.configure(text="🚫")
-            self.lbl_score.configure(text="0", text_color="red")
-            self.lbl_feedback.configure(text=f"{msg}\n\nYuk perbaiki kalimatmu!", text_color="red")            
-            self.btn_result_action.configure(text="Perbaiki Kata-kata ✏️", fg_color="green", hover_color="darkgreen", command=lambda: self.show_frame("INPUT"))
-            self.btn_result_action.pack(side="bottom", pady=30)
-
-    def animate_score_pop(self, target_score, current_size):
-        if current_size >= 70: 
-            self.lbl_score.configure(text=f"{target_score}") 
-            return
-        
-        temp_score = random.randint(0, 100) if current_size < 60 else target_score
-        self.lbl_score.configure(font=ctk.CTkFont(size=current_size, weight="bold"), text=f"{temp_score}")
-        
-        self.after(20, lambda: self.animate_score_pop(target_score, current_size + 5))
-    
-    def start_auto_close_timer(self):
-        if self.auto_close_timer:
-            self.after_cancel(self.auto_close_timer)
-        
-        self.auto_close_timer = self.after(4000, self.reset_system)
-
-    def cancel_auto_close(self):
-        if self.auto_close_timer:
-            self.after_cancel(self.auto_close_timer)
-            self.auto_close_timer = None
-        
-    def start_reset_sequence(self):
-        self.lbl_loading.configure(text="Sabar ya, sedang proses menuju ke halaman awal... 🔄")
-        self.show_frame("LOADING")
-        self.after(2000, self.reset_system)
-
-    def reset_system(self):
-        self.is_camera_on = False 
-        self.last_activity_time = time.time()
-        self.cancel_auto_close()
-        self.stop_confetti()
-        
-        self.entry_nama.delete(0, "end")
-        self.entry_kelas.set("Pilih Kelas")
-        self.txt_ide.delete("1.0", "end")
+        self.register_page.reset()
+        self.input_page.reset()
         self.active_user = None
         self.pending_encoding = None
         
         try:
-            self.cam_label.configure(image=None, text="Merestart Kamera... 📷")
-            self.cam_label.image = None
-        except:
-            pass
+            self.camera_page.clear_cam_image()
+            self.camera_page.set_cam_text(CAM_STARTING)
+        except Exception as e:
+            log.error(f"Error resetting camera page UI: {e}")
 
-        self.after(300, self.wake_up_system)
+        self.after(300, self._wake_up_system)
 
-    def on_closing(self):
-        if self.cap is not None:
-            self.cap.release()
+
+    def _show_frame(self, state):
+        pages = {
+            AppState.CAMERA: self.camera_page,
+            AppState.CONFIRM: self.confirm_page,
+            AppState.REGISTER: self.register_page,
+            AppState.INPUT: self.input_page,
+            AppState.LOADING: self.loading_page,
+            AppState.RESULT: self.result_page,
+        }
+        
+        for page in pages.values():
+            page.pack_forget()
+
+        if state != AppState.CAMERA:
+            self.camera_manager.go_to_sleep()
+            try:
+                self.camera_page.clear_cam_image() # Ensure UI is visually cleared
+            except Exception as e:
+                 log.error(f"Error clearing camera image: {e}")
+
+        page_to_show = pages.get(state)
+        self.current_state = state
+
+        if page_to_show:
+            pack_options = {"fill": "both", "expand": True}
+            if state not in [AppState.CAMERA]:
+                 pack_options.update({"padx": 50, "pady": 50})
+            page_to_show.pack(**pack_options)
+
+        # Post-show actions
+        if state == AppState.INPUT:
+            self.input_page.reset()
+            self.input_page.focus_textbox()
+
+    def _display_camera_frame(self, img_tk, text_message=None):
+        try:
+            if img_tk:
+                self.camera_page.set_cam_image(img_tk)
+            elif text_message:
+                self.camera_page.set_cam_text(text_message)
+        except Exception as e:
+            log.error(f"Error displaying camera frame: {e}")
+
+    # --- SYSTEM & CAMERA CONTROL ---
+
+    def _wake_up_system(self, event=None):
+        log.info("🚀 GoodDeedApp: Waking Up System...")
+        self.camera_manager.wake_up_system()
+
+        self.status_dot.configure(text_color="green")
+        self.status_text.configure(text="ONLINE", text_color="green")
+        
+        try:
+            self.camera_page.set_info_text(CAM_INFO_WAKE_UP, color="blue")
+        except Exception as e:
+            log.error(f"Error setting wake up text: {e}")
             
-        self.cancel_auto_close()                      
-        self.destroy()
-    
-    def start_confetti(self):
-        self.confetti.start()
+        self._show_frame(AppState.CAMERA)
+            
+    def _go_to_sleep(self):
+        log.info("💤 GoodDeedApp: System Going to Sleep...")
+        self.camera_manager.go_to_sleep()
+        
+        self.status_dot.configure(text_color="red")
+        self.status_text.configure(text="OFFLINE", text_color="red")
+        
+        try:
+            self.camera_page.set_info_text(CAM_INFO_SLEEP, color="gray")
+            self.camera_page.clear_cam_image()
+            self.camera_page.set_cam_text(CAM_CLICK_TO_START, color="gray")
+        except Exception as e:
+            log.error(f"Error setting sleep UI: {e}")
 
-    def stop_confetti(self):
-        self.confetti.stop()
+    def _handle_login_trigger(self, vision_data):
+        """Handles the event when a user is identified by the camera."""
+        zone = vision_data["zone"]
+        user = vision_data["user_data"]
+        
+        self.pending_encoding = vision_data["encoding"]
+        self.temp_potential_user = user 
+        
+        if zone == ZONE_GREEN:
+            self.active_user = user
+            self.input_page.set_welcome_message(user['nama'])
+            self._show_frame(AppState.INPUT)
+        elif zone == ZONE_YELLOW:
+            self.confirm_page.set_name(user['nama'])
+            self._show_frame(AppState.CONFIRM)
+        else: # RED
+            self._show_frame(AppState.REGISTER)
+            
+    def _on_confirm_yes(self):
+        self.active_user = self.temp_potential_user
+        self.input_page.set_welcome_message(self.active_user['nama'])
+        self._show_frame(AppState.INPUT)
+
+    def _on_confirm_no(self):
+        self._show_frame(AppState.REGISTER)
+
+    def _submit_registration(self):
+        user_data = self.register_page.get_values()
+        name = user_data["nama"]
+        class_name = user_data["kelas"]
+
+        if not name or not class_name:
+            log.warning("Registration submission with empty name or class.")
+            return
+            
+        if self.pending_encoding is not None:
+            success, msg = self.brain.register_user(name, class_name, self.pending_encoding)
+            if success:
+                self.vision.load_memory(self.brain.get_all_users())
+                self.active_user = {"nama": name, "kelas": class_name}
+                self.input_page.set_welcome_message(name)
+                self._show_frame(AppState.INPUT)
+            else:
+                log.error(f"Failed to register user: {msg}")
+
+    def _submit_idea(self):
+        """Handles the submission of a user's good idea."""
+        text = self.input_page.get_idea_text()
+        if len(text) < 5:
+            log.warning("Idea submission too short.")
+            return
+
+        self._show_frame(AppState.LOADING)
+        self.after(100, lambda: self._process_idea_submission(text))
+
+    def _process_idea_submission(self, text):
+        result = self.brain.predict_and_score(text)
+
+        self.loading_page.set_text("Menganalisis kadar kebaikanmu nih 🧐")
+        self.after(1000, lambda: self.loading_page.set_text("Menghitung poin..."))
+        self.after(2000, lambda: self._display_submission_result(result, text))
+
+    def _display_submission_result(self, result, text_input):
+        score = result.get("final_score", 0)
+        feedback = result.get("feedback", "No Feedback")
+        msg = result.get("msg", "")
+
+        self._show_frame(AppState.RESULT)
+
+        if result["success"]:
+            self.result_page.show_success(score, feedback)
+            
+            if self.active_user:
+                self.brain.add_points(self.active_user["nama"], self.active_user["kelas"], score, text_input, result["prediction_level"])
+                self.update_leaderboard() 
+            
+            self._start_auto_reset_timer()
+        else:
+            self.result_page.show_failure(msg, 
+                                          retry_callback=lambda: self._show_frame(AppState.INPUT), 
+                                          back_to_home_callback=self.start_reset)
+
+    def _start_auto_reset_timer(self):
+        """Starts a timer to automatically reset the app after a successful submission."""
+        if self.auto_reset_timer:
+            self.after_cancel(self.auto_reset_timer)
+        self.auto_reset_timer = self.after(int(AUTO_RESET_AFTER_SUCCESS * 1000), self._reset_app)
+
+    def _cancel_auto_reset_timer(self):
+        if self.auto_reset_timer:
+            self.after_cancel(self.auto_reset_timer)
+            self.auto_reset_timer = None
+        
+    def _on_closing(self):
+        log.info("Application closing. Shutting down services.")
+        self.camera_manager.shutdown()
+        self._cancel_auto_reset_timer()
+        self.destroy()
 
 if __name__ == "__main__":
-    app = KebaikanApp()
-    app.protocol("WM_DELETE_WINDOW", app.on_closing)
+    ctk.set_appearance_mode("Light")
+    ctk.set_default_color_theme("blue")
+    
+    app = GoodDeedApp()
+    app.protocol("WM_DELETE_WINDOW", app._on_closing)
     app.mainloop()
