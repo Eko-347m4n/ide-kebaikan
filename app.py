@@ -23,7 +23,7 @@ class GoodDeedApp(ctk.CTk):
 
         # --- Window and Grid Setup ---
         self.title(APP_TITLE)
-        self.geometry("1100x700")
+        self.geometry("1000x600")
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
 

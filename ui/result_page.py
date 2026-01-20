@@ -16,7 +16,7 @@ class ResultPage(ctk.CTkFrame):
 
         self.result_card = ctk.CTkFrame(self, fg_color="white", corner_radius=20, 
                                         border_width=2, border_color=COLOR_SUCCESS_BORDER)
-        self.result_card.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.6, relheight=0.7)
+        self.result_card.place(relx=0.5, rely=0.5, anchor="center", relwidth=1, relheight=1)
         
         self.lbl_result_title = ctk.CTkLabel(self.result_card, text=RESULT_TITLE, 
                                              font=ctk.CTkFont(size=14, weight="bold"), text_color="gray")
@@ -35,15 +35,14 @@ class ResultPage(ctk.CTkFrame):
         
         # Button Container for failure state
         self.button_frame = ctk.CTkFrame(self.result_card, fg_color="transparent")
-        self.button_frame.pack(side="bottom", pady=30)
+        self.button_frame.pack(side="bottom", pady=10)
         
         # Primary action button (Selesai for success, Perbaiki for failure)
         self.btn_primary_action = ctk.CTkButton(self.button_frame, text="Selesai", command=self._reset_callback, width=150, height=40, corner_radius=20)
-        self.btn_primary_action.pack(side="left", padx=5)
+        self.btn_primary_action.pack(side="left", padx=2)
 
         # Secondary action button (Back to Home for failure)
         self.btn_secondary_action = ctk.CTkButton(self.button_frame, text="Kembali ke Utama", command=self._reset_callback, width=150, height=40, corner_radius=20, fg_color="gray", hover_color="darkgray")
-        # Initially hidden
         self.btn_secondary_action.pack_forget()
 
     def show_success(self, score, feedback):
@@ -66,12 +65,12 @@ class ResultPage(ctk.CTkFrame):
         self.result_card.configure(border_color=COLOR_FAILURE_BORDER)
         self.lbl_icon.configure(text=RESULT_FAILURE_ICON)
         self.lbl_score.configure(text="0", text_color="red")
-        self.lbl_feedback.configure(text=f"{msg}\n\nYuk perbaiki kalimatmu!", text_color="red")
+        self.lbl_feedback.configure(text=f"{msg}\n\nWah aku masih belum menangkap maksudmu nih tolong jelasin dong idemu lebih jelas lagi!", text_color="red")
         
         self.btn_primary_action.configure(text="Perbaiki Kata-kata ✏️", fg_color="green", hover_color="darkgreen", command=self._retry_callback)
         
         self.btn_secondary_action.configure(text="Kembali ke Utama", command=self._reset_callback)
-        self.btn_secondary_action.pack(side="right", padx=5) # Show the secondary button
+        self.btn_secondary_action.pack(side="right", padx=2) # Show the secondary button
 
     def animate_score_pop(self, target_score, current_size):
         if current_size >= 70: 
