@@ -1,6 +1,9 @@
 # core/rules.py
 
 SLANG_DICTIONARY = {
+    "teman" : "teman",
+    "tmn" : "teman",
+    "temanku" : "teman",
     "yg": "yang", 
     "gk": "tidak", 
     "gak": "tidak", 
@@ -66,7 +69,26 @@ SLANG_DICTIONARY = {
     "satpam": "orang",
     "ob": "orang",
     "cleaning": "orang",
-    "bekal": "makanan"
+    "membagikan": "bagi", 
+    "bagi": "bagi",
+    "berbagi": "bagi",
+    "temanku": "teman", 
+    "kawanku": "teman",
+    "sahabatku": "teman",
+    "makanan": "makan",
+    "membelikan": "beli", 
+    "beliin": "beli",
+    "unuk": "untuk", # Typo spesifik kamu
+    "minuman": "minum",
+    "haus": "haus", # Pastikan ada
+    "kehausan": "haus",
+    "memberikan": "memberi",  # KUNCI 1
+    "membuatkan": "buat",     # KUNCI 2
+    "bikinin": "buat",
+    "masakin": "masak",
+    "nyiapin": "siap",
+    "menyiapkan": "siap",
+    "makanan": "makan"
 }
 
 # --- C. FEEDBACK BANK ---

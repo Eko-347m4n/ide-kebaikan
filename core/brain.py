@@ -9,6 +9,7 @@ import difflib
 import sqlite3
 import json 
 import csv
+from datetime import datetime
 
 # Import Rules
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -23,27 +24,42 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import KNeighborsClassifier
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
-from core.config import Config
-from core.database import DatabaseManager
 
-DATA_PATH = Config.TRAINING_DATA_PATH
-LEARNED_PATH = Config.LEARNED_DATA_PATH
-MODEL_PATH = Config.MODEL_PATH
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, '../data/training_data.csv') 
+LEARNED_PATH = os.path.join(BASE_DIR, '../data/learned_data.csv')
+REJECTED_PATH = os.path.join(BASE_DIR, '../data/rejected_data.csv')
+MODEL_PATH = os.path.join(BASE_DIR, 'trained_brain.pkl')
 
 class BrainLogic:
     def __init__(self):
         print("🧠 Initializing Brain (Human-Centric + Plagiarism Guard)...")
-        self.stemmer = StemmerFactory().create_stemmer()
-        self.stopword_remover = StopWordRemoverFactory().create_stop_word_remover()
-        
-        self.db = DatabaseManager() # Komposisi Database
+        # Lazy loading attributes
+        self._stemmer = None
+        self._stopword_remover = None
         
         self.vectorizer = None
         self.knn_level = None
         self.knn_quality = None
         self.is_trained = False
         self.init_learned_data()
+        self.init_rejected_data()
         self.load_model()
+        self.init_db() 
+
+    @property
+    def stemmer(self):
+        if self._stemmer is None:
+            print("⏳ Initializing Sastrawi Stemmer (Lazy Load)...")
+            self._stemmer = StemmerFactory().create_stemmer()
+        return self._stemmer
+
+    @property
+    def stopword_remover(self):
+        if self._stopword_remover is None:
+            print("⏳ Initializing Sastrawi Stopword Remover (Lazy Load)...")
+            self._stopword_remover = StopWordRemoverFactory().create_stop_word_remover()
+        return self._stopword_remover 
 
     def init_learned_data(self):
         """Membuat file learned_data.csv jika belum ada"""
@@ -56,18 +72,135 @@ class BrainLogic:
                 print("📂 File 'learned_data.csv' baru berhasil dibuat.")
             except Exception as e:
                 print(f"⚠️ Gagal membuat file learned data: {e}")
+    
+    def init_rejected_data(self):
+        """[BARU] Membuat file rejected_data.csv jika belum ada"""
+        if not os.path.exists(REJECTED_PATH):
+            try:
+                os.makedirs(os.path.dirname(REJECTED_PATH), exist_ok=True)
+                with open(REJECTED_PATH, 'w', newline='', encoding='utf-8') as f:
+                    writer = csv.writer(f)
+                    writer.writerow(['timestamp', 'text', 'reason']) # Header: Kapan, Apa, Kenapa
+                print("📂 File 'rejected_data.csv' siap menampung sampah.")
+            except Exception as e:
+                print(f"⚠️ Gagal membuat file rejected data: {e}")
+
+    def init_db(self):
+        """Membuat tabel database jika belum ada"""
+        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
+        os.makedirs(os.path.dirname(db_path), exist_ok=True)
+        
+        conn = sqlite3.connect(db_path)
+        c = conn.cursor()
+        
+        c.execute('''CREATE TABLE IF NOT EXISTS siswa
+                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                      nama TEXT, 
+                      kelas TEXT, 
+                      encoding TEXT, 
+                      total_poin INTEGER DEFAULT 0, 
+                      streak INTEGER DEFAULT 0, 
+                      last_active DATE)''')
+                      
+        c.execute('''CREATE TABLE IF NOT EXISTS log_aktivitas
+                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                      nama_siswa TEXT, 
+                      kelas TEXT, 
+                      ide_kebaikan TEXT, 
+                      skor_ai INTEGER, 
+                      kategori_ide TEXT,
+                      waktu TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
+        conn.commit()
+        conn.close()
+        print("🗄️ Database initialized.")
 
     def register_user(self, nama, kelas, encoding):
-        return self.db.register_user(nama, kelas, encoding)
+        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
+        conn = sqlite3.connect(db_path)
+        c = conn.cursor()
+        
+        c.execute("SELECT id FROM siswa WHERE nama=? AND kelas=?", (nama, kelas))
+        if c.fetchone():
+            conn.close()
+            return False, "Siswa sudah terdaftar!"
+            
+        encoding_list = encoding.tolist() 
+        encoding_json = json.dumps(encoding_list)
+        
+        c.execute("INSERT INTO siswa (nama, kelas, encoding, total_poin) VALUES (?, ?, ?, 0)", 
+                  (nama, kelas, encoding_json))
+        conn.commit()
+        conn.close()
+        return True, "Pendaftaran Berhasil!"
 
     def add_points(self, nama, kelas, poin, ide, kategori_ide):
-        self.db.add_points(nama, kelas, poin, ide, kategori_ide)
+        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
+        conn = sqlite3.connect(db_path)
+        c = conn.cursor()
+        c.execute("SELECT id, total_poin FROM siswa WHERE nama=? AND kelas=?", (nama, kelas))
+        data = c.fetchone()        
+        if data:
+            new_poin = data[1] + poin
+            c.execute("UPDATE siswa SET total_poin=? WHERE id=?", (new_poin, data[0]))
+        else:
+            c.execute("INSERT INTO siswa (nama, kelas, total_poin) VALUES (?, ?, ?)", (nama, kelas, poin))
+            
+        c.execute("INSERT INTO log_aktivitas (nama_siswa, kelas, ide_kebaikan, skor_ai, kategori_ide) VALUES (?, ?, ?, ?, ?)", 
+                  (nama, kelas, ide, poin, kategori_ide))
+                  
+        conn.commit()
+        conn.close()
 
     def get_leaderboard(self, limit=15):
-        return self.db.get_leaderboard(limit)
+        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
+        conn = sqlite3.connect(db_path)
+        c = conn.cursor()        
+        c.execute("SELECT nama, kelas, total_poin FROM siswa ORDER BY total_poin DESC LIMIT ?", (limit,))
+        data = c.fetchall()         
+        conn.close()
+        return data
     
     def get_all_users(self):
-        return self.db.get_all_users()
+        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
+        conn = sqlite3.connect(db_path)
+        c = conn.cursor()
+        c.execute("SELECT id, nama, kelas, encoding, total_poin FROM siswa")
+        users = []
+        for row in c.fetchall():
+            if row[3]:
+                try:
+                    encoding_list = json.loads(row[3])
+                    users.append({
+                        "id": row[0],
+                        "nama": row[1],
+                        "kelas": row[2],
+                        "encoding": encoding_list,
+                        "poin": row[4]
+                    })
+                except:
+                    pass
+        conn.close()
+        return users
+    
+    def get_user_ideas_history_by_name_class(self, nama, kelas):
+        """Mengambil semua ide kebaikan yang pernah disubmit oleh seorang siswa."""
+        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
+        conn = sqlite3.connect(db_path)
+        c = conn.cursor()
+        c.execute("SELECT ide_kebaikan FROM log_aktivitas WHERE nama_siswa=? AND kelas=? ORDER BY waktu ASC", (nama, kelas))
+        history = [row[0] for row in c.fetchall()]
+        conn.close()
+        return history
+    
+    def log_rejected_input(self, text, reason):
+        """[BARU] Catat input yang ditolak ke CSV"""
+        try:
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            with open(REJECTED_PATH, 'a', newline='', encoding='utf-8') as f:
+                writer = csv.writer(f)
+                writer.writerow([timestamp, text, reason])
+        except Exception as e:
+            print(f"⚠️ Gagal mencatat rejection: {e}")
 
     def preprocess_text(self, text):
         if not isinstance(text, str): 
@@ -126,7 +259,7 @@ class BrainLogic:
         W = [0.5, 0.3, 0.2]
 
         val_level = 0.0
-        if pred_level in ['Friend', 'Self', 'Social']: val_level = 1.0
+        if pred_level in ['Friend', 'Self', 'Stranger']: val_level = 1.0
         elif pred_level == 'Enemy': val_level = 0.2
         else: val_level = 0.0 # Junk
 
@@ -137,8 +270,13 @@ class BrainLogic:
    
         val_length = min(text_len / 100.0, 1.0)
         final_saw = (val_level * W[0]) + (val_quality * W[1]) + (val_length * W[2])
+
+        variance = random.uniform(-1.5, 1.5)
         
-        score = int(round(final_saw * 10))
+        score = int(round(final_saw*10 + variance))
+
+        if score > 10: score = 10
+        if score < 1: score = 1 
         
         return score
     
@@ -167,14 +305,37 @@ class BrainLogic:
     
     def check_plagiarism(self, new_text, history_list):
         if not history_list: return False, None
+        
         clean_new = new_text.lower().strip()
+        new_words = set(clean_new.split())
+        
         for old_text in history_list:
             clean_old = old_text.lower().strip()
+            
+            # 1. Exact Match Shortcut
             if clean_new == clean_old:
                 return True, old_text
-            ratio = difflib.SequenceMatcher(None, clean_new, clean_old).ratio()
-            if ratio > 0.85:
-                return True, old_text
+
+            # 2. Length Filter: If length difference is > 50%, skip
+            if abs(len(clean_new) - len(clean_old)) > len(clean_new) * 0.5:
+                continue
+
+            # 3. Jaccard Similarity Pre-check (Set Intersection)
+            old_words = set(clean_old.split())
+            intersection = len(new_words & old_words)
+            union = len(new_words | old_words)
+            
+            # If no common words, skip
+            if union == 0: continue
+            
+            jaccard = intersection / union
+            
+            # Only do deep check if word overlap is significant (> 30%)
+            if jaccard > 0.3:
+                ratio = difflib.SequenceMatcher(None, clean_new, clean_old).ratio()
+                if ratio > 0.85:
+                    return True, old_text
+                    
         return False, None
 
     def predict_and_score(self, text_input, class_history=[]):
@@ -188,15 +349,19 @@ class BrainLogic:
         
         if self.vectorizer.transform([clean_input]).sum() == 0:
             fail_response["msg"] = "Kalimat tidak dimengerti."
+            self.log_rejected_input(text_input, "Unknown Words")
             return fail_response
+        
         if len(text_input) < 10: 
             fail_response["msg"] = "Terlalu pendek."
+            self.log_rejected_input(text_input, "Terlalu pendek")
             return fail_response
         
         if class_history:
             is_plagiat, _ = self.check_plagiarism(text_input, class_history)
             if is_plagiat: 
                 fail_response["msg"] = "Ide mirip temanmu!"
+                self.log_rejected_input(text_input, f"Plagiarism detected (Similiar to: {_})")
                 return fail_response
 
         vec_input = self.vectorizer.transform([clean_input])
@@ -206,10 +371,12 @@ class BrainLogic:
         
         if pred_level == "Junk": 
             fail_response["msg"] = "Kalimat kurang jelas/tidak nyambung."
+            self.log_rejected_input(text_input, "Junk")
             return fail_response
         
         if pred_level == "Enemy":
             fail_response["msg"] = "Kebaikan harus positif ya!"
+            self.log_rejected_input(text_input, "Enemy")
             return fail_response
 
         final_score = self.calculate_score_saw(pred_level, pred_quality, len(text_input))
@@ -240,11 +407,3 @@ class BrainLogic:
             self.is_trained = True
         else:
             print("⚠️ Model belum ada.")
-
-# ... (Ini adalah baris terakhir class BrainLogic kamu sebelumnya) ...
-# ... (Paste kode di bawah ini di paling bawah file) ...
-
-# --- DEBUGGER (JANGAN DIHAPUS UTK CEK) ---
-if __name__ == "__main__":
-    brain = BrainLogic()
-    brain.train()
