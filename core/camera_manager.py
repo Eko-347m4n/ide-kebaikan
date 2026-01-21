@@ -14,12 +14,13 @@ from core.constants import (
 )
 
 class CameraManager:
-    def __init__(self, master_app, vision_system, display_frame_callback, login_trigger_callback, challenge_update_callback):
+    def __init__(self, master_app, vision_system, display_frame_callback, login_trigger_callback, challenge_update_callback, sleep_callback):
         self.master_app = master_app
         self.vision = vision_system
         self.display_frame_callback = display_frame_callback
         self.login_trigger_callback = login_trigger_callback 
         self.challenge_update_callback = challenge_update_callback
+        self.sleep_callback = sleep_callback
 
         self.is_camera_on = False
         self.last_activity_time = time.time()
@@ -102,10 +103,18 @@ class CameraManager:
     def _camera_worker(self):
         """Worker thread: Handles OpenCV capture and Vision Processing."""
         log.info("📷 Camera Thread: Started.")
-        cap = cv2.VideoCapture(0)
         
-        if not cap.isOpened():
-            log.error("📷 Camera Thread: Failed to open camera.")
+        cap = None
+        # Try to open camera up to 3 times
+        for attempt in range(3):
+            cap = cv2.VideoCapture(0)
+            if cap.isOpened():
+                break
+            log.warning(f"📷 Camera Thread: Failed to open camera (Attempt {attempt+1}/3). Retrying...")
+            time.sleep(0.5)
+        
+        if not cap or not cap.isOpened():
+            log.error("📷 Camera Thread: Failed to open camera after 3 attempts.")
             self.frame_queue.put("ERROR")
             return
 
@@ -144,7 +153,10 @@ class CameraManager:
         # Auto-sleep check
         if time.time() - self.last_activity_time > SLEEP_TIMEOUT:
             log.info("💤 CameraManager: Auto Sleep Activated!")
-            self.go_to_sleep()
+            if self.sleep_callback:
+                self.sleep_callback()
+            else:
+                self.go_to_sleep()
             return
 
         try:
@@ -155,7 +167,14 @@ class CameraManager:
                 self.display_frame_callback(None, CAM_ERROR)
             else:
                 frame, vision_data = data
+                # Process logic, which might modify the frame (e.g., draw boxes)
                 self._process_game_logic(frame, vision_data)
+                
+                # Now, *after* logic processing, convert and display the frame
+                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                img = Image.fromarray(frame_rgb)
+                img_tk = ctk.CTkImage(light_image=img, dark_image=img, size=(640, 480))
+                self.display_frame_callback(img_tk)
 
         except queue.Empty:
             pass # No new frame, skip
@@ -270,11 +289,6 @@ class CameraManager:
                 self._reset_logic_state()
                 self.challenge_update_callback(CAM_STARTING)
 
-        # 3. DISPLAY FINAL IMAGE
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        img = Image.fromarray(frame_rgb)
-        img_tk = ctk.CTkImage(light_image=img, dark_image=img, size=(640, 480))
-        self.display_frame_callback(img_tk)
 
     def shutdown(self):
         """Releases camera resources and stops the update loop."""

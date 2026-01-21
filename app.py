@@ -1,13 +1,15 @@
 import customtkinter as ctk
 import time
 import threading
+import pygame
+import os
 from core.brain import BrainLogic
 from core.vision import VisionSystem
 from core.logger import log
 from core.constants import (
     AppState, AUTO_RESET_AFTER_SUCCESS, APP_TITLE, SIDEBAR_TITLE,
     CAM_INFO_SLEEP, CAM_INFO_WAKE_UP, CAM_CLICK_TO_START, CAM_STARTING,
-    LEADERBOARD_LIMIT, ZONE_GREEN, ZONE_YELLOW, ADMIN_PIN
+    LEADERBOARD_LIMIT, ZONE_GREEN, ZONE_YELLOW, ADMIN_PIN, BGM_PATH
 )
 from ui.camera_page import CameraPage
 from ui.confirm_page import ConfirmPage
@@ -20,6 +22,9 @@ from core.camera_manager import CameraManager
 class GoodDeedApp(ctk.CTk):
     def __init__(self):
         super().__init__()
+
+        # --- Audio Setup ---
+        self._setup_audio()
 
         # --- Window and Grid Setup ---
         self.title(APP_TITLE)
@@ -47,7 +52,8 @@ class GoodDeedApp(ctk.CTk):
             vision_system=self.vision,
             display_frame_callback=self._display_camera_frame,
             login_trigger_callback=self._handle_login_trigger,
-            challenge_update_callback=self._update_challenge_text
+            challenge_update_callback=self._update_challenge_text,
+            sleep_callback=self._go_to_sleep
         )
         
         # --- Initial State ---
@@ -64,6 +70,48 @@ class GoodDeedApp(ctk.CTk):
 
         # --- Kiosk Enforcement ---
         self._enable_kiosk_mode()
+
+    def _setup_audio(self):
+        """Initializes and plays background music from the sounds directory in a loop."""
+        try:
+            pygame.mixer.init()
+            
+            # Mendapatkan semua file audio dari folder sounds
+            sound_dir = os.path.dirname(BGM_PATH)
+            self.bgm_files = [
+                os.path.join(sound_dir, f) 
+                for f in os.listdir(sound_dir) 
+                if f.lower().endswith(('.mp3', '.wav', '.ogg'))
+            ]
+            self.bgm_files.sort()
+            self.bgm_index = 0
+            
+            if not self.bgm_files:
+                log.warning("No BGM files found in assets/sounds/")
+                return
+
+            log.info(f"Music system started with {len(self.bgm_files)} files.")
+            self._maintain_bgm()
+        except Exception as e:
+            log.error(f"Failed to setup music: {e}")
+
+    def _maintain_bgm(self):
+        """Ensures music keeps playing and cycles through the playlist."""
+        try:
+            if not pygame.mixer.music.get_busy():
+                file_to_play = self.bgm_files[self.bgm_index]
+                pygame.mixer.music.load(file_to_play)
+                pygame.mixer.music.set_volume(0.5)
+                pygame.mixer.music.play()
+                log.info(f"Playing BGM: {file_to_play}")
+                
+                # Update index for next song
+                self.bgm_index = (self.bgm_index + 1) % len(self.bgm_files)
+            
+            # Check every 2 seconds if the music has finished
+            self.after(2000, self._maintain_bgm)
+        except Exception as e:
+            log.error(f"Error in playlist maintenance: {e}")
 
     def _enable_kiosk_mode(self):
         """Enforces aggressive kiosk mode behaviors for Windows and Linux."""
@@ -230,7 +278,8 @@ class GoodDeedApp(ctk.CTk):
         except Exception as e:
             log.error(f"Error resetting camera page UI: {e}")
 
-        self.after(300, self._wake_up_system)
+        # Give more time for the camera to fully release before waking up again
+        self.after(1000, self._wake_up_system)
 
     def _show_frame(self, state):
         pages = {
@@ -276,17 +325,22 @@ class GoodDeedApp(ctk.CTk):
 
     def _wake_up_system(self, event=None):
         log.info("🚀 GoodDeedApp: Waking Up System...")
-        self.camera_manager.wake_up_system()
-
+        
+        # 1. Update UI Status First
         self.status_dot.configure(text_color="green")
         self.status_text.configure(text="ONLINE", text_color="green")
         
         try:
+            # 2. Clear old "Click to start" text immediately
+            self.camera_page.set_cam_text(CAM_STARTING, color="black")
             self.camera_page.set_info_text(CAM_INFO_WAKE_UP, color="blue")
         except Exception as e:
             log.error(f"Error setting wake up text: {e}")
             
         self._show_frame(AppState.CAMERA)
+        
+        # 3. Start Camera Logic
+        self.camera_manager.wake_up_system()
             
     def _go_to_sleep(self):
         log.info("💤 GoodDeedApp: System Going to Sleep...")

@@ -25,7 +25,8 @@ class CameraPage(ctk.CTkFrame):
     def set_cam_image(self, image):
         # Ensure the label's image attribute holds the reference
         self.cam_label.image = image 
-        self.cam_label.configure(image=image)
+        # Set text to empty string so it doesn't overlap or persist
+        self.cam_label.configure(image=image, text="")
     
     def clear_cam_image(self):
         try:

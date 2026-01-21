@@ -1,4 +1,9 @@
+import os
 from enum import Enum, auto
+
+# --- Paths ---
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BGM_PATH = os.path.join(BASE_DIR, "assets", "sounds", "bgm_fixed.mp3")
 
 class AppState(Enum):
     CAMERA = auto()
