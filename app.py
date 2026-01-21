@@ -18,20 +18,15 @@ from ui.result_page import ResultPage
 from core.camera_manager import CameraManager
 
 class GoodDeedApp(ctk.CTk):
-    """
-    Main application class for the 'Berburu Kebaikan' (Hunt for Goodness) app.
-    Orchestrates the UI, state management, and backend services.
-    """
     def __init__(self):
         super().__init__()
 
         # --- Window and Grid Setup ---
         self.title(APP_TITLE)
-        self.geometry("1100x700")
-        self.attributes("-fullscreen", True)
-        self.protocol("WM_DELETE_WINDOW", lambda: None)  # Disable 'X' button
+        self.after(0, lambda: self.state("zoomed"))        
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
+        self.protocol("WM_DELETE_WINDOW", lambda: None)
 
         # --- System Components ---
         self.brain = BrainLogic()
@@ -65,26 +60,20 @@ class GoodDeedApp(ctk.CTk):
             self._go_to_sleep()
 
         # --- Keyboard Bindings ---
-        self.bind("<Return>", self._handle_global_enter)
-        self.bind("<Alt-Shift-E>", self._force_close)
+        self.bind("<Escape>", self._go_back_action)
+        self.bind("<Alt-Shift-E>", self._on_closing)
 
-    def _force_close(self, event=None):
-        """Handles the force close event."""
-        log.info("Force close requested. Shutting down services.")
-        self.camera_manager.shutdown()
-        self.destroy()
-
-    def _handle_global_enter(self, event=None):
-        if self.current_state == AppState.REGISTER:
-            self.register_page.handle_enter()
-        elif self.current_state == AppState.INPUT:
-            self._submit_idea()
+    def _go_back_action(self, event=None):
+        """Triggers a full application reset when Escape is pressed."""
+        log.info("Escape pressed. Initiating full reset.")
+        self.start_reset()
 
     def _train_model_flow(self):
         """Shows a training screen and runs the model training in a thread."""
         self._show_frame(AppState.LOADING)
         self.loading_page.set_text("Model AI sedang disiapkan... (± 15 detik)")
         
+        # Run training in a separate thread to not freeze the GUI
         training_thread = threading.Thread(target=self._run_training_in_thread)
         training_thread.daemon = True
         training_thread.start()
@@ -92,6 +81,7 @@ class GoodDeedApp(ctk.CTk):
     def _run_training_in_thread(self):
         """The actual training process, run in a background thread."""
         self.brain.train()
+        # Once training is done, schedule the next step in the main thread
         self.after(100, self._on_training_complete)
 
     def _on_training_complete(self):
@@ -105,6 +95,7 @@ class GoodDeedApp(ctk.CTk):
         if challenge_text:
             self.camera_page.set_info_text(challenge_text, color="blue")
         else:
+            # When challenge is cleared, return to default text
             self.camera_page.set_info_text(CAM_INFO_WAKE_UP, color="blue")
 
     def _setup_sidebar(self):
@@ -137,6 +128,7 @@ class GoodDeedApp(ctk.CTk):
         main_frame = ctk.CTkFrame(self, fg_color="transparent")
         main_frame.grid(row=0, column=1, sticky="nsew", padx=20, pady=20)
 
+        # Instantiate all pages
         self.camera_page = CameraPage(main_frame, wake_up_callback=self._wake_up_system)
         self.confirm_page = ConfirmPage(main_frame, yes_callback=self._on_confirm_yes, no_callback=self._on_confirm_no)
         self.register_page = RegisterPage(main_frame, submit_callback=self._submit_registration, cancel_callback=self.start_reset)
@@ -205,7 +197,6 @@ class GoodDeedApp(ctk.CTk):
 
         page_to_show = pages.get(state)
         self.current_state = state
-        log.info(f"APP: Switched to state {state.name}")
 
         if page_to_show:
             pack_options = {"fill": "both", "expand": True}
@@ -216,10 +207,6 @@ class GoodDeedApp(ctk.CTk):
         if state == AppState.INPUT:
             self.input_page.reset()
             self.input_page.focus_textbox()
-        
-        if state == AppState.REGISTER:
-            self.register_page.reset()
-            self.register_page.set_initial_focus()
 
     def _display_camera_frame(self, img_tk, text_message=None):
         try:
@@ -280,101 +267,98 @@ class GoodDeedApp(ctk.CTk):
             self.pending_encoding = encoding
             log.info("APP: Unrecognized face detected. Triggering registration.")
             self._show_frame(AppState.REGISTER)
-            
+        
     def _on_confirm_yes(self):
         self.active_user = self.temp_potential_user
         self.input_page.set_welcome_message(self.active_user['nama'])
         self._show_frame(AppState.INPUT)
-        
+
     def _on_confirm_no(self):
         self._show_frame(AppState.REGISTER)
 
     def _submit_registration(self):
-        log.info("APP: _submit_registration called.")
-        reg_data = self.register_page.get_values()
-        nama = reg_data.get("nama")
-        kelas = reg_data.get("kelas")
-        log.info(f"APP: Registration data: Name='{nama}', Class='{kelas}'")
+        user_data = self.register_page.get_values()
+        name = user_data["nama"]
+        class_name = user_data["kelas"]
 
-        if not nama or not kelas:
-            log.warning("APP: Registration attempt with missing name or class. Aborting.")
-            return
-
-        if self.pending_encoding is None:
-            log.error("APP: Registration submitted but no face encoding is pending. Aborting and resetting.")
-            self.start_reset()
+        if not name or not class_name:
+            log.warning("Registration submission with empty name or class.")
             return
             
-        success, message = self.brain.register_user(nama, kelas, self.pending_encoding)
-
-        if success:
-            log.info(f"APP: New user registered successfully: {nama} - {kelas}")
-            all_users = self.brain.get_all_users()
-            self.vision.load_memory(all_users)
-            
-            newly_registered_user = next((u for u in all_users if u['nama'] == nama and u['kelas'] == kelas), None)
-
-            if newly_registered_user:
-                self.active_user = newly_registered_user
-                self.input_page.set_welcome_message(self.active_user['nama'])
+        if self.pending_encoding is not None:
+            success, msg = self.brain.register_user(name, class_name, self.pending_encoding)
+            if success:
+                self.vision.load_memory(self.brain.get_all_users())
+                self.active_user = {"nama": name, "kelas": class_name}
+                self.input_page.set_welcome_message(name)
                 self._show_frame(AppState.INPUT)
             else:
-                log.error("APP: Could not find newly registered user after registration. Resetting.")
-                self.start_reset()
-        else:
-            log.error(f"APP: Failed to register user in brain. Reason: {message}")
-            self.start_reset()
+                log.error(f"Failed to register user: {msg}")
 
     def _submit_idea(self):
-        idea_text = self.input_page.get_idea_text().strip()
-        if not idea_text:
-            return 
+        text = self.input_page.get_idea_text()
+        if len(text) < 5:
+            log.warning("Idea submission too short.")
+            return
 
         self._show_frame(AppState.LOADING)
-        self.loading_page.set_text("Menganalisis ide kebaikanmu...")
+        self.after(100, lambda: self._process_idea_submission(text))
 
-        def do_prediction():
-            history = self.brain.get_user_ideas_history_by_name_class(self.active_user['nama'], self.active_user['kelas'])
-            result = self.brain.predict_and_score(idea_text, history)
-            self.after(100, lambda: self._on_prediction_complete(result))
+    def _process_idea_submission(self, text):
+        # 1. Get active user details
+        user_ideas_history = []
+        if self.active_user:
+            user_name = self.active_user["nama"]
+            user_class = self.active_user["kelas"]
+            # 2. Retrieve user's idea history
+            user_ideas_history = self.brain.get_user_ideas_history_by_name_class(user_name, user_class)
+        
+        # Pass history to predict_and_score
+        result = self.brain.predict_and_score(text, class_history=user_ideas_history)
 
-        threading.Thread(target=do_prediction, daemon=True).start()
+        self.loading_page.set_text("Menganalisis kadar kebaikanmu nih 🧐")
+        self.after(1000, lambda: self.loading_page.set_text("Menghitung poin..."))
+        self.after(2000, lambda: self._display_submission_result(result, text))
 
-    def _on_prediction_complete(self, result):
+    def _display_submission_result(self, result, text_input):
+        score = result.get("final_score", 0)
+        feedback = result.get("feedback", "No Feedback")
+        msg = result.get("msg", "")
+
+        self._show_frame(AppState.RESULT)
+
         if result["success"]:
-            self.brain.add_points(
-                self.active_user['nama'], 
-                self.active_user['kelas'],
-                result["final_score"],
-                result["original_text"],
-                result["prediction_level"]
-            )
-            self.update_leaderboard()
-            self.result_page.show_success(result["final_score"], result["feedback"])
+            self.result_page.show_success(score, feedback)
+            
+            if self.active_user:
+                self.brain.add_points(self.active_user["nama"], self.active_user["kelas"], score, text_input, result["prediction_level"])
+                self.update_leaderboard() 
+            
             self._start_auto_reset_timer()
         else:
-            self.result_page.show_failure(
-                msg=result["msg"],
-                retry_callback=self._retry_input,
-                back_to_home_callback=self.start_reset
-            )
-        self._show_frame(AppState.RESULT)
-        
-    def _retry_input(self):
-        self._show_frame(AppState.INPUT)
-        self.input_page.focus_textbox()
+            self.result_page.show_failure(msg, 
+                                          retry_callback=lambda: self._show_frame(AppState.INPUT), 
+                                          back_to_home_callback=self.start_reset)
 
     def _start_auto_reset_timer(self):
-        self._cancel_auto_reset_timer()
-        log.info(f"Starting auto-reset timer for {AUTO_RESET_AFTER_SUCCESS} seconds.")
-        self.auto_reset_timer = self.after(int(AUTO_RESET_AFTER_SUCCESS * 1000), self.start_reset)
+        if self.auto_reset_timer:
+            self.after_cancel(self.auto_reset_timer)
+        self.auto_reset_timer = self.after(int(AUTO_RESET_AFTER_SUCCESS * 1000), self._reset_app)
 
     def _cancel_auto_reset_timer(self):
         if self.auto_reset_timer:
-            log.info("Cancelling auto-reset timer.")
             self.after_cancel(self.auto_reset_timer)
             self.auto_reset_timer = None
+        
+    def _on_closing(self, event=None):
+        log.info("Application closing. Shutting down services.")
+        self.camera_manager.shutdown()
+        self._cancel_auto_reset_timer()
+        self.destroy()
 
 if __name__ == "__main__":
+    ctk.set_appearance_mode("Light")
+    ctk.set_default_color_theme("blue")
+    
     app = GoodDeedApp()
     app.mainloop()
