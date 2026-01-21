@@ -120,7 +120,7 @@ class GoodDeedApp(ctk.CTk):
         lb_title = ctk.CTkLabel(self.sidebar, text="🏆 Top Siswa", font=ctk.CTkFont(size=18, weight="bold"))
         lb_title.grid(row=3, column=0, padx=20, pady=(10, 10))
 
-        self.leaderboard_frame = ctk.CTkScrollableFrame(self.sidebar, label_text="Minggu Ini", fg_color="white")
+        self.leaderboard_frame = ctk.CTkScrollableFrame(self.sidebar, label_text="Orang Baik", fg_color="white")
         self.leaderboard_frame.grid(row=4, column=0, padx=20, pady=10, sticky="nsew")
         self.update_leaderboard()
 
@@ -151,7 +151,7 @@ class GoodDeedApp(ctk.CTk):
             row = ctk.CTkFrame(self.leaderboard_frame, fg_color="transparent")
             row.pack(fill="x", pady=2)
             ctk.CTkLabel(row, text=f"{idx+1}. {name} ({class_name})", anchor="w").pack(side="left", padx=5)
-            ctk.CTkLabel(row, text=f"{score} Pts", font=ctk.CTkFont(weight="bold")).pack(side="right", padx=5)
+            ctk.CTkLabel(row, text=f"{score} poin", font=ctk.CTkFont(weight="bold")).pack(side="right", padx=5)
 
     def start_reset(self):
         self.loading_page.set_text("Sabar ya, sedang proses menuju ke halaman awal... 🔄")
