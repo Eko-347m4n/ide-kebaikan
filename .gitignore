@@ -1,0 +1,23 @@
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Build artifacts
+build/
+dist/
+*.spec
+
+# Logs
+logs/*
+!logs/.gitkeep
+
+# Environment
+.env
+venv/
+env/
+
+# IDE settings
+.vscode/
+.idea/
