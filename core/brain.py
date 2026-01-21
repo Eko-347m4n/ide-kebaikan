@@ -369,8 +369,3 @@ class BrainLogic:
             self.is_trained = True
         else:
             print("⚠️ Model belum ada.")
-
-# --- DEBUGGER S---
-if __name__ == "__main__":
-    brain = BrainLogic()
-    brain.train()

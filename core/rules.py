@@ -81,7 +81,14 @@ SLANG_DICTIONARY = {
     "unuk": "untuk", # Typo spesifik kamu
     "minuman": "minum",
     "haus": "haus", # Pastikan ada
-    "kehausan": "haus"
+    "kehausan": "haus",
+    "memberikan": "memberi",  # KUNCI 1
+    "membuatkan": "buat",     # KUNCI 2
+    "bikinin": "buat",
+    "masakin": "masak",
+    "nyiapin": "siap",
+    "menyiapkan": "siap",
+    "makanan": "makan"
 }
 
 # --- C. FEEDBACK BANK ---

@@ -306,15 +306,14 @@ class GoodDeedApp(ctk.CTk):
 
     def _process_idea_submission(self, text):
         # 1. Get active user details
-        user_ideas_history = []
+        class_ideas_history = []
         if self.active_user:
-            user_name = self.active_user["nama"]
             user_class = self.active_user["kelas"]
-            # 2. Retrieve user's idea history
-            user_ideas_history = self.brain.get_user_ideas_history_by_name_class(user_name, user_class)
+            # 2. Retrieve all ideas from the user's class for plagiarism check
+            class_ideas_history = self.brain.get_class_ideas_history(user_class)
         
         # Pass history to predict_and_score
-        result = self.brain.predict_and_score(text, class_history=user_ideas_history)
+        result = self.brain.predict_and_score(text, class_history=class_ideas_history)
 
         self.loading_page.set_text("Menganalisis kadar kebaikanmu nih 🧐")
         self.after(1000, lambda: self.loading_page.set_text("Menghitung poin..."))
