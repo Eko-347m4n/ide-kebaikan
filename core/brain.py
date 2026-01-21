@@ -167,6 +167,16 @@ class BrainLogic:
         conn.close()
         return users
     
+    def get_user_ideas_history_by_name_class(self, nama, kelas):
+        """Mengambil semua ide kebaikan yang pernah disubmit oleh seorang siswa."""
+        db_path = os.path.join(BASE_DIR, '../data/kebaikan.db')
+        conn = sqlite3.connect(db_path)
+        c = conn.cursor()
+        c.execute("SELECT ide_kebaikan FROM log_aktivitas WHERE nama_siswa=? AND kelas=? ORDER BY waktu ASC", (nama, kelas))
+        history = [row[0] for row in c.fetchall()]
+        conn.close()
+        return history
+    
     def log_rejected_input(self, text, reason):
         """[BARU] Catat input yang ditolak ke CSV"""
         try:
@@ -234,7 +244,7 @@ class BrainLogic:
         W = [0.5, 0.3, 0.2]
 
         val_level = 0.0
-        if pred_level in ['Friend', 'Self', 'Social']: val_level = 1.0
+        if pred_level in ['Friend', 'Self', 'Stranger']: val_level = 1.0
         elif pred_level == 'Enemy': val_level = 0.2
         else: val_level = 0.0 # Junk
 
@@ -245,8 +255,13 @@ class BrainLogic:
    
         val_length = min(text_len / 100.0, 1.0)
         final_saw = (val_level * W[0]) + (val_quality * W[1]) + (val_length * W[2])
+
+        variance = random.uniform(-1.5, 1.5)
         
-        score = int(round(final_saw * 10))
+        score = int(round(final_saw*10 + variance))
+
+        if score > 10: score = 10
+        if score < 1: score = 1 
         
         return score
     

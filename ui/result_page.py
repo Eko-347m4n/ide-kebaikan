@@ -65,7 +65,7 @@ class ResultPage(ctk.CTkFrame):
         self.result_card.configure(border_color=COLOR_FAILURE_BORDER)
         self.lbl_icon.configure(text=RESULT_FAILURE_ICON)
         self.lbl_score.configure(text="0", text_color="red")
-        self.lbl_feedback.configure(text=f"{msg}\n\nWah aku masih belum menangkap maksudmu nih tolong jelasin dong idemu lebih jelas lagi!", text_color="red")
+        self.lbl_feedback.configure(text=f"{msg}", text_color="red")
         
         self.btn_primary_action.configure(text="Perbaiki Kata-kata ✏️", fg_color="green", hover_color="darkgreen", command=self._retry_callback)
         

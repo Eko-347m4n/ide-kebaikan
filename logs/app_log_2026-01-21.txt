@@ -1,0 +1,1322 @@
+04:00:44 - ERROR - Error loading encoding for user Audy, ID: 1. Error: the JSON object must be str, bytes or bytearray, not list
+04:00:44 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:00:44 - INFO - 💤 CameraManager: Going to Sleep...
+04:00:44 - INFO - Camera image cleared successfully.
+04:00:46 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:00:46 - INFO - 🚀 CameraManager: Waking Up System...
+04:01:05 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:06 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:07 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:08 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:08 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:09 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:10 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:11 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:11 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:12 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:13 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:13 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:14 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:15 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:15 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:16 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:17 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:17 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:18 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:19 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:20 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:20 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:21 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:22 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:22 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:23 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:24 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:24 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:25 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:26 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:26 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:27 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:01:27 - INFO - Application closing. Shutting down services.
+04:01:27 - INFO - 💤 CameraManager: Going to Sleep...
+04:04:36 - ERROR - Error loading encoding for user Audy, ID: 1. Error: the JSON object must be str, bytes or bytearray, not list
+04:04:36 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:04:36 - INFO - 💤 CameraManager: Going to Sleep...
+04:04:36 - INFO - Camera image cleared successfully.
+04:04:38 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:04:38 - INFO - 🚀 CameraManager: Waking Up System...
+04:04:43 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:44 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:45 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:45 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:46 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:47 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:47 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:48 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:49 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:49 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:50 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:51 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:51 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:52 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:53 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:53 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:54 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:55 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:55 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:56 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:04:56 - INFO - Application closing. Shutting down services.
+04:04:56 - INFO - 💤 CameraManager: Going to Sleep...
+04:08:17 - ERROR - Error loading encoding for user Audy, ID: 1. Error: the JSON object must be str, bytes or bytearray, not list
+04:08:17 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:08:17 - INFO - 💤 CameraManager: Going to Sleep...
+04:08:17 - INFO - Camera image cleared successfully.
+04:08:20 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:08:20 - INFO - 🚀 CameraManager: Waking Up System...
+04:08:26 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:27 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:27 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:28 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:29 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:30 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:30 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:31 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:32 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:32 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:33 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:34 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:34 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:35 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:36 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:36 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:08:36 - INFO - 🚀 CameraManager: Waking Up System...
+04:08:36 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:37 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:38 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:38 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:08:38 - INFO - 🚀 CameraManager: Waking Up System...
+04:08:38 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:39 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:40 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:40 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:40 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:08:40 - INFO - 🚀 CameraManager: Waking Up System...
+04:08:41 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:42 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:43 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:43 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:44 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:45 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:45 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:46 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:47 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:48 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:48 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:49 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:50 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:50 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:51 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:52 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:53 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:08:53 - INFO - Application closing. Shutting down services.
+04:08:53 - INFO - 💤 CameraManager: Going to Sleep...
+04:10:14 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:10:14 - INFO - 💤 CameraManager: Going to Sleep...
+04:10:14 - INFO - Camera image cleared successfully.
+04:10:16 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:10:16 - INFO - 🚀 CameraManager: Waking Up System...
+04:10:22 - INFO - VISION: Min_dist found: 0.3447 for user Audy (7-A)
+04:10:22 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:10:22 - INFO - VISION: Zone decision: GREEN for Audy
+04:10:22 - INFO - VISION: Min_dist found: 0.3564 for user Audy (7-A)
+04:10:22 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:10:22 - INFO - VISION: Zone decision: GREEN for Audy
+04:10:22 - INFO - Identity established: Audy (Zone: GREEN, Dist: 0.3564)
+04:10:23 - INFO - VISION: Min_dist found: 0.3429 for user Audy (7-A)
+04:10:23 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:10:23 - INFO - VISION: Zone decision: GREEN for Audy
+04:10:24 - INFO - VISION: Min_dist found: 0.4391 for user Audy (7-A)
+04:10:24 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:10:24 - INFO - VISION: Zone decision: GREEN for Audy
+04:10:24 - INFO - VISION: Min_dist found: 0.3927 for user Audy (7-A)
+04:10:24 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:10:24 - INFO - VISION: Zone decision: GREEN for Audy
+04:10:25 - INFO - VISION: Min_dist found: 0.4039 for user Audy (7-A)
+04:10:25 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:10:25 - INFO - VISION: Zone decision: GREEN for Audy
+04:10:26 - INFO - VISION: Min_dist found: 0.4030 for user Audy (7-A)
+04:10:26 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:10:26 - INFO - VISION: Zone decision: GREEN for Audy
+04:10:26 - INFO - VISION: Min_dist found: 0.3698 for user Audy (7-A)
+04:10:26 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:10:26 - INFO - VISION: Zone decision: GREEN for Audy
+04:10:27 - INFO - VISION: Min_dist found: 0.3966 for user Audy (7-A)
+04:10:27 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:10:27 - INFO - VISION: Zone decision: GREEN for Audy
+04:10:27 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'GREEN', 'user_data': {'id': 1, 'nama': 'Audy', 'kelas': '7-A', 'encoding': [-0.08958698064088821, 0.023505069315433502, 0.09843668341636658, -0.05659105256199837, -0.05519993230700493, -0.04231319949030876, -0.06549757719039917, -0.11314707249403, 0.19776974618434906, -0.10006946325302124, 0.2259039729833603, 0.007309902925044298, -0.1745750606060028, -0.007752963341772556, -0.01150561310350895, 0.17274384200572968, -0.20329491794109344, -0.0798443853855133, -0.057513277977705, 0.00545873586088419, 0.0456760935485363, -0.03254585713148117, 0.09609650820493698, 0.0801612138748169, -0.13588593900203705, -0.3701281249523163, -0.10072533786296844, -0.09646084904670715, 0.04965299367904663, -0.03122546151280403, -0.026836033910512924, 0.05743222311139107, -0.11441074311733246, 0.05365142971277237, 0.020978225395083427, 0.09640853106975555, -0.04346809163689613, -0.08778543770313263, 0.2312639355659485, -0.020795483142137527, -0.2813243269920349, -0.026542339473962784, -0.0679861456155777, 0.18013878166675568, 0.22781309485435486, 0.04226323589682579, 0.09997394680976868, -0.14321765303611755, 0.1163991168141365, -0.20023667812347412, 0.04563354700803757, 0.15573640167713165, 0.021014180034399033, 0.01528388261795044, 0.009245019406080246, -0.16949398815631866, -0.01773908920586109, 0.1136484444141388, -0.11492296308279037, -0.015703462064266205, 0.041057832539081573, -0.09983398020267487, 0.00875602662563324, -0.05794646963477135, 0.19371969997882843, 0.11621808260679245, -0.17403672635555267, -0.12210265547037125, 0.15979845821857452, -0.16260650753974915, 0.0011852416209876537, 0.06012704223394394, -0.18035291135311127, -0.22567428648471832, -0.27595940232276917, -0.030493859201669693, 0.4325715899467468, 0.07668456435203552, -0.17848056554794312, 0.0006029382348060608, -0.09527745842933655, 0.011838879436254501, 0.0916023701429367, 0.2240271121263504, -0.0315077006816864, -0.01142614521086216, -0.0728100836277008, -0.012456699274480343, 0.19594891369342804, -0.09920653700828552, 0.01063401810824871, 0.21494486927986145, -0.004809040576219559, 0.07511594146490097, -0.03670802712440491, 0.055686432868242264, -0.06886468082666397, 0.06335417181253433, -0.062456659972667694, 0.022125594317913055, -0.0008447393774986267, 0.030074741691350937, 0.03342200815677643, 0.1040969267487526, -0.1663038581609726, 0.1509866714477539, 9.324401617050171e-05, 0.01686248369514942, 0.08594048023223877, 0.028058044612407684, -0.07210376858711243, -0.1641111671924591, 0.14876994490623474, -0.23163588345050812, 0.1260937750339508, 0.24178454279899597, 0.03574380278587341, 0.161673903465271, 0.05475444346666336, 0.16153383255004883, 0.00011640693992376328, 0.020414303988218307, -0.19951128959655762, 0.061810415238142014, 0.04033420607447624, -0.0015898463316261768, -0.009627537801861763, -0.009122500196099281], 'poin': 1}, 'encoding': array([-1.10346355e-01,  5.17014973e-02,  6.12022616e-02, -8.95753652e-02,
+       -9.95066911e-02,  3.32134739e-02, -7.07892030e-02, -1.42027259e-01,
+        1.79983094e-01, -1.23523034e-01,  1.89325750e-01, -9.85831860e-03,
+       -1.65731505e-01, -2.33398508e-02, -1.80370584e-02,  1.60753131e-01,
+       -1.57306254e-01, -7.67662972e-02, -3.95060107e-02, -4.11378592e-02,
+        6.37861267e-02, -5.04795536e-02,  5.17546535e-02,  1.08663999e-01,
+       -1.97192818e-01, -3.69977683e-01, -1.40211046e-01, -1.04081787e-01,
+        3.57982181e-02, -5.16591258e-02, -1.38481930e-02,  2.23401375e-02,
+       -1.22757047e-01,  6.80754334e-02, -2.67822184e-02,  7.97824189e-02,
+       -3.96722071e-02, -1.09153241e-01,  1.84400156e-01,  2.97839791e-02,
+       -2.30840132e-01, -2.38053612e-02, -3.00714746e-02,  1.91694587e-01,
+        1.94125190e-01,  3.61600444e-02,  1.14617757e-01, -8.09387937e-02,
+        1.25484183e-01, -1.53424203e-01,  5.79400063e-02,  1.25022307e-01,
+        8.57437216e-03,  5.01008146e-02,  2.37218793e-02, -1.53524518e-01,
+        7.32970051e-03,  1.44096345e-01, -1.35436177e-01,  1.87250338e-02,
+        3.51602621e-02, -1.00713000e-01, -1.14255957e-02, -4.46661748e-02,
+        2.10056275e-01,  1.38301998e-01, -1.66437626e-01, -9.16223750e-02,
+        1.65110826e-01, -1.09374143e-01,  1.65998712e-02,  2.50059180e-02,
+       -2.04260275e-01, -2.12976545e-01, -2.72924870e-01,  5.95759898e-02,
+        4.79255170e-01,  1.53994337e-01, -1.49810612e-01, -3.36253233e-02,
+       -9.84908268e-02,  2.43762545e-02,  1.06769204e-01,  1.82614341e-01,
+       -2.24574730e-02, -5.99087179e-02, -3.86726260e-02,  3.93723845e-02,
+        1.71015456e-01, -4.83916402e-02, -6.32856414e-03,  2.10398018e-01,
+       -7.18699023e-03,  5.64297773e-02, -6.72175139e-02,  7.00131729e-02,
+       -1.30944550e-01,  6.05358370e-02, -1.00882780e-02,  2.20467579e-02,
+        6.17063511e-03,  8.89861304e-03,  5.28658777e-02,  1.02506913e-01,
+       -1.82029605e-01,  1.85712636e-01,  3.68836932e-02, -9.72119905e-03,
+        3.24381478e-02,  5.03302179e-02, -1.18968725e-01, -8.93942416e-02,
+        1.35540918e-01, -2.50439405e-01,  1.34063572e-01,  2.32956752e-01,
+        5.50467037e-02,  1.80394441e-01,  8.41558799e-02,  1.29503399e-01,
+        1.37415417e-02, -1.16031840e-02, -1.61874443e-01,  2.84457132e-02,
+        6.66472539e-02, -2.31480263e-02,  2.29287166e-02, -1.86794437e-04]), 'distance': np.float64(0.3564226780896611), 'face_detected': True, 'location': (200, 408, 408, 200)}
+04:10:27 - INFO - 💤 CameraManager: Going to Sleep...
+04:10:27 - INFO - Camera image cleared successfully.
+04:10:37 - INFO - 💤 CameraManager: Going to Sleep...
+04:10:37 - INFO - Camera image cleared successfully.
+04:10:38 - INFO - 💤 CameraManager: Going to Sleep...
+04:10:38 - INFO - Camera image cleared successfully.
+04:10:41 - INFO - 💤 CameraManager: Going to Sleep...
+04:10:41 - INFO - Camera image cleared successfully.
+04:10:45 - INFO - Application closing. Shutting down services.
+04:10:45 - INFO - 💤 CameraManager: Going to Sleep...
+04:12:36 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:12:36 - INFO - 💤 CameraManager: Going to Sleep...
+04:12:36 - INFO - Camera image cleared successfully.
+04:12:37 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:12:37 - INFO - 🚀 CameraManager: Waking Up System...
+04:12:43 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:44 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:45 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:45 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:46 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:46 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:47 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:48 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:48 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:49 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:50 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:51 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:51 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:52 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:53 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:53 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:54 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:55 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:12:55 - INFO - Application closing. Shutting down services.
+04:12:55 - INFO - 💤 CameraManager: Going to Sleep...
+04:16:47 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:16:47 - INFO - 💤 CameraManager: Going to Sleep...
+04:16:47 - INFO - Camera image cleared successfully.
+04:16:50 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:16:50 - INFO - 🚀 CameraManager: Waking Up System...
+04:16:59 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:17:00 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:17:01 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:17:01 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:17:01 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'RED', 'user_data': None, 'encoding': array([-1.19649261e-01,  3.67106684e-02,  1.05014026e-01, -1.14583582e-01,
+       -4.07076105e-02, -3.96608002e-02, -6.34979457e-02, -1.56017572e-01,
+        1.87062457e-01, -1.35910362e-01,  2.11611599e-01, -1.08123953e-02,
+       -1.45475700e-01, -2.15589814e-02, -3.42524461e-02,  1.76758289e-01,
+       -1.94214970e-01, -6.31112605e-02, -4.36882637e-02, -1.22407656e-02,
+        4.36709784e-02, -3.77638415e-02,  7.16747940e-02,  1.05663329e-01,
+       -1.67069718e-01, -3.77066106e-01, -1.36672586e-01, -1.08636886e-01,
+       -4.30539809e-03, -3.78907509e-02,  1.42652448e-03,  4.71817814e-02,
+       -1.26164004e-01,  6.22124821e-02, -2.54630279e-02,  1.00456782e-01,
+       -3.49781811e-02, -1.12631992e-01,  2.05626085e-01,  3.07432115e-02,
+       -2.45359257e-01, -2.74326690e-02, -2.78156027e-02,  1.94612488e-01,
+        2.29384795e-01,  1.69103555e-02,  1.03581943e-01, -1.08421549e-01,
+        1.26242608e-01, -2.02180371e-01,  1.91795509e-02,  1.09595686e-01,
+        1.13611249e-03,  2.87465081e-02,  3.78082842e-02, -1.60123020e-01,
+        1.15982536e-02,  8.53018165e-02, -1.50413215e-01, -1.51164830e-02,
+        1.87394433e-02, -9.43202153e-02,  5.93835115e-03, -4.11686115e-02,
+        1.99542433e-01,  1.43213317e-01, -1.88792229e-01, -6.55850172e-02,
+        1.74168378e-01, -1.55080765e-01,  2.95418072e-02,  2.31939405e-02,
+       -1.80671379e-01, -2.24746242e-01, -3.03191423e-01,  8.75318423e-04,
+        4.42709625e-01,  1.30706623e-01, -1.62736386e-01, -2.87155602e-02,
+       -1.18867449e-01, -1.28534157e-04,  8.84914473e-02,  2.14767650e-01,
+       -1.21285161e-02, -2.26343572e-02, -3.65443379e-02,  1.21190166e-02,
+        1.74732164e-01, -5.39111905e-02,  2.08167639e-03,  2.26871014e-01,
+       -1.72291901e-02,  5.08521385e-02, -5.86946830e-02,  6.88367188e-02,
+       -1.25496551e-01,  4.87671606e-02, -4.72631529e-02,  4.78017479e-02,
+       -3.17029655e-02,  1.50260096e-02,  2.98913792e-02,  1.24087773e-01,
+       -1.97047368e-01,  1.73322409e-01,  1.97401363e-02, -4.34382111e-02,
+        3.32090743e-02,  3.89337391e-02, -9.77809504e-02, -1.23913504e-01,
+        1.35757580e-01, -2.28173748e-01,  9.79416892e-02,  2.55854696e-01,
+        1.99166778e-02,  1.85673624e-01,  6.41829148e-02,  1.35254279e-01,
+       -1.21434461e-02,  1.18725542e-02, -1.63912117e-01,  3.66457961e-02,
+        2.69087199e-02, -1.00776013e-02,  7.57059921e-03, -1.12350117e-02]), 'distance': None, 'face_detected': True, 'location': (242, 378, 416, 204)}
+04:17:01 - INFO - APP: Unrecognized face detected. Triggering registration.
+04:17:01 - INFO - 💤 CameraManager: Going to Sleep...
+04:17:02 - INFO - Camera image cleared successfully.
+04:17:23 - INFO - 💤 CameraManager: Going to Sleep...
+04:17:23 - INFO - Camera image cleared successfully.
+04:17:24 - INFO - Application closing. Shutting down services.
+04:17:24 - INFO - 💤 CameraManager: Going to Sleep...
+04:23:11 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:23:11 - INFO - 💤 CameraManager: Going to Sleep...
+04:23:11 - INFO - Camera image cleared successfully.
+04:23:14 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:23:14 - INFO - 🚀 CameraManager: Waking Up System...
+04:23:25 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:23:26 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:23:27 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:23:27 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:23:27 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'RED', 'user_data': None, 'encoding': array([-0.12231173,  0.04907909,  0.09474219, -0.1007306 , -0.02197493,
+       -0.03375552, -0.02854242, -0.15767521,  0.17828581, -0.12676626,
+        0.26373559, -0.01499375, -0.15311427, -0.04908393,  0.02811527,
+        0.17112468, -0.18491262, -0.06717567, -0.0636019 , -0.04435172,
+        0.03009396, -0.03233738,  0.10072367,  0.10747589, -0.13911265,
+       -0.35023704, -0.11674155, -0.13616958,  0.0394168 , -0.05379844,
+        0.01918507,  0.02915648, -0.17947841,  0.05683723, -0.03656149,
+        0.04620744, -0.02532873, -0.10722112,  0.22323626,  0.00762089,
+       -0.23031665, -0.04244978, -0.03989785,  0.17632665,  0.20646839,
+       -0.02467857,  0.06280431, -0.08724742,  0.08747787, -0.16678008,
+       -0.00094402,  0.10796554,  0.01881627,  0.00400014,  0.00050667,
+       -0.1274718 , -0.01061195,  0.07389142, -0.16837017, -0.02330601,
+        0.01629435, -0.09912832, -0.04442063, -0.04831762,  0.22147477,
+        0.13126658, -0.17366487, -0.07665651,  0.18146427, -0.10299638,
+        0.05482539,  0.07060051, -0.18947579, -0.21390955, -0.22993746,
+        0.01057745,  0.45186067,  0.06849134, -0.17122278, -0.00331519,
+       -0.18488765, -0.00719117,  0.0583373 ,  0.16596057,  0.01778093,
+       -0.0328919 , -0.02371805,  0.03930428,  0.15772656, -0.0834928 ,
+        0.00318064,  0.23283157, -0.03446086,  0.02357126, -0.05217839,
+        0.04039437, -0.07691021,  0.0329758 , -0.04897977,  0.01535505,
+       -0.04381124, -0.00930665,  0.02178095,  0.08422545, -0.20801692,
+        0.14517489,  0.0760963 , -0.04011726,  0.07620764,  0.06509673,
+       -0.08510567, -0.15648161,  0.1209404 , -0.26642168,  0.13438527,
+        0.22716624,  0.00540038,  0.17732941,  0.01980796,  0.16228661,
+       -0.01558478,  0.0018097 , -0.15226586,  0.0343452 ,  0.05569129,
+        0.01815508,  0.00188243, -0.02162045]), 'distance': None, 'face_detected': True, 'location': (186, 434, 434, 186)}
+04:23:27 - INFO - APP: Unrecognized face detected. Triggering registration.
+04:23:27 - INFO - 💤 CameraManager: Going to Sleep...
+04:23:28 - INFO - Camera image cleared successfully.
+04:23:46 - INFO - New user registered: Audy - 7-A
+04:23:46 - INFO - 💤 CameraManager: Going to Sleep...
+04:23:46 - INFO - Camera image cleared successfully.
+04:23:50 - INFO - Application closing. Shutting down services.
+04:23:50 - INFO - 💤 CameraManager: Going to Sleep...
+04:29:02 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:29:02 - INFO - 💤 CameraManager: Going to Sleep...
+04:29:02 - INFO - Camera image cleared successfully.
+04:29:05 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:29:05 - INFO - 🚀 CameraManager: Waking Up System...
+04:29:11 - INFO - VISION: Min_dist found: 0.3838 for user Audy (7-A)
+04:29:11 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:11 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:11 - INFO - VISION: Min_dist found: 0.3531 for user Audy (7-A)
+04:29:11 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:11 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:11 - INFO - Identity established: Audy (Zone: GREEN, Dist: 0.3531)
+04:29:12 - INFO - VISION: Min_dist found: 0.3489 for user Audy (7-A)
+04:29:12 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:12 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:13 - INFO - VISION: Min_dist found: 0.3878 for user Audy (7-A)
+04:29:13 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:13 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:13 - INFO - VISION: Min_dist found: 0.3211 for user Audy (7-A)
+04:29:13 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:13 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:14 - INFO - VISION: Min_dist found: 0.3228 for user Audy (7-A)
+04:29:14 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:14 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:15 - INFO - VISION: Min_dist found: 0.3346 for user Audy (7-A)
+04:29:15 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:15 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:16 - INFO - VISION: Min_dist found: 0.3530 for user Audy (7-A)
+04:29:16 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:16 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:16 - INFO - VISION: Min_dist found: 0.3583 for user Audy (7-A)
+04:29:16 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:16 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:17 - INFO - VISION: Min_dist found: 0.2759 for user Audy (7-A)
+04:29:17 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:17 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:17 - INFO - VISION: Min_dist found: 0.3638 for user Audy (7-A)
+04:29:17 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:17 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:18 - INFO - VISION: Min_dist found: 0.3136 for user Audy (7-A)
+04:29:18 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:18 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:19 - INFO - VISION: Min_dist found: 0.2580 for user Audy (7-A)
+04:29:19 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:19 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:19 - INFO - VISION: Min_dist found: 0.2768 for user Audy (7-A)
+04:29:19 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:19 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:20 - INFO - VISION: Min_dist found: 0.2912 for user Audy (7-A)
+04:29:20 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:29:20 - INFO - VISION: Zone decision: GREEN for Audy
+04:29:20 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'GREEN', 'user_data': {'id': 1, 'nama': 'Audy', 'kelas': '7-A', 'encoding': [-0.12231172621250153, 0.04907909035682678, 0.09474219381809235, -0.10073059797286987, -0.021974928677082062, -0.03375552222132683, -0.028542418032884598, -0.15767520666122437, 0.17828580737113953, -0.12676626443862915, 0.2637355923652649, -0.014993751421570778, -0.15311427414417267, -0.049083925783634186, 0.028115272521972656, 0.1711246818304062, -0.18491262197494507, -0.06717567145824432, -0.06360189616680145, -0.044351719319820404, 0.030093958601355553, -0.03233737871050835, 0.10072366893291473, 0.1074758917093277, -0.139112651348114, -0.35023704171180725, -0.11674154549837112, -0.13616958260536194, 0.03941679745912552, -0.05379844084382057, 0.019185073673725128, 0.029156478121876717, -0.17947840690612793, 0.05683722719550133, -0.03656148910522461, 0.04620744287967682, -0.025328727439045906, -0.10722111910581589, 0.22323626279830933, 0.0076208943501114845, -0.2303166538476944, -0.04244977980852127, -0.0398978516459465, 0.17632664740085602, 0.2064683884382248, -0.02467857487499714, 0.06280431151390076, -0.08724741637706757, 0.08747787028551102, -0.16678008437156677, -0.0009440165013074875, 0.10796554386615753, 0.018816273659467697, 0.004000144544988871, 0.0005066664889454842, -0.12747180461883545, -0.01061195321381092, 0.07389141619205475, -0.16837017238140106, -0.023306014016270638, 0.016294347122311592, -0.09912832081317902, -0.04442062973976135, -0.048317618668079376, 0.2214747667312622, 0.13126657903194427, -0.1736648678779602, -0.0766565129160881, 0.1814642697572708, -0.10299637913703918, 0.05482538789510727, 0.07060050964355469, -0.18947578966617584, -0.2139095515012741, -0.22993746399879456, 0.010577451437711716, 0.4518606662750244, 0.06849133968353271, -0.1712227761745453, -0.003315187990665436, -0.18488764762878418, -0.007191173266619444, 0.05833730101585388, 0.16596056520938873, 0.017780931666493416, -0.032891895622015, -0.023718053475022316, 0.03930427506566048, 0.15772655606269836, -0.08349280059337616, 0.0031806393526494503, 0.23283156752586365, -0.03446085751056671, 0.023571260273456573, -0.05217839032411575, 0.0403943695127964, -0.07691020518541336, 0.03297580033540726, -0.04897977039217949, 0.015355046838521957, -0.04381123557686806, -0.009306651540100574, 0.021780945360660553, 0.08422544598579407, -0.20801691710948944, 0.14517489075660706, 0.0760962963104248, -0.040117256343364716, 0.07620763778686523, 0.06509672850370407, -0.08510567247867584, -0.15648160874843597, 0.12094040215015411, -0.26642167568206787, 0.13438527286052704, 0.22716623544692993, 0.00540038151666522, 0.1773294061422348, 0.01980796456336975, 0.16228660941123962, -0.015584781765937805, 0.0018096985295414925, -0.15226586163043976, 0.03434520214796066, 0.05569128692150116, 0.01815507560968399, 0.001882428303360939, -0.021620452404022217], 'poin': 0}, 'encoding': array([-0.1130437 ,  0.02146856,  0.09506927, -0.04999886, -0.07819708,
+       -0.01634705, -0.05838825, -0.08572675,  0.151539  , -0.10821886,
+        0.23019312, -0.01852432, -0.16604209, -0.03191754,  0.03358631,
+        0.16363125, -0.1648365 , -0.0637589 , -0.01745538, -0.03044429,
+        0.07536522, -0.04018498,  0.05248654,  0.09421988, -0.1673438 ,
+       -0.3846935 , -0.11984424, -0.08617991,  0.04892043, -0.09430357,
+       -0.02204797,  0.04479424, -0.1764065 ,  0.0415206 , -0.0326175 ,
+        0.05910703, -0.02730767, -0.08191952,  0.18097869,  0.04062718,
+       -0.22962776, -0.02852531, -0.06889744,  0.20126995,  0.17493311,
+        0.0627628 ,  0.09718235, -0.09046005,  0.05256046, -0.1778474 ,
+        0.08126613,  0.12908962,  0.00056458,  0.0476165 , -0.03544351,
+       -0.17227373, -0.01630564,  0.08269687, -0.18371165,  0.03276195,
+        0.03713917, -0.08144022, -0.00928144, -0.04938047,  0.22035533,
+        0.15289986, -0.16234276, -0.10390043,  0.13698538, -0.13331948,
+        0.01666765,  0.03758616, -0.17389326, -0.22516134, -0.28492123,
+        0.03322959,  0.41115254,  0.09756997, -0.17867996, -0.03210332,
+       -0.1082814 , -0.0134162 ,  0.09985208,  0.20039657,  0.00206751,
+       -0.00816779, -0.01065527,  0.07276237,  0.15707204, -0.04672719,
+       -0.0194834 ,  0.22765215, -0.01748709,  0.04305566, -0.04212764,
+        0.08982319, -0.06932312,  0.04818318, -0.0166384 ,  0.0193135 ,
+       -0.00887685, -0.00518576,  0.02511138,  0.10359667, -0.19643241,
+        0.21352541,  0.03480931, -0.01635318,  0.02740224,  0.02916198,
+       -0.10522394, -0.09595128,  0.12024191, -0.27021959,  0.1741668 ,
+        0.25545952,  0.04529014,  0.18732478,  0.03172559,  0.13513234,
+        0.00809277, -0.03015658, -0.17886581,  0.05198894,  0.05194141,
+       -0.0164385 ,  0.02772082,  0.01095353]), 'distance': np.float64(0.35306329280609944), 'face_detected': True, 'location': (186, 406, 434, 158)}
+04:29:20 - INFO - 💤 CameraManager: Going to Sleep...
+04:29:21 - INFO - Camera image cleared successfully.
+04:29:31 - INFO - Application closing. Shutting down services.
+04:29:31 - INFO - 💤 CameraManager: Going to Sleep...
+04:29:58 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:29:58 - INFO - 💤 CameraManager: Going to Sleep...
+04:29:58 - INFO - Camera image cleared successfully.
+04:30:02 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:30:02 - INFO - 🚀 CameraManager: Waking Up System...
+04:30:08 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:30:09 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:30:09 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:30:10 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:30:10 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'RED', 'user_data': None, 'encoding': array([-0.12909059,  0.02928108,  0.07755084, -0.12245121, -0.04549646,
+       -0.03941035, -0.03596891, -0.16048804,  0.21047999, -0.15154274,
+        0.23927201, -0.01567389, -0.13418828, -0.03273256, -0.02415566,
+        0.15628178, -0.17294832, -0.10619213, -0.05840768, -0.04925396,
+        0.03208711, -0.06352846,  0.04384822,  0.15216471, -0.15442325,
+       -0.35846111, -0.11555567, -0.11948377,  0.03224307, -0.08212776,
+        0.00927834,  0.06034411, -0.21209535,  0.0360004 , -0.05615672,
+        0.08646958, -0.0210003 , -0.09670453,  0.17286693,  0.02650549,
+       -0.23932761, -0.032357  , -0.04378057,  0.19550596,  0.19468281,
+       -0.00106381,  0.06030362, -0.09897856,  0.10565549, -0.15147074,
+        0.03873063,  0.13038677,  0.05097087,  0.03519336,  0.0232615 ,
+       -0.14855433,  0.02007988,  0.07373351, -0.16031519,  0.00227712,
+        0.00191747, -0.08824444,  0.00355357, -0.05220615,  0.20964842,
+        0.12988542, -0.14951041, -0.07038336,  0.19828862, -0.12775491,
+        0.03249374,  0.03880116, -0.17045654, -0.22649345, -0.25844604,
+        0.03830442,  0.44000256,  0.13465615, -0.18725938,  0.02184203,
+       -0.15380736, -0.02601569,  0.06184159,  0.19990838,  0.00438914,
+       -0.00740496, -0.01914896,  0.03169503,  0.15059836, -0.0286759 ,
+       -0.00316804,  0.22809194, -0.04436709,  0.00520412, -0.03505727,
+        0.04193479, -0.1309422 ,  0.05928677, -0.04085388,  0.00462103,
+       -0.04779613,  0.0113959 ,  0.00173189,  0.08695764, -0.19515623,
+        0.16891132,  0.05337178, -0.03584785,  0.03643943,  0.08338605,
+       -0.07982486, -0.16444902,  0.10462005, -0.26275784,  0.1565828 ,
+        0.22301006,  0.02908206,  0.20068303,  0.03649474,  0.15405557,
+        0.01701438, -0.00777377, -0.13202296,  0.02654003,  0.06266867,
+       -0.01733888,  0.00766307, -0.00313887]), 'distance': None, 'face_detected': True, 'location': (186, 378, 434, 130)}
+04:30:10 - INFO - APP: Unrecognized face detected. Triggering registration.
+04:30:10 - INFO - 💤 CameraManager: Going to Sleep...
+04:30:10 - INFO - Camera image cleared successfully.
+04:30:24 - INFO - 💤 CameraManager: Going to Sleep...
+04:30:24 - INFO - Camera image cleared successfully.
+04:30:26 - INFO - Application closing. Shutting down services.
+04:30:26 - INFO - 💤 CameraManager: Going to Sleep...
+04:36:30 - INFO - APP: Switched to state CAMERA
+04:36:30 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:36:30 - INFO - 💤 CameraManager: Going to Sleep...
+04:36:30 - INFO - Camera image cleared successfully.
+04:36:32 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:36:32 - INFO - 🚀 CameraManager: Waking Up System...
+04:36:47 - INFO - APP: Switched to state CAMERA
+04:36:51 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:36:52 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:36:53 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:36:53 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'RED', 'user_data': None, 'encoding': array([-0.11458071,  0.103219  ,  0.09549126, -0.06821026, -0.07323619,
+       -0.03240905, -0.01835316, -0.10203527,  0.17608207, -0.12512815,
+        0.25269637, -0.00162294, -0.16784835,  0.03212933, -0.04295974,
+        0.16885284, -0.14513849, -0.08498935, -0.06394927,  0.0049024 ,
+        0.0702922 ,  0.03727389,  0.09409811,  0.04405387, -0.1165101 ,
+       -0.33325687, -0.12125561, -0.05311182,  0.03758435, -0.07816769,
+       -0.02880841,  0.00592622, -0.14045466,  0.03955043,  0.06157902,
+        0.08825006, -0.04361198, -0.11130574,  0.2315423 ,  0.04020466,
+       -0.26116675, -0.02268426, -0.02143801,  0.24733783,  0.2212418 ,
+        0.00662014,  0.04130022, -0.17231484,  0.07702591, -0.1656214 ,
+        0.07344105,  0.13549417,  0.01517087,  0.05231213, -0.03030332,
+       -0.14006917,  0.0011572 ,  0.14825588, -0.15099131, -0.04550086,
+        0.09938113, -0.08060966, -0.04560725, -0.08003683,  0.18743506,
+        0.13811348, -0.1911568 , -0.16021308,  0.12208138, -0.1547969 ,
+       -0.010269  ,  0.06929626, -0.1808209 , -0.20677665, -0.21705958,
+       -0.00732785,  0.43428725,  0.10793558, -0.16222227, -0.02979034,
+       -0.11551424,  0.03025857,  0.08441567,  0.1828198 , -0.0372752 ,
+       -0.00348637, -0.03989656,  0.01538367,  0.20037976, -0.06136803,
+       -0.06079676,  0.18919465, -0.03423721,  0.02159093, -0.01112714,
+        0.06157191, -0.07739411,  0.03133921, -0.09077168, -0.0291784 ,
+       -0.05294261, -0.05263457, -0.02091658,  0.14199637, -0.23693095,
+        0.19356254,  0.01164073, -0.01047509,  0.0649727 , -0.01098424,
+       -0.07093316, -0.08009322,  0.13819474, -0.24547012,  0.17026138,
+        0.22466971,  0.04092319,  0.17587149,  0.08922742,  0.14559734,
+        0.00346796,  0.00768948, -0.19354731,  0.014672  ,  0.04314444,
+        0.0138165 ,  0.08296629, -0.04248974]), 'distance': None, 'face_detected': True, 'location': (378, 362, 522, 218)}
+04:36:53 - INFO - APP: Unrecognized face detected. Triggering registration.
+04:36:53 - INFO - 💤 CameraManager: Going to Sleep...
+04:36:54 - INFO - Camera image cleared successfully.
+04:36:54 - INFO - APP: Switched to state REGISTER
+04:37:00 - INFO - 💤 CameraManager: Going to Sleep...
+04:37:00 - INFO - Camera image cleared successfully.
+04:37:00 - INFO - APP: Switched to state LOADING
+04:37:02 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:37:02 - INFO - 💤 CameraManager: Going to Sleep...
+04:37:02 - INFO - Camera image cleared successfully.
+04:37:02 - ERROR - Error setting sleep UI: image "pyimage11" doesn't exist
+04:37:02 - INFO - Camera image cleared successfully.
+04:37:02 - ERROR - Error resetting camera page UI: image "pyimage11" doesn't exist
+04:37:02 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:37:02 - INFO - 🚀 CameraManager: Waking Up System...
+04:37:07 - INFO - APP: Switched to state CAMERA
+04:37:07 - INFO - Face lost, resetting identity and challenge state.
+04:37:09 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:37:10 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:37:10 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:37:11 - INFO - VISION: memory_encodings is empty. Returning RED.
+04:37:11 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'RED', 'user_data': None, 'encoding': array([-0.10303594,  0.03648938,  0.11456275, -0.11116267, -0.03277074,
+       -0.03541971, -0.0041405 , -0.11238763,  0.19554473, -0.16341813,
+        0.24746883, -0.03675152, -0.15659705, -0.08075627,  0.03192512,
+        0.17514899, -0.1534072 , -0.09602905, -0.07226252, -0.04897483,
+        0.00985413, -0.02832661,  0.08839067,  0.13289407, -0.15208936,
+       -0.41214731, -0.11556849, -0.13524711,  0.03999713, -0.05111548,
+        0.00313186,  0.05718949, -0.17630145,  0.01120128, -0.03715428,
+        0.066801  , -0.00391452, -0.05311983,  0.17707492, -0.00766487,
+       -0.2529304 , -0.0787299 , -0.02712405,  0.18900333,  0.18008791,
+        0.00347936,  0.07605826, -0.07386532,  0.04543277, -0.18031187,
+        0.0611371 ,  0.08282892,  0.04460526,  0.02291094,  0.03682479,
+       -0.13844676, -0.02779524,  0.12310281, -0.14472681,  0.01736737,
+       -0.00401376, -0.07696296, -0.02467315, -0.02576052,  0.24450465,
+        0.1118701 , -0.16395432, -0.08263964,  0.20460244, -0.12405903,
+        0.05725159,  0.05101467, -0.15014559, -0.20291203, -0.23833728,
+        0.0498643 ,  0.39660123,  0.10252427, -0.20228551, -0.00976233,
+       -0.17682041,  0.00298469,  0.05705709,  0.1503284 , -0.00437901,
+       -0.01146811, -0.02394446,  0.03000668,  0.13564634, -0.06183022,
+        0.02208927,  0.24369541, -0.04879406,  0.02011167, -0.02798916,
+        0.02971384, -0.11365479,  0.0705864 , -0.08729561,  0.01689947,
+        0.0092089 , -0.00711682,  0.00786099,  0.08201502, -0.21893965,
+        0.15936637,  0.04252042, -0.05246945,  0.09015292,  0.08935617,
+       -0.10620476, -0.18501295,  0.15635964, -0.23446316,  0.14344731,
+        0.24348205,  0.02289629,  0.20447712,  0.06451681,  0.14695215,
+        0.0359183 , -0.03862174, -0.15166549,  0.05633922,  0.1093674 ,
+       -0.05718219, -0.01367746, -0.01199506]), 'distance': None, 'face_detected': True, 'location': (330, 346, 474, 202)}
+04:37:11 - INFO - APP: Unrecognized face detected. Triggering registration.
+04:37:11 - INFO - 💤 CameraManager: Going to Sleep...
+04:37:11 - INFO - Camera image cleared successfully.
+04:37:11 - INFO - APP: Switched to state REGISTER
+04:37:15 - INFO - APP: _submit_registration called.
+04:37:15 - INFO - APP: Registration data: Name='audy', Class='7-A'
+04:37:15 - INFO - APP: New user registered successfully: audy - 7-A
+04:37:15 - INFO - 💤 CameraManager: Going to Sleep...
+04:37:15 - INFO - Camera image cleared successfully.
+04:37:15 - INFO - APP: Switched to state INPUT
+04:37:18 - INFO - 💤 CameraManager: Going to Sleep...
+04:37:18 - INFO - Camera image cleared successfully.
+04:37:18 - INFO - APP: Switched to state LOADING
+04:37:20 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+04:37:20 - INFO - 💤 CameraManager: Going to Sleep...
+04:37:20 - INFO - Camera image cleared successfully.
+04:37:20 - ERROR - Error setting sleep UI: image "pyimage37" doesn't exist
+04:37:20 - INFO - Camera image cleared successfully.
+04:37:20 - ERROR - Error resetting camera page UI: image "pyimage37" doesn't exist
+04:37:21 - INFO - 🚀 GoodDeedApp: Waking Up System...
+04:37:21 - INFO - 🚀 CameraManager: Waking Up System...
+04:37:26 - INFO - APP: Switched to state CAMERA
+04:37:26 - INFO - Face lost, resetting identity and challenge state.
+04:37:32 - INFO - VISION: Min_dist found: 0.1969 for user audy (7-A)
+04:37:32 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:37:32 - INFO - VISION: Zone decision: GREEN for audy
+04:37:32 - INFO - VISION: Min_dist found: 0.2578 for user audy (7-A)
+04:37:32 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:37:32 - INFO - VISION: Zone decision: GREEN for audy
+04:37:32 - INFO - Identity established: audy (Zone: GREEN, Dist: 0.2578)
+04:37:33 - INFO - VISION: Min_dist found: 0.2624 for user audy (7-A)
+04:37:33 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:37:33 - INFO - VISION: Zone decision: GREEN for audy
+04:37:34 - INFO - VISION: Min_dist found: 0.2133 for user audy (7-A)
+04:37:34 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:37:34 - INFO - VISION: Zone decision: GREEN for audy
+04:37:34 - INFO - VISION: Min_dist found: 0.2415 for user audy (7-A)
+04:37:34 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:37:34 - INFO - VISION: Zone decision: GREEN for audy
+04:37:35 - INFO - VISION: Min_dist found: 0.2346 for user audy (7-A)
+04:37:35 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+04:37:35 - INFO - VISION: Zone decision: GREEN for audy
+04:37:35 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'GREEN', 'user_data': {'id': 1, 'nama': 'audy', 'kelas': '7-A', 'encoding': [-0.10303594172000885, 0.03648938238620758, 0.1145627498626709, -0.11116266995668411, -0.03277074173092842, -0.035419706255197525, -0.004140503704547882, -0.11238762736320496, 0.19554473459720612, -0.16341812908649445, 0.24746882915496826, -0.03675151616334915, -0.1565970480442047, -0.08075626939535141, 0.03192511573433876, 0.17514899373054504, -0.15340720117092133, -0.09602905064821243, -0.07226251810789108, -0.04897483438253403, 0.009854125790297985, -0.02832660637795925, 0.08839067071676254, 0.13289406895637512, -0.15208935737609863, -0.41214731335639954, -0.11556848883628845, -0.1352471113204956, 0.039997126907110214, -0.051115475594997406, 0.0031318645924329758, 0.057189490646123886, -0.17630144953727722, 0.0112012829631567, -0.03715427592396736, 0.06680099666118622, -0.003914517350494862, -0.053119827061891556, 0.17707492411136627, -0.007664865348488092, -0.2529304027557373, -0.07872989773750305, -0.027124054729938507, 0.1890033334493637, 0.18008790910243988, 0.003479356411844492, 0.07605826109647751, -0.07386532425880432, 0.045432765036821365, -0.1803118735551834, 0.06113710254430771, 0.08282892405986786, 0.044605255126953125, 0.022910937666893005, 0.0368247851729393, -0.13844676315784454, -0.02779524400830269, 0.1231028139591217, -0.14472681283950806, 0.017367374151945114, -0.00401376374065876, -0.07696295529603958, -0.02467314898967743, -0.02576051652431488, 0.2445046454668045, 0.11187009513378143, -0.16395431756973267, -0.08263964205980301, 0.2046024352312088, -0.1240590289235115, 0.057251594960689545, 0.05101466923952103, -0.15014559030532837, -0.20291203260421753, -0.23833727836608887, 0.049864303320646286, 0.39660122990608215, 0.1025242730975151, -0.2022855132818222, -0.009762333706021309, -0.17682041227817535, 0.0029846900142729282, 0.05705709010362625, 0.1503283977508545, -0.00437900610268116, -0.011468111537396908, -0.023944461718201637, 0.030006684362888336, 0.13564634323120117, -0.061830222606658936, 0.0220892746001482, 0.24369540810585022, -0.04879406467080116, 0.02011166885495186, -0.027989156544208527, 0.029713839292526245, -0.11365479230880737, 0.07058639824390411, -0.08729560673236847, 0.016899473965168, 0.009208904579281807, -0.007116816006600857, 0.007860987447202206, 0.0820150151848793, -0.2189396470785141, 0.15936636924743652, 0.042520418763160706, -0.05246945098042488, 0.09015291929244995, 0.08935616910457611, -0.10620476305484772, -0.18501295149326324, 0.15635964274406433, -0.2344631552696228, 0.14344730973243713, 0.2434820532798767, 0.022896287962794304, 0.20447711646556854, 0.06451680511236191, 0.14695215225219727, 0.03591829538345337, -0.03862174227833748, -0.15166549384593964, 0.05633921921253204, 0.10936740040779114, -0.0571821890771389, -0.013677459210157394, -0.011995063163340092], 'poin': 0}, 'encoding': array([-0.0985925 ,  0.06560703,  0.11335201, -0.10121576, -0.01694473,
+       -0.02271863, -0.01152595, -0.0922801 ,  0.18181582, -0.15373199,
+        0.22958273, -0.00594987, -0.15060182, -0.07720904,  0.0539287 ,
+        0.1519516 , -0.15263329, -0.07643869, -0.0764019 , -0.03816821,
+        0.03284143, -0.01760689,  0.09508219,  0.08412798, -0.13530852,
+       -0.41364011, -0.09554936, -0.10441139,  0.02252062, -0.04617157,
+        0.03124354,  0.0254104 , -0.17432103,  0.02160524, -0.02379972,
+        0.04118463, -0.0246955 , -0.03588546,  0.19557698, -0.04298555,
+       -0.22148432, -0.06559856, -0.0060806 ,  0.20983393,  0.20379241,
+        0.01527144,  0.0642231 , -0.03922217,  0.0585407 , -0.19025579,
+        0.03338007,  0.05902252,  0.06549183,  0.01332835,  0.04602052,
+       -0.12868643, -0.01213836,  0.09722611, -0.13370045,  0.00912334,
+        0.00984419, -0.0741494 , -0.02129248, -0.00512801,  0.25240967,
+        0.06366115, -0.1742716 , -0.07797634,  0.12767053, -0.12648737,
+        0.08477166,  0.05891769, -0.14929822, -0.20501967, -0.23231369,
+        0.01405283,  0.39230251,  0.1142806 , -0.19361864, -0.03333478,
+       -0.16877842,  0.0233165 ,  0.07374552,  0.09615269, -0.04057191,
+       -0.00665476, -0.05097177,  0.05581335,  0.16313072, -0.05430306,
+       -0.01786538,  0.24269715, -0.02233002,  0.02132498, -0.0592926 ,
+       -0.00653987, -0.08567302,  0.05049299, -0.10240669,  0.02227227,
+       -0.00586144, -0.00752656,  0.02344909,  0.10147207, -0.23917672,
+        0.16756736,  0.03477179, -0.01203793,  0.07646541,  0.09948786,
+       -0.15276578, -0.15523723,  0.13834514, -0.22919068,  0.10296873,
+        0.24711919,  0.03274775,  0.18060352,  0.06577311,  0.09680139,
+        0.02134991, -0.00625743, -0.15165365,  0.05263707,  0.09071158,
+       -0.03276168,  0.05595838, -0.01499062]), 'distance': np.float64(0.25784050442256773), 'face_detected': True, 'location': (330, 346, 474, 202)}
+04:37:35 - INFO - 💤 CameraManager: Going to Sleep...
+04:37:35 - INFO - Camera image cleared successfully.
+04:37:35 - INFO - APP: Switched to state INPUT
+04:38:26 - INFO - Application closing. Shutting down services.
+04:38:26 - INFO - 💤 CameraManager: Going to Sleep...
+06:40:26 - INFO - RegisterPage: Initializing.
+06:40:26 - INFO - RegisterPage: Initial focus set on name entry in __init__.
+06:40:26 - INFO - APP: Switched to state CAMERA
+06:40:26 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+06:40:26 - INFO - 💤 CameraManager: Going to Sleep...
+06:40:26 - INFO - Camera image cleared successfully.
+06:40:29 - INFO - 🚀 GoodDeedApp: Waking Up System...
+06:40:29 - INFO - 🚀 CameraManager: Waking Up System...
+06:40:35 - INFO - APP: Switched to state CAMERA
+06:40:36 - INFO - VISION: Min_dist found: 0.3638 for user audy (7-A)
+06:40:36 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:40:36 - INFO - VISION: Zone decision: GREEN for audy
+06:40:36 - INFO - VISION: Min_dist found: 0.4802 for user audy (7-A)
+06:40:36 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:40:36 - INFO - VISION: Zone decision: GREEN for audy
+06:40:36 - INFO - Identity established: audy (Zone: GREEN, Dist: 0.4802)
+06:40:37 - INFO - VISION: Min_dist found: 0.4668 for user audy (7-A)
+06:40:37 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:40:37 - INFO - VISION: Zone decision: GREEN for audy
+06:40:38 - INFO - VISION: Min_dist found: 0.3971 for user audy (7-A)
+06:40:38 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:40:38 - INFO - VISION: Zone decision: GREEN for audy
+06:40:38 - INFO - VISION: Min_dist found: 0.4655 for user audy (7-A)
+06:40:38 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:40:38 - INFO - VISION: Zone decision: GREEN for audy
+06:40:39 - INFO - VISION: Min_dist found: 0.4655 for user audy (7-A)
+06:40:39 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:40:39 - INFO - VISION: Zone decision: GREEN for audy
+06:40:40 - INFO - VISION: Min_dist found: 0.4445 for user audy (7-A)
+06:40:40 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:40:40 - INFO - VISION: Zone decision: GREEN for audy
+06:40:40 - INFO - VISION: Min_dist found: 0.4096 for user audy (7-A)
+06:40:40 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:40:40 - INFO - VISION: Zone decision: GREEN for audy
+06:40:42 - INFO - VISION: Min_dist found: 0.4423 for user audy (7-A)
+06:40:42 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:40:42 - INFO - VISION: Zone decision: GREEN for audy
+06:40:42 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'GREEN', 'user_data': {'id': 1, 'nama': 'audy', 'kelas': '7-A', 'encoding': [-0.10303594172000885, 0.03648938238620758, 0.1145627498626709, -0.11116266995668411, -0.03277074173092842, -0.035419706255197525, -0.004140503704547882, -0.11238762736320496, 0.19554473459720612, -0.16341812908649445, 0.24746882915496826, -0.03675151616334915, -0.1565970480442047, -0.08075626939535141, 0.03192511573433876, 0.17514899373054504, -0.15340720117092133, -0.09602905064821243, -0.07226251810789108, -0.04897483438253403, 0.009854125790297985, -0.02832660637795925, 0.08839067071676254, 0.13289406895637512, -0.15208935737609863, -0.41214731335639954, -0.11556848883628845, -0.1352471113204956, 0.039997126907110214, -0.051115475594997406, 0.0031318645924329758, 0.057189490646123886, -0.17630144953727722, 0.0112012829631567, -0.03715427592396736, 0.06680099666118622, -0.003914517350494862, -0.053119827061891556, 0.17707492411136627, -0.007664865348488092, -0.2529304027557373, -0.07872989773750305, -0.027124054729938507, 0.1890033334493637, 0.18008790910243988, 0.003479356411844492, 0.07605826109647751, -0.07386532425880432, 0.045432765036821365, -0.1803118735551834, 0.06113710254430771, 0.08282892405986786, 0.044605255126953125, 0.022910937666893005, 0.0368247851729393, -0.13844676315784454, -0.02779524400830269, 0.1231028139591217, -0.14472681283950806, 0.017367374151945114, -0.00401376374065876, -0.07696295529603958, -0.02467314898967743, -0.02576051652431488, 0.2445046454668045, 0.11187009513378143, -0.16395431756973267, -0.08263964205980301, 0.2046024352312088, -0.1240590289235115, 0.057251594960689545, 0.05101466923952103, -0.15014559030532837, -0.20291203260421753, -0.23833727836608887, 0.049864303320646286, 0.39660122990608215, 0.1025242730975151, -0.2022855132818222, -0.009762333706021309, -0.17682041227817535, 0.0029846900142729282, 0.05705709010362625, 0.1503283977508545, -0.00437900610268116, -0.011468111537396908, -0.023944461718201637, 0.030006684362888336, 0.13564634323120117, -0.061830222606658936, 0.0220892746001482, 0.24369540810585022, -0.04879406467080116, 0.02011166885495186, -0.027989156544208527, 0.029713839292526245, -0.11365479230880737, 0.07058639824390411, -0.08729560673236847, 0.016899473965168, 0.009208904579281807, -0.007116816006600857, 0.007860987447202206, 0.0820150151848793, -0.2189396470785141, 0.15936636924743652, 0.042520418763160706, -0.05246945098042488, 0.09015291929244995, 0.08935616910457611, -0.10620476305484772, -0.18501295149326324, 0.15635964274406433, -0.2344631552696228, 0.14344730973243713, 0.2434820532798767, 0.022896287962794304, 0.20447711646556854, 0.06451680511236191, 0.14695215225219727, 0.03591829538345337, -0.03862174227833748, -0.15166549384593964, 0.05633921921253204, 0.10936740040779114, -0.0571821890771389, -0.013677459210157394, -0.011995063163340092], 'poin': 0}, 'encoding': array([-8.46865699e-02,  6.74784705e-02,  9.13351625e-02, -8.73379484e-02,
+       -4.60761711e-02, -1.07211713e-02, -4.00256887e-02, -8.92290473e-02,
+        2.19369695e-01, -1.27884597e-01,  2.32372969e-01,  1.78893302e-02,
+       -1.85977712e-01,  3.88042480e-02, -3.31969326e-03,  1.92282900e-01,
+       -1.67114452e-01, -4.03113738e-02, -1.01900503e-01, -2.94578560e-02,
+        5.64809330e-02, -9.53697599e-05,  7.06486255e-02,  1.15683004e-01,
+       -1.40826344e-01, -3.65731567e-01, -1.43445909e-01, -7.91072771e-02,
+        5.73500134e-02, -5.06529957e-02, -5.09652775e-03,  3.21195945e-02,
+       -1.60778344e-01,  1.28279123e-02,  6.81999698e-02,  7.35639408e-02,
+       -5.45437774e-03, -1.41362831e-01,  2.01758116e-01,  3.73251326e-02,
+       -2.15189427e-01,  2.29169056e-03, -3.58625427e-02,  2.09357530e-01,
+        1.99146375e-01,  2.66158860e-02,  8.74437317e-02, -9.98168215e-02,
+        1.32762387e-01, -2.16582760e-01,  1.64515506e-02,  1.14291213e-01,
+       -3.77204362e-03,  4.58454862e-02,  3.08081340e-02, -1.28150195e-01,
+        5.82215339e-02,  1.51657403e-01, -2.25680560e-01, -9.19788145e-03,
+        5.09524047e-02, -1.46868750e-01, -7.54232239e-03, -2.54908558e-02,
+        2.02696607e-01,  1.34360850e-01, -1.80375934e-01, -1.34015486e-01,
+        1.53146192e-01, -1.41897097e-01,  8.05782229e-02,  5.61490729e-02,
+       -1.63497403e-01, -1.97590128e-01, -2.22029820e-01,  1.30113792e-02,
+        5.12047172e-01,  1.60068616e-01, -1.71453848e-01,  3.30317095e-02,
+       -1.74185872e-01,  1.16427662e-03,  7.15181530e-02,  1.55140519e-01,
+        2.07333323e-02, -5.06148040e-02, -4.66591530e-02,  2.64212154e-02,
+        2.14103490e-01, -3.58378217e-02,  3.65545042e-03,  2.55455405e-01,
+       -2.78911442e-02, -2.53389310e-03, -2.81770639e-02,  4.10468280e-02,
+       -1.58380672e-01, -2.75688209e-02, -3.79460566e-02, -2.66597047e-02,
+       -7.63986185e-02, -1.89112779e-03,  1.43176932e-02,  7.90725201e-02,
+       -2.39878014e-01,  1.92594990e-01, -9.95071977e-03, -4.14083079e-02,
+        4.65944298e-02,  3.08021549e-02, -9.68768001e-02, -9.18531418e-02,
+        1.31753698e-01, -2.94136703e-01,  1.47802949e-01,  2.07251191e-01,
+        1.63087919e-02,  1.84923127e-01,  2.34609563e-02,  1.41937032e-01,
+        4.47532535e-03, -1.50013519e-02, -1.30668387e-01, -4.25540805e-02,
+        4.59986776e-02, -9.65684280e-03,  6.41193986e-02, -6.64097294e-02]), 'distance': np.float64(0.48015125219947297), 'face_detected': True, 'location': (178, 384, 384, 178)}
+06:40:42 - INFO - 💤 CameraManager: Going to Sleep...
+06:40:42 - INFO - Camera image cleared successfully.
+06:40:42 - INFO - APP: Switched to state INPUT
+06:40:49 - INFO - Application closing. Shutting down services.
+06:40:49 - INFO - 💤 CameraManager: Going to Sleep...
+06:44:07 - INFO - RegisterPage: Initializing.
+06:44:07 - INFO - RegisterPage: Initial focus set on name entry in __init__.
+06:44:07 - INFO - APP: Switched to state CAMERA
+06:44:07 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+06:44:07 - INFO - 💤 CameraManager: Going to Sleep...
+06:44:07 - INFO - Camera image cleared successfully.
+06:44:09 - INFO - 🚀 GoodDeedApp: Waking Up System...
+06:44:09 - INFO - 🚀 CameraManager: Waking Up System...
+06:44:15 - INFO - APP: Switched to state CAMERA
+06:44:16 - INFO - VISION: memory_encodings is empty. Returning RED.
+06:44:17 - INFO - VISION: memory_encodings is empty. Returning RED.
+06:44:18 - INFO - VISION: memory_encodings is empty. Returning RED.
+06:44:19 - INFO - VISION: memory_encodings is empty. Returning RED.
+06:44:19 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'RED', 'user_data': None, 'encoding': array([-1.43364981e-01,  8.24289620e-02,  8.53721723e-02, -6.14680722e-02,
+       -7.01288879e-02, -2.42793635e-02, -6.02779165e-02, -1.40916988e-01,
+        1.76436484e-01, -1.73134148e-01,  2.23088250e-01, -4.19478603e-02,
+       -1.91787839e-01, -5.16998172e-02, -4.55781892e-02,  2.20020235e-01,
+       -1.17908396e-01, -7.83114210e-02, -1.93414614e-02, -3.69649082e-02,
+        4.38907221e-02, -1.77515559e-02,  1.21912189e-01,  1.00430638e-01,
+       -1.67520046e-01, -4.05443460e-01, -1.52670085e-01, -7.72661567e-02,
+        6.55174255e-04, -5.67443669e-02, -2.76029892e-02,  8.15476403e-02,
+       -1.43267959e-01,  4.02845778e-02, -1.01335840e-02,  7.28203058e-02,
+        1.71665214e-02, -8.12606364e-02,  2.21746206e-01,  5.70040122e-02,
+       -2.28412360e-01, -6.86094239e-02, -2.12278720e-02,  2.43025348e-01,
+        1.77479163e-01,  4.99475524e-02,  9.62440819e-02, -1.07193023e-01,
+        7.83895552e-02, -1.68028146e-01,  1.02124689e-02,  8.59849453e-02,
+       -3.60982958e-04,  2.05198489e-03, -2.11921185e-02, -1.44165635e-01,
+        2.06124410e-02,  9.07252133e-02, -1.77843258e-01, -3.20104547e-02,
+        1.14752613e-02, -1.21164158e-01, -3.41188498e-02, -3.72214317e-02,
+        2.94789463e-01,  1.59805700e-01, -1.70788050e-01, -8.69302452e-02,
+        1.91330448e-01, -1.60994411e-01,  5.92816621e-02,  3.81670520e-02,
+       -1.69429839e-01, -1.88205943e-01, -3.00295144e-01, -4.87535633e-03,
+        4.14202750e-01,  1.42949626e-01, -1.55989647e-01, -1.24984728e-02,
+       -1.13680072e-01,  2.87044682e-02,  8.26303288e-02,  2.28653163e-01,
+       -4.55749705e-02, -4.48599923e-03, -3.26601788e-02, -1.20726321e-03,
+        1.82287514e-01, -5.46778701e-02, -3.97913195e-02,  2.36648291e-01,
+       -2.90154479e-03,  6.69521242e-02, -2.77980901e-02,  3.72301824e-02,
+       -1.38243541e-01, -9.00577009e-03, -3.84148434e-02,  8.29786249e-03,
+       -4.09300923e-02, -1.16038695e-03,  2.99475472e-02,  1.35181263e-01,
+       -2.13514790e-01,  1.61590368e-01, -2.18039434e-02, -4.81183007e-02,
+        3.11912857e-02,  4.98791896e-02, -8.11191872e-02, -1.39310583e-01,
+        1.04389578e-01, -2.37163529e-01,  8.83841813e-02,  2.34910533e-01,
+        4.36622184e-03,  2.10032284e-01,  9.13906544e-02,  1.67318240e-01,
+       -1.58507451e-02,  1.42959636e-02, -1.31710574e-01,  1.35026658e-02,
+        9.25571397e-02, -6.52508214e-02,  7.75445774e-02, -2.93524079e-02]), 'distance': None, 'face_detected': True, 'location': (200, 338, 408, 130)}
+06:44:19 - INFO - APP: Unrecognized face detected. Triggering registration.
+06:44:19 - INFO - 💤 CameraManager: Going to Sleep...
+06:44:20 - INFO - Camera image cleared successfully.
+06:44:20 - INFO - APP: Switched to state REGISTER
+06:44:20 - INFO - RegisterPage: Resetting page state.
+06:44:20 - INFO - RegisterPage: Reset complete, focus set on name entry.
+06:44:20 - INFO - RegisterPage: Setting initial focus with delay.
+06:44:20 - INFO - RegisterPage: after(100, focus_set) called.
+06:44:23 - INFO - RegisterPage: handle_enter called in state: ENTRY_NAME
+06:44:23 - INFO - RegisterPage: focus_to_kelas called.
+06:44:23 - INFO - RegisterPage: State changed to SELECT_CLASS.
+06:44:23 - INFO - RegisterPage: Focus set on the frame for class selection.
+06:44:25 - INFO - RegisterPage: handle_enter called in state: SELECT_CLASS
+06:44:25 - INFO - APP: _submit_registration called.
+06:44:25 - INFO - RegisterPage: get_values returning: Name='audy', Class='7-A'
+06:44:25 - INFO - APP: Registration data: Name='audy', Class='7-A'
+06:44:25 - INFO - APP: New user registered successfully: audy - 7-A
+06:44:25 - INFO - 💤 CameraManager: Going to Sleep...
+06:44:25 - INFO - Camera image cleared successfully.
+06:44:25 - INFO - APP: Switched to state INPUT
+06:44:30 - INFO - Application closing. Shutting down services.
+06:44:30 - INFO - 💤 CameraManager: Going to Sleep...
+06:53:52 - INFO - RegisterPage: Initializing.
+06:53:52 - INFO - RegisterPage: Initial focus set on name entry in __init__.
+06:53:52 - INFO - APP: Switched to state CAMERA
+06:53:52 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+06:53:52 - INFO - 💤 CameraManager: Going to Sleep...
+06:53:52 - INFO - Camera image cleared successfully.
+06:53:55 - INFO - 🚀 GoodDeedApp: Waking Up System...
+06:53:55 - INFO - 🚀 CameraManager: Waking Up System...
+06:54:01 - INFO - APP: Switched to state CAMERA
+06:54:04 - INFO - VISION: Min_dist found: 0.3638 for user audy (7-A)
+06:54:04 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:04 - INFO - VISION: Zone decision: GREEN for audy
+06:54:04 - INFO - VISION: Min_dist found: 0.3631 for user audy (7-A)
+06:54:04 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:04 - INFO - VISION: Zone decision: GREEN for audy
+06:54:04 - INFO - Identity established: audy (Zone: GREEN, Dist: 0.3631)
+06:54:05 - INFO - VISION: Min_dist found: 0.3272 for user audy (7-A)
+06:54:05 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:05 - INFO - VISION: Zone decision: GREEN for audy
+06:54:06 - INFO - VISION: Min_dist found: 0.3400 for user audy (7-A)
+06:54:06 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:06 - INFO - VISION: Zone decision: GREEN for audy
+06:54:06 - INFO - VISION: Min_dist found: 0.3619 for user audy (7-A)
+06:54:06 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:06 - INFO - VISION: Zone decision: GREEN for audy
+06:54:07 - INFO - VISION: Min_dist found: 0.3899 for user audy (7-A)
+06:54:07 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:07 - INFO - VISION: Zone decision: GREEN for audy
+06:54:08 - INFO - VISION: Min_dist found: 0.3991 for user audy (7-A)
+06:54:08 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:08 - INFO - VISION: Zone decision: GREEN for audy
+06:54:08 - INFO - VISION: Min_dist found: 0.3904 for user audy (7-A)
+06:54:08 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:08 - INFO - VISION: Zone decision: GREEN for audy
+06:54:09 - INFO - VISION: Min_dist found: 0.3679 for user audy (7-A)
+06:54:09 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:09 - INFO - VISION: Zone decision: GREEN for audy
+06:54:09 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'GREEN', 'user_data': {'id': 1, 'nama': 'audy', 'kelas': '7-A', 'encoding': [-0.14336498081684113, 0.0824289619922638, 0.08537217229604721, -0.06146807223558426, -0.07012888789176941, -0.024279363453388214, -0.06027791649103165, -0.14091698825359344, 0.17643648386001587, -0.17313414812088013, 0.22308824956417084, -0.0419478602707386, -0.19178783893585205, -0.051699817180633545, -0.04557818919420242, 0.22002023458480835, -0.11790839582681656, -0.07831142097711563, -0.01934146136045456, -0.03696490824222565, 0.04389072209596634, -0.017751555889844894, 0.12191218882799149, 0.10043063759803772, -0.16752004623413086, -0.4054434597492218, -0.15267008543014526, -0.0772661566734314, 0.0006551742553710938, -0.05674436688423157, -0.027602989226579666, 0.08154764026403427, -0.14326795935630798, 0.04028457775712013, -0.010133584029972553, 0.07282030582427979, 0.01716652140021324, -0.08126063644886017, 0.22174620628356934, 0.057004012167453766, -0.22841235995292664, -0.06860942393541336, -0.021227871999144554, 0.24302534759044647, 0.17747916281223297, 0.049947552382946014, 0.09624408185482025, -0.10719302296638489, 0.07838955521583557, -0.16802814602851868, 0.010212468914687634, 0.08598494529724121, -0.000360982958227396, 0.002051984891295433, -0.021192118525505066, -0.14416563510894775, 0.0206124410033226, 0.09072521328926086, -0.17784325778484344, -0.032010454684495926, 0.01147526130080223, -0.12116415798664093, -0.03411884978413582, -0.037221431732177734, 0.29478946328163147, 0.15980570018291473, -0.17078804969787598, -0.08693024516105652, 0.1913304477930069, -0.16099441051483154, 0.05928166210651398, 0.03816705197095871, -0.16942983865737915, -0.18820594251155853, -0.3002951443195343, -0.0048753563314676285, 0.4142027497291565, 0.14294962584972382, -0.1559896469116211, -0.012498472817242146, -0.11368007212877274, 0.02870446816086769, 0.08263032883405685, 0.2286531627178192, -0.04557497054338455, -0.00448599923402071, -0.03266017884016037, -0.001207263208925724, 0.18228751420974731, -0.054677870124578476, -0.03979131951928139, 0.236648291349411, -0.0029015447944402695, 0.06695212423801422, -0.027798090130090714, 0.03723018243908882, -0.13824354112148285, -0.009005770087242126, -0.0384148433804512, 0.008297862485051155, -0.040930092334747314, -0.0011603869497776031, 0.029947547242045403, 0.13518126308918, -0.2135147899389267, 0.1615903675556183, -0.021803943440318108, -0.04811830073595047, 0.031191285699605942, 0.04987918958067894, -0.08111918717622757, -0.1393105834722519, 0.10438957810401917, -0.23716352880001068, 0.08838418126106262, 0.2349105328321457, 0.004366221837699413, 0.21003228425979614, 0.09139065444469452, 0.16731823980808258, -0.015850745141506195, 0.014295963570475578, -0.13171057403087616, 0.013502665795385838, 0.0925571396946907, -0.06525082141160965, 0.07754457741975784, -0.029352407902479172], 'poin': 0}, 'encoding': array([-1.00175768e-01,  4.63200212e-02,  1.03475191e-01, -6.95908889e-02,
+       -8.02197084e-02, -2.49262601e-02, -5.24822846e-02, -1.40369475e-01,
+        2.03233987e-01, -1.21791184e-01,  2.34487742e-01,  3.14915217e-02,
+       -1.59561336e-01, -2.79547833e-02, -6.44906890e-03,  1.86462209e-01,
+       -1.75958693e-01, -6.91270605e-02, -3.47362310e-02, -1.30941216e-02,
+        5.45121655e-02, -8.81016999e-03,  1.10598706e-01,  9.45706442e-02,
+       -1.61170378e-01, -4.02764499e-01, -1.53795183e-01, -1.06112249e-01,
+        4.34863865e-02, -7.70992637e-02,  9.91101563e-03,  4.95352447e-02,
+       -1.43240556e-01,  5.19764423e-02,  1.08190505e-02,  7.05486760e-02,
+       -1.71154328e-02, -1.34775907e-01,  1.99264511e-01,  2.87116878e-02,
+       -2.70335734e-01, -2.41556726e-02, -3.58942673e-02,  1.91081956e-01,
+        2.11302906e-01,  4.30327281e-03,  1.05239630e-01, -1.23554058e-01,
+        1.32723406e-01, -1.73254743e-01,  4.00382206e-02,  1.10881224e-01,
+       -2.02257931e-02,  2.36321036e-02,  3.71023789e-02, -1.49635717e-01,
+       -3.83202080e-03,  9.77479368e-02, -1.56745568e-01, -4.81558172e-03,
+        1.64373852e-02, -8.04919153e-02,  2.22584531e-02, -4.03024182e-02,
+        1.97183609e-01,  1.34970173e-01, -1.72178715e-01, -1.08374260e-01,
+        1.69153512e-01, -1.69664249e-01,  4.62388806e-02,  6.68634251e-02,
+       -1.96514398e-01, -2.14809179e-01, -2.71388173e-01, -1.04914829e-02,
+        4.76134241e-01,  1.02463216e-01, -1.83398470e-01, -2.34104227e-02,
+       -1.33330867e-01,  4.04209318e-03,  8.56479108e-02,  2.46029243e-01,
+        3.80225480e-02, -2.74756774e-02, -4.91051376e-02, -8.07533786e-03,
+        2.14178935e-01, -6.85159117e-02, -9.14574601e-03,  2.73526430e-01,
+       -1.43267158e-02,  5.56850024e-02, -2.72815153e-02,  7.33130500e-02,
+       -1.25398919e-01,  1.02401040e-02, -3.45102921e-02,  1.20004639e-04,
+       -7.85520747e-02,  8.85770842e-03,  2.80698575e-03,  1.20883673e-01,
+       -1.77666098e-01,  1.67791128e-01,  2.65671331e-02, -8.83698091e-03,
+        5.06389253e-02,  5.77713624e-02, -7.92673677e-02, -1.70024887e-01,
+        1.14827320e-01, -2.51255393e-01,  1.43532887e-01,  2.29724616e-01,
+       -1.58353476e-03,  1.81736112e-01,  1.67228058e-02,  1.80174127e-01,
+       -1.70072280e-02, -8.72905180e-03, -1.17634609e-01,  3.64137813e-02,
+        1.69574581e-02, -2.24163812e-02, -1.98028795e-02, -4.49547805e-02]), 'distance': np.float64(0.36309461906321033), 'face_detected': True, 'location': (200, 338, 408, 130)}
+06:54:09 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:09 - INFO - Camera image cleared successfully.
+06:54:09 - INFO - APP: Switched to state INPUT
+06:54:13 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:13 - INFO - Camera image cleared successfully.
+06:54:13 - INFO - APP: Switched to state LOADING
+06:54:13 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:13 - INFO - Camera image cleared successfully.
+06:54:13 - INFO - APP: Switched to state RESULT
+06:54:14 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:14 - INFO - Camera image cleared successfully.
+06:54:14 - INFO - APP: Switched to state LOADING
+06:54:15 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:15 - INFO - Camera image cleared successfully.
+06:54:15 - INFO - APP: Switched to state RESULT
+06:54:16 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:16 - INFO - Camera image cleared successfully.
+06:54:16 - INFO - APP: Switched to state LOADING
+06:54:16 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:16 - INFO - Camera image cleared successfully.
+06:54:16 - INFO - APP: Switched to state RESULT
+06:54:22 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:22 - INFO - Camera image cleared successfully.
+06:54:22 - INFO - APP: Switched to state LOADING
+06:54:22 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:22 - INFO - Camera image cleared successfully.
+06:54:22 - INFO - APP: Switched to state RESULT
+06:54:23 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:23 - INFO - Camera image cleared successfully.
+06:54:23 - INFO - APP: Switched to state LOADING
+06:54:24 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:24 - INFO - Camera image cleared successfully.
+06:54:24 - INFO - APP: Switched to state RESULT
+06:54:26 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:26 - INFO - Camera image cleared successfully.
+06:54:26 - INFO - APP: Switched to state LOADING
+06:54:28 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+06:54:28 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:28 - INFO - Camera image cleared successfully.
+06:54:28 - ERROR - Error setting sleep UI: image "pyimage50" doesn't exist
+06:54:28 - INFO - RegisterPage: Resetting page state.
+06:54:29 - INFO - RegisterPage: Reset complete, focus set on name entry.
+06:54:29 - INFO - Camera image cleared successfully.
+06:54:29 - ERROR - Error resetting camera page UI: image "pyimage50" doesn't exist
+06:54:29 - INFO - 🚀 GoodDeedApp: Waking Up System...
+06:54:29 - INFO - 🚀 CameraManager: Waking Up System...
+06:54:34 - INFO - APP: Switched to state CAMERA
+06:54:34 - INFO - VISION: Min_dist found: 0.3152 for user audy (7-A)
+06:54:34 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:34 - INFO - VISION: Zone decision: GREEN for audy
+06:54:34 - INFO - Identity established: audy (Zone: GREEN, Dist: 0.3152)
+06:54:35 - INFO - VISION: Min_dist found: 0.2915 for user audy (7-A)
+06:54:35 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:35 - INFO - VISION: Zone decision: GREEN for audy
+06:54:35 - INFO - VISION: Min_dist found: 0.3015 for user audy (7-A)
+06:54:35 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:35 - INFO - VISION: Zone decision: GREEN for audy
+06:54:36 - INFO - VISION: Min_dist found: 0.2868 for user audy (7-A)
+06:54:36 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:36 - INFO - VISION: Zone decision: GREEN for audy
+06:54:37 - INFO - VISION: Min_dist found: 0.2567 for user audy (7-A)
+06:54:37 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:37 - INFO - VISION: Zone decision: GREEN for audy
+06:54:38 - INFO - VISION: Min_dist found: 0.3826 for user audy (7-A)
+06:54:38 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:38 - INFO - VISION: Zone decision: GREEN for audy
+06:54:38 - INFO - VISION: Min_dist found: 0.3679 for user audy (7-A)
+06:54:38 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:38 - INFO - VISION: Zone decision: GREEN for audy
+06:54:39 - INFO - VISION: Min_dist found: 0.4015 for user audy (7-A)
+06:54:39 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:39 - INFO - VISION: Zone decision: GREEN for audy
+06:54:40 - INFO - VISION: Min_dist found: 0.5480 for user audy (7-A)
+06:54:40 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+06:54:40 - INFO - VISION: Zone decision: GREEN for audy
+06:54:40 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'GREEN', 'user_data': {'id': 1, 'nama': 'audy', 'kelas': '7-A', 'encoding': [-0.14336498081684113, 0.0824289619922638, 0.08537217229604721, -0.06146807223558426, -0.07012888789176941, -0.024279363453388214, -0.06027791649103165, -0.14091698825359344, 0.17643648386001587, -0.17313414812088013, 0.22308824956417084, -0.0419478602707386, -0.19178783893585205, -0.051699817180633545, -0.04557818919420242, 0.22002023458480835, -0.11790839582681656, -0.07831142097711563, -0.01934146136045456, -0.03696490824222565, 0.04389072209596634, -0.017751555889844894, 0.12191218882799149, 0.10043063759803772, -0.16752004623413086, -0.4054434597492218, -0.15267008543014526, -0.0772661566734314, 0.0006551742553710938, -0.05674436688423157, -0.027602989226579666, 0.08154764026403427, -0.14326795935630798, 0.04028457775712013, -0.010133584029972553, 0.07282030582427979, 0.01716652140021324, -0.08126063644886017, 0.22174620628356934, 0.057004012167453766, -0.22841235995292664, -0.06860942393541336, -0.021227871999144554, 0.24302534759044647, 0.17747916281223297, 0.049947552382946014, 0.09624408185482025, -0.10719302296638489, 0.07838955521583557, -0.16802814602851868, 0.010212468914687634, 0.08598494529724121, -0.000360982958227396, 0.002051984891295433, -0.021192118525505066, -0.14416563510894775, 0.0206124410033226, 0.09072521328926086, -0.17784325778484344, -0.032010454684495926, 0.01147526130080223, -0.12116415798664093, -0.03411884978413582, -0.037221431732177734, 0.29478946328163147, 0.15980570018291473, -0.17078804969787598, -0.08693024516105652, 0.1913304477930069, -0.16099441051483154, 0.05928166210651398, 0.03816705197095871, -0.16942983865737915, -0.18820594251155853, -0.3002951443195343, -0.0048753563314676285, 0.4142027497291565, 0.14294962584972382, -0.1559896469116211, -0.012498472817242146, -0.11368007212877274, 0.02870446816086769, 0.08263032883405685, 0.2286531627178192, -0.04557497054338455, -0.00448599923402071, -0.03266017884016037, -0.001207263208925724, 0.18228751420974731, -0.054677870124578476, -0.03979131951928139, 0.236648291349411, -0.0029015447944402695, 0.06695212423801422, -0.027798090130090714, 0.03723018243908882, -0.13824354112148285, -0.009005770087242126, -0.0384148433804512, 0.008297862485051155, -0.040930092334747314, -0.0011603869497776031, 0.029947547242045403, 0.13518126308918, -0.2135147899389267, 0.1615903675556183, -0.021803943440318108, -0.04811830073595047, 0.031191285699605942, 0.04987918958067894, -0.08111918717622757, -0.1393105834722519, 0.10438957810401917, -0.23716352880001068, 0.08838418126106262, 0.2349105328321457, 0.004366221837699413, 0.21003228425979614, 0.09139065444469452, 0.16731823980808258, -0.015850745141506195, 0.014295963570475578, -0.13171057403087616, 0.013502665795385838, 0.0925571396946907, -0.06525082141160965, 0.07754457741975784, -0.029352407902479172], 'poin': 0}, 'encoding': array([-0.10342162,  0.05034717,  0.12348974, -0.05619635, -0.0912107 ,
+       -0.02207361, -0.0580077 , -0.10963276,  0.13681941, -0.13628267,
+        0.23207144, -0.05851113, -0.20367205,  0.00244011, -0.01157883,
+        0.18651155, -0.12906523, -0.03826313, -0.04244306, -0.0048807 ,
+        0.0568931 , -0.00853632,  0.07918043,  0.0971664 , -0.11246924,
+       -0.4094134 , -0.14269011, -0.07129583,  0.00369803, -0.09015676,
+       -0.05644992,  0.05174666, -0.14390582,  0.02483945, -0.03410738,
+        0.02574149, -0.02834292, -0.11120099,  0.16637321,  0.06116382,
+       -0.24199206, -0.03295615, -0.05201127,  0.18363363,  0.16949742,
+        0.07503934,  0.10033818, -0.1156302 ,  0.04585792, -0.18248352,
+        0.03000415,  0.1085076 , -0.02284143,  0.0164903 , -0.03628746,
+       -0.18099396, -0.01702593,  0.10413188, -0.17260355,  0.02531222,
+        0.0230838 , -0.11393001, -0.00865366, -0.04796103,  0.22634356,
+        0.1702411 , -0.14971372, -0.1083195 ,  0.15861183, -0.13977265,
+        0.02653357,  0.04935748, -0.18191861, -0.21514823, -0.2801668 ,
+       -0.00265818,  0.41268855,  0.11267313, -0.14630005, -0.05139631,
+       -0.15553851,  0.02121597,  0.07759424,  0.19336978, -0.00462215,
+       -0.03402136, -0.03693141,  0.02192629,  0.16667445, -0.05741234,
+       -0.03437355,  0.23985507, -0.02988336,  0.05077486, -0.04681627,
+        0.0706371 , -0.11739679,  0.01305903, -0.02399012, -0.0167054 ,
+       -0.03048673, -0.02084688,  0.01157612,  0.13077872, -0.22305685,
+        0.16950268, -0.00547044, -0.0278104 ,  0.04843335,  0.02184646,
+       -0.07864384, -0.09536544,  0.1286125 , -0.24533142,  0.12855577,
+        0.26216438,  0.04599635,  0.18224722,  0.0528521 ,  0.13295111,
+       -0.01831792, -0.04055014, -0.18296821,  0.03262029,  0.07391884,
+       -0.00888941,  0.03234516, -0.01286995]), 'distance': np.float64(0.3152136826002972), 'face_detected': True, 'location': (224, 362, 430, 154)}
+06:54:40 - INFO - 💤 CameraManager: Going to Sleep...
+06:54:40 - INFO - Camera image cleared successfully.
+06:54:40 - INFO - APP: Switched to state INPUT
+06:54:44 - INFO - Application closing. Shutting down services.
+06:54:44 - INFO - 💤 CameraManager: Going to Sleep...
+07:01:14 - INFO - RegisterPage: Initializing.
+07:01:14 - INFO - RegisterPage: Initial focus set on name entry in __init__.
+07:01:14 - INFO - APP: Switched to state CAMERA
+07:01:14 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+07:01:14 - INFO - 💤 CameraManager: Going to Sleep...
+07:01:14 - INFO - Camera image cleared successfully.
+07:01:17 - INFO - Application closing. Shutting down services.
+07:01:17 - INFO - 💤 CameraManager: Going to Sleep...
+07:02:17 - INFO - RegisterPage: Initializing.
+07:02:17 - INFO - RegisterPage: Initial focus set on name entry in __init__.
+07:04:57 - INFO - RegisterPage: Initializing.
+07:04:57 - INFO - RegisterPage: Initial focus set on name entry in __init__.
+07:07:33 - INFO - RegisterPage: Initializing.
+07:07:33 - INFO - RegisterPage: Initial focus set on name entry in __init__.
+07:07:33 - INFO - APP: Switched to state CAMERA
+07:07:33 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+07:07:33 - INFO - 💤 CameraManager: Going to Sleep...
+07:07:33 - INFO - Camera image cleared successfully.
+07:07:35 - INFO - 🚀 GoodDeedApp: Waking Up System...
+07:07:35 - INFO - 🚀 CameraManager: Waking Up System...
+07:07:50 - INFO - APP: Switched to state CAMERA
+07:07:53 - INFO - VISION: Min_dist found: 0.2923 for user audy (7-A)
+07:07:53 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:07:53 - INFO - VISION: Zone decision: GREEN for audy
+07:07:55 - INFO - VISION: Min_dist found: 0.2395 for user audy (7-A)
+07:07:55 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:07:55 - INFO - VISION: Zone decision: GREEN for audy
+07:07:55 - INFO - Identity established: audy (Zone: GREEN, Dist: 0.2395)
+07:07:56 - INFO - VISION: Min_dist found: 0.2998 for user audy (7-A)
+07:07:56 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:07:56 - INFO - VISION: Zone decision: GREEN for audy
+07:07:57 - INFO - VISION: Min_dist found: 0.3193 for user audy (7-A)
+07:07:57 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:07:57 - INFO - VISION: Zone decision: GREEN for audy
+07:07:58 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'GREEN', 'user_data': {'id': 1, 'nama': 'audy', 'kelas': '7-A', 'encoding': [-0.14336498081684113, 0.0824289619922638, 0.08537217229604721, -0.06146807223558426, -0.07012888789176941, -0.024279363453388214, -0.06027791649103165, -0.14091698825359344, 0.17643648386001587, -0.17313414812088013, 0.22308824956417084, -0.0419478602707386, -0.19178783893585205, -0.051699817180633545, -0.04557818919420242, 0.22002023458480835, -0.11790839582681656, -0.07831142097711563, -0.01934146136045456, -0.03696490824222565, 0.04389072209596634, -0.017751555889844894, 0.12191218882799149, 0.10043063759803772, -0.16752004623413086, -0.4054434597492218, -0.15267008543014526, -0.0772661566734314, 0.0006551742553710938, -0.05674436688423157, -0.027602989226579666, 0.08154764026403427, -0.14326795935630798, 0.04028457775712013, -0.010133584029972553, 0.07282030582427979, 0.01716652140021324, -0.08126063644886017, 0.22174620628356934, 0.057004012167453766, -0.22841235995292664, -0.06860942393541336, -0.021227871999144554, 0.24302534759044647, 0.17747916281223297, 0.049947552382946014, 0.09624408185482025, -0.10719302296638489, 0.07838955521583557, -0.16802814602851868, 0.010212468914687634, 0.08598494529724121, -0.000360982958227396, 0.002051984891295433, -0.021192118525505066, -0.14416563510894775, 0.0206124410033226, 0.09072521328926086, -0.17784325778484344, -0.032010454684495926, 0.01147526130080223, -0.12116415798664093, -0.03411884978413582, -0.037221431732177734, 0.29478946328163147, 0.15980570018291473, -0.17078804969787598, -0.08693024516105652, 0.1913304477930069, -0.16099441051483154, 0.05928166210651398, 0.03816705197095871, -0.16942983865737915, -0.18820594251155853, -0.3002951443195343, -0.0048753563314676285, 0.4142027497291565, 0.14294962584972382, -0.1559896469116211, -0.012498472817242146, -0.11368007212877274, 0.02870446816086769, 0.08263032883405685, 0.2286531627178192, -0.04557497054338455, -0.00448599923402071, -0.03266017884016037, -0.001207263208925724, 0.18228751420974731, -0.054677870124578476, -0.03979131951928139, 0.236648291349411, -0.0029015447944402695, 0.06695212423801422, -0.027798090130090714, 0.03723018243908882, -0.13824354112148285, -0.009005770087242126, -0.0384148433804512, 0.008297862485051155, -0.040930092334747314, -0.0011603869497776031, 0.029947547242045403, 0.13518126308918, -0.2135147899389267, 0.1615903675556183, -0.021803943440318108, -0.04811830073595047, 0.031191285699605942, 0.04987918958067894, -0.08111918717622757, -0.1393105834722519, 0.10438957810401917, -0.23716352880001068, 0.08838418126106262, 0.2349105328321457, 0.004366221837699413, 0.21003228425979614, 0.09139065444469452, 0.16731823980808258, -0.015850745141506195, 0.014295963570475578, -0.13171057403087616, 0.013502665795385838, 0.0925571396946907, -0.06525082141160965, 0.07754457741975784, -0.029352407902479172], 'poin': 0}, 'encoding': array([-0.1254378 ,  0.03869484,  0.05958694, -0.08515937, -0.07852542,
+       -0.04717082, -0.05872663, -0.13392001,  0.18318723, -0.13667016,
+        0.22931698, -0.0418266 , -0.18185787, -0.01959448, -0.06231316,
+        0.18962511, -0.17052959, -0.0622301 , -0.01779698, -0.0333433 ,
+        0.05171557, -0.03707309,  0.09446545,  0.12292356, -0.14347756,
+       -0.427724  , -0.15557346, -0.12930067,  0.00790047, -0.05567486,
+       -0.00507594,  0.10268111, -0.1453577 ,  0.03958882, -0.02356079,
+        0.03108349,  0.01383547, -0.09681828,  0.20779712,  0.07281792,
+       -0.24494201, -0.06306434, -0.05930757,  0.22745687,  0.160353  ,
+        0.02915769,  0.10830041, -0.11264595,  0.08331032, -0.1409511 ,
+        0.00903555,  0.12051143,  0.00673477,  0.00125859, -0.02647644,
+       -0.13016488,  0.01809493,  0.06059373, -0.18825011, -0.01761637,
+        0.0242028 , -0.12509824, -0.01869597, -0.06762848,  0.2467813 ,
+        0.15614444, -0.15689535, -0.09318671,  0.19427261, -0.15414654,
+        0.03904956,  0.0288504 , -0.19261408, -0.21849027, -0.28254959,
+        0.00910488,  0.42362991,  0.1422382 , -0.14747234, -0.00952228,
+       -0.14250578, -0.00375673,  0.08531854,  0.24228196, -0.01507725,
+        0.0045292 , -0.01530734,  0.01433899,  0.16494678, -0.07379902,
+       -0.04234337,  0.22738133, -0.04164613,  0.06563832, -0.03268693,
+        0.04279668, -0.13481864,  0.02899844, -0.01944488,  0.03128862,
+       -0.04372645,  0.00746268,  0.01871642,  0.10212682, -0.17584309,
+        0.13839039, -0.0038306 , -0.05580558,  0.01926873,  0.04171244,
+       -0.08249452, -0.15825209,  0.11582606, -0.22537942,  0.12769842,
+        0.23446435,  0.04208262,  0.20828654,  0.05779274,  0.14385334,
+       -0.02448168, -0.02061412, -0.15146728,  0.03206713,  0.09626082,
+       -0.02185659,  0.02742656, -0.05248532]), 'distance': np.float64(0.23945509510784752), 'face_detected': True, 'location': (158, 378, 406, 130)}
+07:07:58 - INFO - 💤 CameraManager: Going to Sleep...
+07:07:58 - INFO - Camera image cleared successfully.
+07:07:58 - INFO - APP: Switched to state INPUT
+07:07:59 - INFO - 💤 CameraManager: Going to Sleep...
+07:07:59 - INFO - Camera image cleared successfully.
+07:07:59 - INFO - APP: Switched to state LOADING
+07:08:01 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+07:08:01 - INFO - 💤 CameraManager: Going to Sleep...
+07:08:01 - INFO - Camera image cleared successfully.
+07:08:01 - ERROR - Error setting sleep UI: image "pyimage11" doesn't exist
+07:08:01 - INFO - RegisterPage: Resetting page state.
+07:08:01 - INFO - RegisterPage: Reset complete, focus set on name entry.
+07:08:01 - INFO - Camera image cleared successfully.
+07:08:01 - ERROR - Error resetting camera page UI: image "pyimage11" doesn't exist
+07:08:02 - INFO - 🚀 GoodDeedApp: Waking Up System...
+07:08:02 - INFO - 🚀 CameraManager: Waking Up System...
+07:08:08 - INFO - APP: Switched to state CAMERA
+07:08:08 - INFO - Force close requested. Shutting down services.
+07:08:08 - INFO - 💤 CameraManager: Going to Sleep...
+07:15:34 - INFO - RegisterPage: Initializing.
+07:15:34 - INFO - RegisterPage: Initial focus set on name entry in __init__.
+07:15:34 - INFO - APP: Switched to state CAMERA
+07:15:34 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+07:15:34 - INFO - 💤 CameraManager: Going to Sleep...
+07:15:34 - INFO - Camera image cleared successfully.
+07:15:36 - INFO - 🚀 GoodDeedApp: Waking Up System...
+07:15:36 - INFO - 🚀 CameraManager: Waking Up System...
+07:15:41 - INFO - APP: Switched to state CAMERA
+07:15:45 - INFO - VISION: Min_dist found: 0.4541 for user audy (7-A)
+07:15:45 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:45 - INFO - VISION: Zone decision: GREEN for audy
+07:15:46 - INFO - VISION: Min_dist found: 0.5312 for user audy (7-A)
+07:15:46 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:46 - INFO - VISION: Zone decision: GREEN for audy
+07:15:46 - INFO - Identity established: audy (Zone: GREEN, Dist: 0.5312)
+07:15:46 - INFO - VISION: Min_dist found: 0.5088 for user audy (7-A)
+07:15:46 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:46 - INFO - VISION: Zone decision: GREEN for audy
+07:15:47 - INFO - VISION: Min_dist found: 0.5224 for user audy (7-A)
+07:15:47 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:47 - INFO - VISION: Zone decision: GREEN for audy
+07:15:48 - INFO - VISION: Min_dist found: 0.5672 for user audy (7-A)
+07:15:48 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:48 - INFO - VISION: Zone decision: YELLOW for audy
+07:15:48 - INFO - VISION: Min_dist found: 0.4587 for user audy (7-A)
+07:15:48 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:48 - INFO - VISION: Zone decision: GREEN for audy
+07:15:49 - INFO - VISION: Min_dist found: 0.5352 for user audy (7-A)
+07:15:49 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:49 - INFO - VISION: Zone decision: GREEN for audy
+07:15:50 - INFO - VISION: Min_dist found: 0.4443 for user audy (7-A)
+07:15:50 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:50 - INFO - VISION: Zone decision: GREEN for audy
+07:15:50 - INFO - VISION: Min_dist found: 0.4787 for user audy (7-A)
+07:15:50 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:50 - INFO - VISION: Zone decision: GREEN for audy
+07:15:51 - INFO - VISION: Min_dist found: 0.5140 for user audy (7-A)
+07:15:51 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:51 - INFO - VISION: Zone decision: GREEN for audy
+07:15:52 - INFO - VISION: Min_dist found: 0.4931 for user audy (7-A)
+07:15:52 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:52 - INFO - VISION: Zone decision: GREEN for audy
+07:15:52 - INFO - VISION: Min_dist found: 0.5296 for user audy (7-A)
+07:15:52 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:52 - INFO - VISION: Zone decision: GREEN for audy
+07:15:53 - INFO - VISION: Min_dist found: 0.5181 for user audy (7-A)
+07:15:53 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:53 - INFO - VISION: Zone decision: GREEN for audy
+07:15:54 - INFO - VISION: Min_dist found: 0.4455 for user audy (7-A)
+07:15:54 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:15:54 - INFO - VISION: Zone decision: GREEN for audy
+07:15:54 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'GREEN', 'user_data': {'id': 1, 'nama': 'audy', 'kelas': '7-A', 'encoding': [-0.14336498081684113, 0.0824289619922638, 0.08537217229604721, -0.06146807223558426, -0.07012888789176941, -0.024279363453388214, -0.06027791649103165, -0.14091698825359344, 0.17643648386001587, -0.17313414812088013, 0.22308824956417084, -0.0419478602707386, -0.19178783893585205, -0.051699817180633545, -0.04557818919420242, 0.22002023458480835, -0.11790839582681656, -0.07831142097711563, -0.01934146136045456, -0.03696490824222565, 0.04389072209596634, -0.017751555889844894, 0.12191218882799149, 0.10043063759803772, -0.16752004623413086, -0.4054434597492218, -0.15267008543014526, -0.0772661566734314, 0.0006551742553710938, -0.05674436688423157, -0.027602989226579666, 0.08154764026403427, -0.14326795935630798, 0.04028457775712013, -0.010133584029972553, 0.07282030582427979, 0.01716652140021324, -0.08126063644886017, 0.22174620628356934, 0.057004012167453766, -0.22841235995292664, -0.06860942393541336, -0.021227871999144554, 0.24302534759044647, 0.17747916281223297, 0.049947552382946014, 0.09624408185482025, -0.10719302296638489, 0.07838955521583557, -0.16802814602851868, 0.010212468914687634, 0.08598494529724121, -0.000360982958227396, 0.002051984891295433, -0.021192118525505066, -0.14416563510894775, 0.0206124410033226, 0.09072521328926086, -0.17784325778484344, -0.032010454684495926, 0.01147526130080223, -0.12116415798664093, -0.03411884978413582, -0.037221431732177734, 0.29478946328163147, 0.15980570018291473, -0.17078804969787598, -0.08693024516105652, 0.1913304477930069, -0.16099441051483154, 0.05928166210651398, 0.03816705197095871, -0.16942983865737915, -0.18820594251155853, -0.3002951443195343, -0.0048753563314676285, 0.4142027497291565, 0.14294962584972382, -0.1559896469116211, -0.012498472817242146, -0.11368007212877274, 0.02870446816086769, 0.08263032883405685, 0.2286531627178192, -0.04557497054338455, -0.00448599923402071, -0.03266017884016037, -0.001207263208925724, 0.18228751420974731, -0.054677870124578476, -0.03979131951928139, 0.236648291349411, -0.0029015447944402695, 0.06695212423801422, -0.027798090130090714, 0.03723018243908882, -0.13824354112148285, -0.009005770087242126, -0.0384148433804512, 0.008297862485051155, -0.040930092334747314, -0.0011603869497776031, 0.029947547242045403, 0.13518126308918, -0.2135147899389267, 0.1615903675556183, -0.021803943440318108, -0.04811830073595047, 0.031191285699605942, 0.04987918958067894, -0.08111918717622757, -0.1393105834722519, 0.10438957810401917, -0.23716352880001068, 0.08838418126106262, 0.2349105328321457, 0.004366221837699413, 0.21003228425979614, 0.09139065444469452, 0.16731823980808258, -0.015850745141506195, 0.014295963570475578, -0.13171057403087616, 0.013502665795385838, 0.0925571396946907, -0.06525082141160965, 0.07754457741975784, -0.029352407902479172], 'poin': 0}, 'encoding': array([-0.04768351,  0.05751528,  0.03177642, -0.06529269, -0.05912532,
+       -0.03628521,  0.00919457, -0.10032681,  0.21894403, -0.08581777,
+        0.24257012, -0.02777898, -0.19569591, -0.09233402,  0.10399234,
+        0.15613325, -0.12691705, -0.06081571, -0.11263148, -0.08593105,
+        0.0317106 ,  0.00691903,  0.13133654,  0.0980501 , -0.18507169,
+       -0.29949251, -0.10524799, -0.14452139,  0.05215115, -0.07700354,
+       -0.00432544,  0.07698139, -0.15789618, -0.04933081,  0.03733682,
+        0.05019766, -0.05436914, -0.04163192,  0.20949578, -0.02409171,
+       -0.21255788, -0.0408291 , -0.02654498,  0.2131428 ,  0.19999252,
+        0.06468052,  0.05281675, -0.08228058,  0.0677676 , -0.20469783,
+        0.06863283,  0.09022965,  0.0461896 , -0.00102297,  0.07651197,
+       -0.16811122, -0.01834357,  0.1488117 , -0.16618113,  0.00706835,
+        0.03601801, -0.0811948 , -0.03651579, -0.06612885,  0.26080123,
+        0.06194118, -0.16980034, -0.0389621 ,  0.14659742, -0.07835913,
+        0.02880119,  0.10880953, -0.1681879 , -0.22799253, -0.26890349,
+        0.03455216,  0.44594595,  0.09758226, -0.18331413, -0.0108238 ,
+       -0.1214258 ,  0.02645394,  0.03999715,  0.08314127, -0.05814643,
+       -0.03972705, -0.05742163,  0.0504458 ,  0.1499128 , -0.11121842,
+        0.00745354,  0.24076135, -0.03138331,  0.03106388, -0.06109636,
+        0.00615874, -0.08205284,  0.02434522, -0.08815869, -0.0114206 ,
+        0.05826739, -0.04775853,  0.02925503,  0.09202526, -0.23963523,
+        0.14316674,  0.04451475, -0.05562831,  0.0264541 ,  0.03309001,
+       -0.12147147, -0.084025  ,  0.16808319, -0.29581338,  0.15545498,
+        0.22646414,  0.0188834 ,  0.1778945 ,  0.03374531,  0.11435761,
+        0.00060608, -0.0198918 , -0.16875413,  0.01143683,  0.13323769,
+       -0.01580989,  0.05627632,  0.01017616]), 'distance': np.float64(0.5311795687143462), 'face_detected': True, 'location': (246, 430, 454, 224)}
+07:15:54 - INFO - 💤 CameraManager: Going to Sleep...
+07:15:54 - INFO - Camera image cleared successfully.
+07:15:54 - INFO - APP: Switched to state INPUT
+07:16:12 - INFO - Force close requested. Shutting down services.
+07:16:12 - INFO - 💤 CameraManager: Going to Sleep...
+07:22:13 - INFO - RegisterPage: Initializing.
+07:22:13 - INFO - RegisterPage: Initial focus set on name entry in __init__.
+07:22:13 - INFO - APP: Switched to state CAMERA
+07:22:13 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+07:22:13 - INFO - 💤 CameraManager: Going to Sleep...
+07:22:13 - INFO - Camera image cleared successfully.
+07:22:14 - INFO - 🚀 GoodDeedApp: Waking Up System...
+07:22:14 - INFO - 🚀 CameraManager: Waking Up System...
+07:22:21 - INFO - APP: Switched to state CAMERA
+07:22:21 - INFO - VISION: Min_dist found: 0.4550 for user audy (7-A)
+07:22:21 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:21 - INFO - VISION: Zone decision: GREEN for audy
+07:22:22 - INFO - VISION: Min_dist found: 0.4004 for user audy (7-A)
+07:22:22 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:22 - INFO - VISION: Zone decision: GREEN for audy
+07:22:22 - INFO - Identity established: audy (Zone: GREEN, Dist: 0.4004)
+07:22:23 - INFO - VISION: Min_dist found: 0.3785 for user audy (7-A)
+07:22:23 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:23 - INFO - VISION: Zone decision: GREEN for audy
+07:22:23 - INFO - VISION: Min_dist found: 0.4346 for user audy (7-A)
+07:22:23 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:23 - INFO - VISION: Zone decision: GREEN for audy
+07:22:24 - INFO - VISION: Min_dist found: 0.4461 for user audy (7-A)
+07:22:24 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:24 - INFO - VISION: Zone decision: GREEN for audy
+07:22:25 - INFO - VISION: Min_dist found: 0.4503 for user audy (7-A)
+07:22:25 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:25 - INFO - VISION: Zone decision: GREEN for audy
+07:22:25 - INFO - VISION: Min_dist found: 0.4121 for user audy (7-A)
+07:22:25 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:25 - INFO - VISION: Zone decision: GREEN for audy
+07:22:26 - INFO - VISION: Min_dist found: 0.4312 for user audy (7-A)
+07:22:26 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:26 - INFO - VISION: Zone decision: GREEN for audy
+07:22:27 - INFO - VISION: Min_dist found: 0.4094 for user audy (7-A)
+07:22:27 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:27 - INFO - VISION: Zone decision: GREEN for audy
+07:22:27 - INFO - VISION: Min_dist found: 0.4022 for user audy (7-A)
+07:22:27 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:27 - INFO - VISION: Zone decision: GREEN for audy
+07:22:28 - INFO - VISION: Min_dist found: 0.4619 for user audy (7-A)
+07:22:28 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:28 - INFO - VISION: Zone decision: GREEN for audy
+07:22:29 - INFO - VISION: Min_dist found: 0.4666 for user audy (7-A)
+07:22:29 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:29 - INFO - VISION: Zone decision: GREEN for audy
+07:22:29 - INFO - VISION: Min_dist found: 0.4748 for user audy (7-A)
+07:22:29 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:29 - INFO - VISION: Zone decision: GREEN for audy
+07:22:30 - INFO - VISION: Min_dist found: 0.5065 for user audy (7-A)
+07:22:30 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:22:30 - INFO - VISION: Zone decision: GREEN for audy
+07:22:30 - INFO - Force close requested. Shutting down services.
+07:22:30 - INFO - 💤 CameraManager: Going to Sleep...
+07:23:27 - INFO - RegisterPage: Initializing.
+07:23:27 - INFO - RegisterPage: Initial focus set on name entry in __init__.
+07:23:28 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+07:23:28 - INFO - 💤 CameraManager: Going to Sleep...
+07:23:28 - INFO - Camera image cleared successfully.
+07:23:32 - INFO - 🚀 GoodDeedApp: Waking Up System...
+07:23:32 - INFO - 🚀 CameraManager: Waking Up System...
+07:23:41 - INFO - 🚀 GoodDeedApp: Waking Up System...
+07:23:41 - INFO - 🚀 CameraManager: Waking Up System...
+07:23:41 - INFO - VISION: Min_dist found: 0.4070 for user audy (7-A)
+07:23:41 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:23:41 - INFO - VISION: Zone decision: GREEN for audy
+07:23:42 - INFO - VISION: Min_dist found: 0.4467 for user audy (7-A)
+07:23:42 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:23:42 - INFO - VISION: Zone decision: GREEN for audy
+07:23:42 - INFO - Identity established: audy (Zone: GREEN, Dist: 0.4467)
+07:23:43 - INFO - VISION: Min_dist found: 0.4647 for user audy (7-A)
+07:23:43 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:23:43 - INFO - VISION: Zone decision: GREEN for audy
+07:23:43 - INFO - VISION: Min_dist found: 0.4118 for user audy (7-A)
+07:23:43 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:23:43 - INFO - VISION: Zone decision: GREEN for audy
+07:23:44 - INFO - VISION: Min_dist found: 0.4470 for user audy (7-A)
+07:23:44 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:23:44 - INFO - VISION: Zone decision: GREEN for audy
+07:23:45 - INFO - VISION: Min_dist found: 0.4369 for user audy (7-A)
+07:23:45 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:23:45 - INFO - VISION: Zone decision: GREEN for audy
+07:23:46 - INFO - VISION: Min_dist found: 0.3982 for user audy (7-A)
+07:23:46 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:23:46 - INFO - VISION: Zone decision: GREEN for audy
+07:23:46 - INFO - APP: _handle_login_trigger called with vision_data: {'zone': 'GREEN', 'user_data': {'id': 1, 'nama': 'audy', 'kelas': '7-A', 'encoding': [-0.14336498081684113, 0.0824289619922638, 0.08537217229604721, -0.06146807223558426, -0.07012888789176941, -0.024279363453388214, -0.06027791649103165, -0.14091698825359344, 0.17643648386001587, -0.17313414812088013, 0.22308824956417084, -0.0419478602707386, -0.19178783893585205, -0.051699817180633545, -0.04557818919420242, 0.22002023458480835, -0.11790839582681656, -0.07831142097711563, -0.01934146136045456, -0.03696490824222565, 0.04389072209596634, -0.017751555889844894, 0.12191218882799149, 0.10043063759803772, -0.16752004623413086, -0.4054434597492218, -0.15267008543014526, -0.0772661566734314, 0.0006551742553710938, -0.05674436688423157, -0.027602989226579666, 0.08154764026403427, -0.14326795935630798, 0.04028457775712013, -0.010133584029972553, 0.07282030582427979, 0.01716652140021324, -0.08126063644886017, 0.22174620628356934, 0.057004012167453766, -0.22841235995292664, -0.06860942393541336, -0.021227871999144554, 0.24302534759044647, 0.17747916281223297, 0.049947552382946014, 0.09624408185482025, -0.10719302296638489, 0.07838955521583557, -0.16802814602851868, 0.010212468914687634, 0.08598494529724121, -0.000360982958227396, 0.002051984891295433, -0.021192118525505066, -0.14416563510894775, 0.0206124410033226, 0.09072521328926086, -0.17784325778484344, -0.032010454684495926, 0.01147526130080223, -0.12116415798664093, -0.03411884978413582, -0.037221431732177734, 0.29478946328163147, 0.15980570018291473, -0.17078804969787598, -0.08693024516105652, 0.1913304477930069, -0.16099441051483154, 0.05928166210651398, 0.03816705197095871, -0.16942983865737915, -0.18820594251155853, -0.3002951443195343, -0.0048753563314676285, 0.4142027497291565, 0.14294962584972382, -0.1559896469116211, -0.012498472817242146, -0.11368007212877274, 0.02870446816086769, 0.08263032883405685, 0.2286531627178192, -0.04557497054338455, -0.00448599923402071, -0.03266017884016037, -0.001207263208925724, 0.18228751420974731, -0.054677870124578476, -0.03979131951928139, 0.236648291349411, -0.0029015447944402695, 0.06695212423801422, -0.027798090130090714, 0.03723018243908882, -0.13824354112148285, -0.009005770087242126, -0.0384148433804512, 0.008297862485051155, -0.040930092334747314, -0.0011603869497776031, 0.029947547242045403, 0.13518126308918, -0.2135147899389267, 0.1615903675556183, -0.021803943440318108, -0.04811830073595047, 0.031191285699605942, 0.04987918958067894, -0.08111918717622757, -0.1393105834722519, 0.10438957810401917, -0.23716352880001068, 0.08838418126106262, 0.2349105328321457, 0.004366221837699413, 0.21003228425979614, 0.09139065444469452, 0.16731823980808258, -0.015850745141506195, 0.014295963570475578, -0.13171057403087616, 0.013502665795385838, 0.0925571396946907, -0.06525082141160965, 0.07754457741975784, -0.029352407902479172], 'poin': 0}, 'encoding': array([-1.01420984e-01,  8.11272785e-02,  5.67698069e-02, -1.48965761e-01,
+       -9.00546461e-02, -4.08604834e-03, -4.26608324e-02, -1.01616919e-01,
+        2.47090250e-01, -1.32411048e-01,  2.02964187e-01, -3.70657071e-04,
+       -1.54624611e-01, -8.51020869e-03, -3.34211811e-02,  1.73726797e-01,
+       -1.30139396e-01, -1.16081201e-01, -1.26445115e-01, -3.53363864e-02,
+        8.40710178e-02, -2.61488687e-02,  7.76232556e-02,  1.22817233e-01,
+       -1.65226549e-01, -3.61683279e-01, -1.16828695e-01, -6.67955205e-02,
+        8.78009945e-04, -8.61604288e-02,  2.16027834e-02,  4.54556681e-02,
+       -1.78335249e-01, -3.47731709e-02, -4.72268369e-03,  7.67010599e-02,
+       -2.92122290e-02, -1.18910968e-01,  1.90811872e-01, -1.73760578e-03,
+       -2.33442172e-01, -1.71830039e-03, -7.80364685e-03,  1.96281433e-01,
+        1.88037068e-01,  5.47736585e-02,  9.59415287e-02, -1.20133892e-01,
+        1.23170711e-01, -2.01096192e-01,  5.65330461e-02,  1.23187982e-01,
+        3.56076583e-02,  6.38635010e-02,  3.89426760e-02, -1.35244995e-01,
+        5.37431352e-02,  1.68171614e-01, -1.95503280e-01, -2.75126030e-03,
+       -4.69859876e-03, -1.05795063e-01, -1.81244239e-02, -6.78939670e-02,
+        1.96594551e-01,  1.34029463e-01, -1.40863076e-01, -1.15489244e-01,
+        1.71470344e-01, -8.77151787e-02,  2.12282836e-02,  5.26530668e-02,
+       -1.74892589e-01, -2.27039278e-01, -2.51317739e-01,  2.06495766e-02,
+        4.60300863e-01,  1.61387816e-01, -1.68077067e-01,  2.67206412e-02,
+       -1.53410837e-01,  2.38339677e-02,  1.58584006e-02,  1.28524750e-01,
+       -1.86748467e-02, -4.20976095e-02, -4.18841019e-02,  5.06643131e-02,
+        1.67110607e-01, -5.81081547e-02, -3.13443504e-02,  2.41258919e-01,
+        1.54789919e-02,  8.10164213e-03, -4.26589698e-02,  8.42109397e-02,
+       -1.43576473e-01,  8.00830647e-02, -4.82068025e-02,  1.19690476e-02,
+        1.43746790e-02,  3.21504623e-02,  2.39217039e-02,  6.77662790e-02,
+       -2.08347112e-01,  1.85068995e-01,  5.08501753e-03, -1.51304035e-02,
+        2.20839176e-02,  5.03915399e-02, -8.39525461e-02, -1.29991949e-01,
+        1.19402565e-01, -2.72650063e-01,  1.38546959e-01,  2.40899429e-01,
+        2.94784270e-03,  2.22365901e-01,  6.34950548e-02,  1.47551507e-01,
+        5.36829606e-02, -1.17897075e-02, -1.41148314e-01, -1.08136879e-02,
+        9.65890810e-02,  2.62388904e-02,  4.71556038e-02,  3.23088095e-02]), 'distance': np.float64(0.4467277424969597), 'face_detected': True, 'location': (282, 320, 454, 148)}
+07:23:46 - INFO - 💤 CameraManager: Going to Sleep...
+07:23:46 - INFO - Camera image cleared successfully.
+07:23:50 - INFO - 💤 CameraManager: Going to Sleep...
+07:23:50 - INFO - Camera image cleared successfully.
+07:23:53 - INFO - 💤 CameraManager: Going to Sleep...
+07:23:53 - INFO - Camera image cleared successfully.
+07:24:08 - INFO - 💤 CameraManager: Going to Sleep...
+07:24:08 - INFO - Camera image cleared successfully.
+07:24:10 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+07:24:10 - INFO - 💤 CameraManager: Going to Sleep...
+07:24:10 - INFO - Camera image cleared successfully.
+07:24:10 - ERROR - Error setting sleep UI: image "pyimage20" doesn't exist
+07:24:10 - INFO - RegisterPage: Resetting page state.
+07:24:10 - INFO - RegisterPage: Reset complete, focus set on name entry.
+07:24:10 - INFO - Camera image cleared successfully.
+07:24:10 - ERROR - Error resetting camera page UI: image "pyimage20" doesn't exist
+07:24:11 - INFO - 🚀 GoodDeedApp: Waking Up System...
+07:24:11 - INFO - 🚀 CameraManager: Waking Up System...
+07:24:16 - INFO - VISION: Min_dist found: 0.4261 for user audy (7-A)
+07:24:16 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:16 - INFO - VISION: Zone decision: GREEN for audy
+07:24:16 - INFO - Identity established: audy (Zone: GREEN, Dist: 0.4261)
+07:24:17 - INFO - VISION: Min_dist found: 0.4628 for user audy (7-A)
+07:24:17 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:17 - INFO - VISION: Zone decision: GREEN for audy
+07:24:17 - INFO - VISION: Min_dist found: 0.4228 for user audy (7-A)
+07:24:17 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:17 - INFO - VISION: Zone decision: GREEN for audy
+07:24:18 - INFO - VISION: Min_dist found: 0.4264 for user audy (7-A)
+07:24:18 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:18 - INFO - VISION: Zone decision: GREEN for audy
+07:24:19 - INFO - VISION: Min_dist found: 0.4730 for user audy (7-A)
+07:24:19 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:19 - INFO - VISION: Zone decision: GREEN for audy
+07:24:20 - INFO - VISION: Min_dist found: 0.4204 for user audy (7-A)
+07:24:20 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:20 - INFO - VISION: Zone decision: GREEN for audy
+07:24:21 - INFO - VISION: Min_dist found: 0.4635 for user audy (7-A)
+07:24:21 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:21 - INFO - VISION: Zone decision: GREEN for audy
+07:24:21 - INFO - VISION: Min_dist found: 0.4567 for user audy (7-A)
+07:24:21 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:21 - INFO - VISION: Zone decision: GREEN for audy
+07:24:22 - INFO - VISION: Min_dist found: 0.5292 for user audy (7-A)
+07:24:22 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:22 - INFO - VISION: Zone decision: GREEN for audy
+07:24:23 - INFO - VISION: Min_dist found: 0.4976 for user audy (7-A)
+07:24:23 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:23 - INFO - VISION: Zone decision: GREEN for audy
+07:24:24 - INFO - VISION: Min_dist found: 0.4924 for user audy (7-A)
+07:24:24 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:24 - INFO - VISION: Zone decision: GREEN for audy
+07:24:25 - INFO - VISION: Min_dist found: 0.5480 for user audy (7-A)
+07:24:25 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:25 - INFO - VISION: Zone decision: GREEN for audy
+07:24:26 - INFO - VISION: Min_dist found: 0.5064 for user audy (7-A)
+07:24:26 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:26 - INFO - VISION: Zone decision: GREEN for audy
+07:24:26 - INFO - Face lost, resetting identity and challenge state.
+07:24:28 - INFO - VISION: Min_dist found: 0.5291 for user audy (7-A)
+07:24:28 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:28 - INFO - VISION: Zone decision: GREEN for audy
+07:24:29 - INFO - VISION: Min_dist found: 0.5323 for user audy (7-A)
+07:24:29 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:29 - INFO - VISION: Zone decision: GREEN for audy
+07:24:29 - INFO - Identity established: audy (Zone: GREEN, Dist: 0.5323)
+07:24:29 - INFO - Face lost, resetting identity and challenge state.
+07:24:31 - INFO - VISION: Min_dist found: 0.5320 for user audy (7-A)
+07:24:31 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:24:31 - INFO - VISION: Zone decision: GREEN for audy
+07:24:54 - INFO - Escape pressed. Initiating full reset.
+07:24:54 - INFO - 💤 CameraManager: Going to Sleep...
+07:24:54 - INFO - Camera image cleared successfully.
+07:24:56 - INFO - 💤 GoodDeedApp: System Going to Sleep...
+07:24:56 - INFO - 💤 CameraManager: Going to Sleep...
+07:24:56 - INFO - Camera image cleared successfully.
+07:24:56 - INFO - RegisterPage: Resetting page state.
+07:24:57 - INFO - RegisterPage: Reset complete, focus set on name entry.
+07:24:57 - INFO - Camera image cleared successfully.
+07:24:57 - INFO - 🚀 GoodDeedApp: Waking Up System...
+07:24:57 - INFO - 🚀 CameraManager: Waking Up System...
+07:25:04 - INFO - VISION: Min_dist found: 0.4977 for user audy (7-A)
+07:25:04 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:04 - INFO - VISION: Zone decision: GREEN for audy
+07:25:05 - INFO - VISION: Min_dist found: 0.4428 for user audy (7-A)
+07:25:05 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:05 - INFO - VISION: Zone decision: GREEN for audy
+07:25:05 - INFO - Identity established: audy (Zone: GREEN, Dist: 0.4428)
+07:25:06 - INFO - VISION: Min_dist found: 0.3855 for user audy (7-A)
+07:25:06 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:06 - INFO - VISION: Zone decision: GREEN for audy
+07:25:06 - INFO - VISION: Min_dist found: 0.4099 for user audy (7-A)
+07:25:06 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:06 - INFO - VISION: Zone decision: GREEN for audy
+07:25:07 - INFO - VISION: Min_dist found: 0.4239 for user audy (7-A)
+07:25:07 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:07 - INFO - VISION: Zone decision: GREEN for audy
+07:25:08 - INFO - VISION: Min_dist found: 0.4411 for user audy (7-A)
+07:25:08 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:08 - INFO - VISION: Zone decision: GREEN for audy
+07:25:09 - INFO - VISION: Min_dist found: 0.4614 for user audy (7-A)
+07:25:09 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:09 - INFO - VISION: Zone decision: GREEN for audy
+07:25:10 - INFO - VISION: Min_dist found: 0.4470 for user audy (7-A)
+07:25:10 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:10 - INFO - VISION: Zone decision: GREEN for audy
+07:25:12 - INFO - VISION: Min_dist found: 0.3750 for user audy (7-A)
+07:25:12 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:12 - INFO - VISION: Zone decision: GREEN for audy
+07:25:15 - INFO - VISION: Min_dist found: 0.3958 for user audy (7-A)
+07:25:15 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:15 - INFO - VISION: Zone decision: GREEN for audy
+07:25:16 - INFO - VISION: Min_dist found: 0.4837 for user audy (7-A)
+07:25:16 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:16 - INFO - VISION: Zone decision: GREEN for audy
+07:25:18 - INFO - VISION: Min_dist found: 0.5166 for user audy (7-A)
+07:25:18 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:18 - INFO - VISION: Zone decision: GREEN for audy
+07:25:19 - INFO - VISION: Min_dist found: 0.4926 for user audy (7-A)
+07:25:19 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:19 - INFO - VISION: Zone decision: GREEN for audy
+07:25:20 - INFO - VISION: Min_dist found: 0.5049 for user audy (7-A)
+07:25:20 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:20 - INFO - VISION: Zone decision: GREEN for audy
+07:25:22 - INFO - VISION: Min_dist found: 0.5153 for user audy (7-A)
+07:25:22 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:22 - INFO - VISION: Zone decision: GREEN for audy
+07:25:23 - INFO - Face lost, resetting identity and challenge state.
+07:25:25 - INFO - VISION: Min_dist found: 0.5671 for user audy (7-A)
+07:25:25 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:25 - INFO - VISION: Zone decision: YELLOW for audy
+07:25:26 - INFO - VISION: Min_dist found: 0.5525 for user audy (7-A)
+07:25:26 - INFO - VISION: ZONE_GREEN=0.55, ZONE_YELLOW=0.65
+07:25:26 - INFO - VISION: Zone decision: YELLOW for audy
+07:25:26 - INFO - Identity established: audy (Zone: YELLOW, Dist: 0.5525)
+07:25:26 - INFO - Face lost, resetting identity and challenge state.

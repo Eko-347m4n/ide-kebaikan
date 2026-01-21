@@ -11,7 +11,8 @@ class AppState(Enum):
 
 # --- Timeouts (in seconds) ---
 SLEEP_TIMEOUT = 300 
-SMILE_HOLD_DURATION = 3.0
+SMILE_HOLD_DURATION = 2.5
+UNRECOGNIZED_FACE_HOLD_DURATION = 2.0
 AUTO_RESET_AFTER_SUCCESS = 7.0
 
 # --- UI Texts ---
