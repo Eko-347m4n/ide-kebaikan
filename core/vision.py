@@ -4,6 +4,7 @@ import numpy as np
 import os
 import json
 import face_recognition # Tetap butuh ini utk encoding login awal
+from sklearn.neighbors import KDTree # Optimalisasi pencarian wajah
 from core.logger import log # Import log
 
 class VisionSystem:
@@ -20,10 +21,11 @@ class VisionSystem:
 
         self.memory_users = []
         self.memory_encodings = []
+        self.face_tree = None # KDTree index
         
         # --- Thresholds ---
-        self.ZONE_GREEN = 0.55  
-        self.ZONE_YELLOW = 0.65
+        self.ZONE_GREEN = 0.48  # Diperketat dari 0.55 (Standar face_recognition 0.6 itu longgar)
+        self.ZONE_YELLOW = 0.60
         self.SMILE_THRESHOLD = 0.40 
         self.MOUTH_AR_THRESHOLD = 0.5 # Mouth Aspect Ratio
         self.EYE_AR_THRESHOLD = 0.23 # Eye Aspect Ratio for blink
@@ -36,6 +38,11 @@ class VisionSystem:
         # --- Smile Score Stabilizer ---
         self.avg_smile_score = 0.0
         self.smile_alpha = 0.3
+
+        # --- Identity Stabilization (Optimization) ---
+        self.last_face_center = None
+        self.frames_since_identity_check = 0
+        self.IDENTITY_CHECK_INTERVAL = 15 # Re-check identity every 15 processed frames if stable
 
         # --- Default Result Dictionary ---
         self.last_result = {
@@ -68,6 +75,17 @@ class VisionSystem:
                         self.memory_users.append(user)
                 except Exception as e: 
                     log.error(f"Error loading encoding for user {user.get('nama', 'Unknown')}, ID: {user.get('id', 'N/A')}. Error: {e}")
+        
+        # Build KDTree Index
+        if self.memory_encodings:
+            try:
+                log.info(f"🌳 Building KDTree for {len(self.memory_encodings)} face encodings...")
+                self.face_tree = KDTree(self.memory_encodings, metric='euclidean')
+            except Exception as e:
+                log.error(f"Failed to build KDTree: {e}")
+                self.face_tree = None
+        else:
+            self.face_tree = None
 
     # --- Geometric Expression Calculation ---
 
@@ -122,27 +140,40 @@ class VisionSystem:
     # --- Face Recognition ---
 
     def identify_face_zones(self, unknown_encoding):
-        """Matches a face encoding against the database."""
-        if not self.memory_encodings:
-            log.info("VISION: memory_encodings is empty. Returning RED.")
+        """Matches a face encoding using Fast KDTree Search."""
+        if self.face_tree is None or not self.memory_encodings:
             return "RED", None, 1.0
         
-        distances = face_recognition.face_distance(self.memory_encodings, unknown_encoding)
-        best_match_idx = np.argmin(distances)
-        min_dist = distances[best_match_idx]
+        # Query KDTree for nearest neighbors
+        # k=2 to allow ambiguity check (compare best match vs runner-up)
+        k_neighbors = min(len(self.memory_users), 2)
+        
+        # reshape(1, -1) because query expects 2D array
+        dists, indices = self.face_tree.query([unknown_encoding], k=k_neighbors)
+        
+        min_dist = dists[0][0]
+        best_match_idx = indices[0][0]
         candidate = self.memory_users[best_match_idx]
+        
+        # --- AMBIGUITY CHECK ---
+        # If we found at least 2 neighbors
+        if k_neighbors > 1:
+            second_dist = dists[0][1]
+            second_idx = indices[0][1]
+            candidate_2 = self.memory_users[second_idx]
+            
+            # If the gap between #1 and #2 is very small (< 0.05) AND they are different people
+            if (second_dist - min_dist < 0.05) and (candidate['id'] != candidate_2['id']):
+                log.warning(f"VISION: Ambiguous match! {candidate['nama']} ({min_dist:.3f}) vs {candidate_2['nama']} ({second_dist:.3f}). Rejecting.")
+                return "RED", None, min_dist
 
-        log.info(f"VISION: Min_dist found: {min_dist:.4f} for user {candidate.get('nama', 'N/A')} ({candidate.get('kelas', 'N/A')})")
-        log.info(f"VISION: ZONE_GREEN={self.ZONE_GREEN}, ZONE_YELLOW={self.ZONE_YELLOW}")
+        log.info(f"VISION: Min_dist found: {min_dist:.4f} for user {candidate.get('nama', 'N/A')}")
 
         if min_dist < self.ZONE_GREEN:
-            log.info(f"VISION: Zone decision: GREEN for {candidate.get('nama', 'N/A')}")
             return "GREEN", candidate, min_dist
         elif min_dist < self.ZONE_YELLOW:
-            log.info(f"VISION: Zone decision: YELLOW for {candidate.get('nama', 'N/A')}")
             return "YELLOW", candidate, min_dist
         else:
-            log.info(f"VISION: Zone decision: RED (no strong match). Candidate: {candidate.get('nama', 'N/A')} dist: {min_dist:.4f}")
             return "RED", None, min_dist
 
     # --- Main Processing Function ---
@@ -190,26 +221,52 @@ class VisionSystem:
             self.avg_smile_score = (self.smile_alpha * raw_smile_score) + ((1 - self.smile_alpha) * self.avg_smile_score)
             result["smile_score"] = self.avg_smile_score
             
-            # --- Face Encoding and Identification (on small frame) ---
-            css_rect = (int(rect.top()), int(rect.right()), int(rect.bottom()), int(rect.left()))
-            rgb_small = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
+            # --- Optimization: Check if we need to re-encode (Identity Locking) ---
+            current_center = np.array([(rect.left() + rect.right()) // 2, (rect.top() + rect.bottom()) // 2])
+            should_encode = True
             
-            try:
-                encodings = face_recognition.face_encodings(rgb_small, [css_rect])
-                if encodings:
-                    unknown_encoding = encodings[0]
-                    result["encoding"] = unknown_encoding 
-                    
-                    zone, user, dist = self.identify_face_zones(unknown_encoding)
-                    result["zone"] = zone
-                    result["user_data"] = user
-                    result["distance"] = dist
-            except Exception as e:
-                print(f"Encoding Error: {e}")
+            if self.last_result["user_data"] is not None and self.last_face_center is not None:
+                # Calculate movement distance (in small frame pixels)
+                dist = np.linalg.norm(current_center - self.last_face_center)
+                
+                # If stable (moved < 20px) and checked recently, skip encoding
+                if dist < 20 and self.frames_since_identity_check < self.IDENTITY_CHECK_INTERVAL:
+                    should_encode = False
+                    self.frames_since_identity_check += 1
+                else:
+                    self.frames_since_identity_check = 0 # Reset if moved or time up
+            
+            self.last_face_center = current_center
+
+            if should_encode:
+                # --- Face Encoding and Identification (Heavy) ---
+                css_rect = (int(rect.top()), int(rect.right()), int(rect.bottom()), int(rect.left()))
+                rgb_small = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
+                
+                try:
+                    encodings = face_recognition.face_encodings(rgb_small, [css_rect])
+                    if encodings:
+                        unknown_encoding = encodings[0]
+                        result["encoding"] = unknown_encoding 
+                        
+                        zone, user, dist = self.identify_face_zones(unknown_encoding)
+                        result["zone"] = zone
+                        result["user_data"] = user
+                        result["distance"] = dist
+                except Exception as e:
+                    print(f"Encoding Error: {e}")
+            else:
+                # Reuse previous identity
+                result["zone"] = self.last_result["zone"]
+                result["user_data"] = self.last_result["user_data"]
+                result["distance"] = self.last_result["distance"]
+                result["encoding"] = self.last_result["encoding"]
         
         else: # No face detected
             self.avg_smile_score = max(0, self.avg_smile_score - 5.0)
             result["smile_score"] = self.avg_smile_score
+            self.last_face_center = None # Reset tracker
+            self.frames_since_identity_check = 0
 
         self.last_result = result
         return result

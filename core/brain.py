@@ -34,8 +34,9 @@ MODEL_PATH = os.path.join(BASE_DIR, 'trained_brain.pkl')
 class BrainLogic:
     def __init__(self):
         print("🧠 Initializing Brain (Human-Centric + Plagiarism Guard)...")
-        self.stemmer = StemmerFactory().create_stemmer()
-        self.stopword_remover = StopWordRemoverFactory().create_stop_word_remover()
+        # Lazy loading attributes
+        self._stemmer = None
+        self._stopword_remover = None
         
         self.vectorizer = None
         self.knn_level = None
@@ -45,6 +46,20 @@ class BrainLogic:
         self.init_rejected_data()
         self.load_model()
         self.init_db() 
+
+    @property
+    def stemmer(self):
+        if self._stemmer is None:
+            print("⏳ Initializing Sastrawi Stemmer (Lazy Load)...")
+            self._stemmer = StemmerFactory().create_stemmer()
+        return self._stemmer
+
+    @property
+    def stopword_remover(self):
+        if self._stopword_remover is None:
+            print("⏳ Initializing Sastrawi Stopword Remover (Lazy Load)...")
+            self._stopword_remover = StopWordRemoverFactory().create_stop_word_remover()
+        return self._stopword_remover 
 
     def init_learned_data(self):
         """Membuat file learned_data.csv jika belum ada"""
@@ -290,14 +305,37 @@ class BrainLogic:
     
     def check_plagiarism(self, new_text, history_list):
         if not history_list: return False, None
+        
         clean_new = new_text.lower().strip()
+        new_words = set(clean_new.split())
+        
         for old_text in history_list:
             clean_old = old_text.lower().strip()
+            
+            # 1. Exact Match Shortcut
             if clean_new == clean_old:
                 return True, old_text
-            ratio = difflib.SequenceMatcher(None, clean_new, clean_old).ratio()
-            if ratio > 0.85:
-                return True, old_text
+
+            # 2. Length Filter: If length difference is > 50%, skip
+            if abs(len(clean_new) - len(clean_old)) > len(clean_new) * 0.5:
+                continue
+
+            # 3. Jaccard Similarity Pre-check (Set Intersection)
+            old_words = set(clean_old.split())
+            intersection = len(new_words & old_words)
+            union = len(new_words | old_words)
+            
+            # If no common words, skip
+            if union == 0: continue
+            
+            jaccard = intersection / union
+            
+            # Only do deep check if word overlap is significant (> 30%)
+            if jaccard > 0.3:
+                ratio = difflib.SequenceMatcher(None, clean_new, clean_old).ratio()
+                if ratio > 0.85:
+                    return True, old_text
+                    
         return False, None
 
     def predict_and_score(self, text_input, class_history=[]):
