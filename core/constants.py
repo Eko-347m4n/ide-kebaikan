@@ -53,3 +53,6 @@ SMILE_PROGRESS_TEXT_COLOR = (0, 255, 0)
 FACE_BOX_GREEN = (0, 255, 0)
 FACE_BOX_YELLOW = (0, 255, 255)
 FACE_BOX_RED = (0, 0, 255)
+
+# --- Security ---
+ADMIN_PIN = "0000"  # Default PIN, please change this!

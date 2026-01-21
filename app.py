@@ -7,7 +7,7 @@ from core.logger import log
 from core.constants import (
     AppState, AUTO_RESET_AFTER_SUCCESS, APP_TITLE, SIDEBAR_TITLE,
     CAM_INFO_SLEEP, CAM_INFO_WAKE_UP, CAM_CLICK_TO_START, CAM_STARTING,
-    LEADERBOARD_LIMIT, ZONE_GREEN, ZONE_YELLOW
+    LEADERBOARD_LIMIT, ZONE_GREEN, ZONE_YELLOW, ADMIN_PIN
 )
 from ui.camera_page import CameraPage
 from ui.confirm_page import ConfirmPage
@@ -23,7 +23,6 @@ class GoodDeedApp(ctk.CTk):
 
         # --- Window and Grid Setup ---
         self.title(APP_TITLE)
-        self.after(0, lambda: self.state("zoomed"))        
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
         self.protocol("WM_DELETE_WINDOW", lambda: None)
@@ -62,6 +61,64 @@ class GoodDeedApp(ctk.CTk):
         # --- Keyboard Bindings ---
         self.bind("<Escape>", self._go_back_action)
         self.bind("<Alt-Shift-E>", self._on_closing)
+
+        # --- Kiosk Enforcement ---
+        self._enable_kiosk_mode()
+
+    def _enable_kiosk_mode(self):
+        """Enforces aggressive kiosk mode behaviors for Windows and Linux."""
+        log.info("🔒 Enabling Aggressive Kiosk Mode (Cross-Platform).")
+        
+        # 1. Hilangkan dekorasi jendela (Title bar, Close, Min, Max)
+        # Ini mencegah user men-drag atau men-swipe bagian atas jendela
+        self.overrideredirect(True)
+        
+        # 2. Maksa Fullscreen dan Selalu di Atas
+        self.attributes("-fullscreen", True)
+        self.attributes("-topmost", True)
+        
+        # 3. Pastikan aplikasi punya fokus penuh
+        self.focus_force()
+        
+        # Bind events to counteract OS window management
+        self.bind("<Unmap>", self._force_restore)
+        self.bind("<FocusOut>", self._force_focus)
+        
+        # Start watchdog
+        self._kiosk_guard()
+
+    def _force_restore(self, event):
+        """Callback when window is unmapped (minimized/hidden). Forces it back."""
+        if self.state() == "iconic" or self.state() == "withdrawn":
+            self.deiconify()
+            self.attributes("-fullscreen", True)
+
+    def _force_focus(self, event):
+        """Callback when window loses focus. Brings it back to top."""
+        self.lift()
+        self.focus_force()
+
+    def _kiosk_guard(self):
+        """Periodic check to ensure kiosk mode compliance."""
+        try:
+            # 1. Ensure topmost
+            if not self.attributes("-topmost"):
+                self.attributes("-topmost", True)
+                
+            # 2. Ensure not minimized
+            if self.state() == "iconic":
+                self.deiconify()
+                
+            # 3. Ensure fullscreen
+            if not self.attributes("-fullscreen"):
+                 self.attributes("-fullscreen", True)
+                 
+            self.lift()
+        except Exception as e:
+            pass
+            
+        # Run again in 500ms
+        self.after(500, self._kiosk_guard)
 
     def _go_back_action(self, event=None):
         """Triggers a full application reset when Escape is pressed."""
@@ -350,10 +407,51 @@ class GoodDeedApp(ctk.CTk):
             self.auto_reset_timer = None
         
     def _on_closing(self, event=None):
-        log.info("Application closing. Shutting down services.")
-        self.camera_manager.shutdown()
-        self._cancel_auto_reset_timer()
-        self.destroy()
+        """Protected closing mechanism using an in-app overlay."""
+        self._show_pin_dialog()
+
+    def _show_pin_dialog(self):
+        # Overlay background (blocks interaction with the rest of the app)
+        self.pin_overlay = ctk.CTkFrame(self, fg_color="black") 
+        self.pin_overlay.place(relx=0, rely=0, relwidth=1, relheight=1)
+        
+        # Center container
+        center_frame = ctk.CTkFrame(self.pin_overlay, corner_radius=10, fg_color="white")
+        center_frame.place(relx=0.5, rely=0.5, anchor="center")
+        
+        label = ctk.CTkLabel(center_frame, text="🔒 Masukkan PIN Admin", font=ctk.CTkFont(size=18, weight="bold"), text_color="black")
+        label.pack(padx=30, pady=(20, 10))
+        
+        self.pin_entry = ctk.CTkEntry(center_frame, show="*", width=200)
+        self.pin_entry.pack(padx=30, pady=10)
+        self.pin_entry.bind("<Return>", self._verify_pin)
+        
+        btn_frame = ctk.CTkFrame(center_frame, fg_color="transparent")
+        btn_frame.pack(padx=30, pady=(10, 20))
+        
+        ctk.CTkButton(btn_frame, text="Batal", fg_color="gray", command=self._close_pin_dialog, width=80).pack(side="left", padx=5)
+        ctk.CTkButton(btn_frame, text="Tutup", fg_color="red", command=self._verify_pin, width=80).pack(side="left", padx=5)
+        
+        # Force focus to entry
+        self.after(100, self.pin_entry.focus_set)
+
+    def _close_pin_dialog(self):
+        if hasattr(self, 'pin_overlay') and self.pin_overlay:
+            self.pin_overlay.destroy()
+            self.pin_overlay = None
+            # Refocus main app
+            self.focus_force()
+
+    def _verify_pin(self, event=None):
+        if self.pin_entry.get() == ADMIN_PIN:
+            log.info("Admin PIN accepted. Shutting down.")
+            self.camera_manager.shutdown()
+            self._cancel_auto_reset_timer()
+            self.destroy()
+        else:
+            self.pin_entry.delete(0, "end")
+            self.pin_entry.configure(placeholder_text="PIN Salah!")
+            self.pin_entry.focus_set()
 
 if __name__ == "__main__":
     ctk.set_appearance_mode("Light")
